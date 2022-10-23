@@ -37,5 +37,3 @@
 - dark mode
 - api address
 - api key
-
-Hallo

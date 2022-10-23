@@ -1,33 +1,34 @@
-import 'package:flutter/Cupertino.dart';
-import'AddPhoto.dart';
-import'GalerieScreen.dart';
-import'HomeScreen.dart';
-import'LogScreen.dart';
-import'Settings.dart';
+import 'package:flutter/material.dart';
+import 'home_tabs.dart';
 
+class HomeRoute extends StatelessWidget {
+  const HomeRoute({super.key});
 
-class HomeScreen extends StatelessWidget {
   @override
-  Widget build(BuildContext context){
-    return CupertinoPageScaffold(
-        navigationBar: CupertinoNavigationBar(
-            leading: CupertinoButton(child: Icon(CupertinoIcons.person), onPressed: () => Navigator.push (context, CupertinoPageRoute(builder: (_) => LogScreen()))),
-            middle: Text("Blindspot"),
-            trailing: CupertinoButton(child: Icon(CupertinoIcons.line_horizontal_3_decrease_circle), onPressed: () => Navigator.push (context,
-                CupertinoPageRoute(builder: (_) => GalerieScreen())))
+  Widget build(BuildContext context) {
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: const Text('Blindspot'),
+          centerTitle: true,
+          bottom: const TabBar(
+            tabs: [
+              Tab(icon: Icon(Icons.camera_alt)),
+              Tab(icon: Icon(Icons.image)),
+              Tab(icon: Icon(Icons.settings)),
+            ],
+          ),
         ),
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text('Welcome to Blindspot, your AI!'),
-              CupertinoButton(child: Text('Galerie'), color: CupertinoColors.activeBlue, onPressed: () => Navigator.push (context,
-                  CupertinoPageRoute(builder: (_) => GalerieScreen()))),
-              CupertinoButton(child: Text('Neues Foto hinzufügen'), color: CupertinoColors.activeBlue, onPressed: () => Navigator.push (context,
-                  CupertinoPageRoute(builder: (_) => AddPhoto()))),
-              CupertinoButton(child: Text('Logout'), color: CupertinoColors.activeBlue, onPressed: () => Navigator.push (context,
-                  CupertinoPageRoute(builder: (_) => LogScreen()))),
-            ])
+        body: TabBarView(
+          children: [
+            const AddPhotoTab(),
+            buildList(),
+            const SettingsTab(),
+          ],
+        ),
+      ),
     );
   }
 }
