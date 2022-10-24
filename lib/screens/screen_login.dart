@@ -6,13 +6,17 @@ class LogScreen extends StatelessWidget{
   Widget build(BuildContext context){
     return Scaffold(
         appBar: AppBar(
-            title: Text("Login into Blindspot")
+            title: const Text("Login into Blindspot")
         ),
         body: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-                Container(width: 150, height: 150, color: Colors.red),
+                const Image(
+                  image: AssetImage('assets/logo.png'),
+                  width: 200,
+                  height: 200
+                ),
                 TextFormField(
                   decoration: const InputDecoration(
                     border: UnderlineInputBorder(),
@@ -25,16 +29,10 @@ class LogScreen extends StatelessWidget{
                     labelText: 'Enter your password',
                   ),
                 ),
-                ElevatedButton(onPressed: () => Navigator.push (context, MaterialPageRoute(builder: (_) => HomeRoute() )), child: Text('Login'))
+                ElevatedButton(onPressed: () => Navigator.push (context, MaterialPageRoute(builder: (_) => HomeRoute() )), child: const Text('Login'))
               ]
         )
     );
-
-
-        // Center(child:(
-        //     //FlutterLogin(onLogin: ),
-        //     ElevatedButton(child: Text('Login'), color: CupertinoColors.activeBlue, onPressed: () => Navigator.push (context, CupertinoPageRoute(builder: (_) => HomeScreen() )))
-        // )));
   }
 }
 
