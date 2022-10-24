@@ -21,11 +21,11 @@ class HomeRoute extends StatelessWidget {
             ],
           ),
         ),
-        body: TabBarView(
+        body: const TabBarView(
           children: [
-            const TakePhotoTab(),
-            buildList(),
-            const SettingsTab(),
+            TakePhotoTab(),
+            GalleryTab(),
+            SettingsTab(),
           ],
         ),
       ),

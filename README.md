@@ -15,14 +15,14 @@
 ## home
 - swipe between tabs
 - take photo tab
-- list view photos tab
+- gallery (list view) of photos tab
 - settings tab
 
 ### TakePhotoTab
 - live camera
 - take photo button
 - 
-### ListViewTab
+### GalleryTab
 - taken photos in a list view
 - short photo info
 - on click to image_screen view
