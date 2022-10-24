@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 /*******************************************************************************
 * TAKE PHTO TAB
 *******************************************************************************/
-class AddPhotoTab extends StatelessWidget {
-  const AddPhotoTab({super.key});
+class TakePhotoTab extends StatelessWidget {
+  const TakePhotoTab({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -67,8 +67,9 @@ class SettingsTab extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          Switch(value: false, onChanged: null),
-          Switch(value: false, onChanged: null),
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[Text('Darkmode'), Switch(value: false, onChanged: null)]),
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[Text('???'), Switch(value: false, onChanged: null)]),
+          Text('AppVersion: 0.1'),
           ElevatedButton(
           child: Text('Logout'),
           onPressed: () => Navigator.pop(context)

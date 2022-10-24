@@ -1,39 +1,36 @@
 # App GUI structure (screens)
 - login
-- take photo
-- gallery
-- photo view
-- settings/menu
+- home
+- image_view
 
 ## login
+- appbar
 - logo
-- apptitle
+- app title
 - user input
 - password input
 - enter/login button
+- on login to home screen 
 
-## AppBar (on each screen)
-- gallery button
+## home
+- swipe between tabs
+- take photo tab
+- list view photos tab
+- settings tab
+
+### TakePhotoTab
+- live camera
 - take photo button
-- settings button
+- 
+### ListViewTab
+- taken photos in a list view
+- short photo info
+- on click to image_screen view
 
-## take photo
-- AppBar
-- live photo
-- take photo button 
-- - takes a photo, sends it to the api, waits for api response and stores it into the gallery
+### SettingsTab
+- darkmode
+- api settings
+- logout
 
-## gallery
-- AppBar
-- list view of taken photos
-- - photo, title, date name
-
-## photo view
-- AppBar
-- photo
-- metadata
-
-## settings
-- dark mode
-- api address
-- api key
+## image_view screen 
+- a more detailed photo view with more metadata

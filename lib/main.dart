@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-// import'AddPhoto.dart';
-// import'GalerieScreen.dart';
-// import'HomeScreen.dart';
-import'LogScreen.dart';
-// import'Settings.dart';
+import'screens/screen_login.dart';
 
 void main(){
   runApp(MaterialApp(

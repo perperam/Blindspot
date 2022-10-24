@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-// import'AddPhoto.dart';
-import 'HomeScreen.dart';
+import 'screen_home.dart';
 
 class LogScreen extends StatelessWidget{
   @override

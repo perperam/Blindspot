@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'home_tabs.dart';
+import 'tabs/tabs_home.dart';
 
 class HomeRoute extends StatelessWidget {
   const HomeRoute({super.key});
@@ -23,7 +23,7 @@ class HomeRoute extends StatelessWidget {
         ),
         body: TabBarView(
           children: [
-            const AddPhotoTab(),
+            const TakePhotoTab(),
             buildList(),
             const SettingsTab(),
           ],
