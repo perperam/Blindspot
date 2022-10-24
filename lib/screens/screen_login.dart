@@ -30,7 +30,7 @@ class LogScreen extends StatelessWidget {
               ),
               ElevatedButton(
                   onPressed: () => Navigator.push(
-                      context, MaterialPageRoute(builder: (_) => HomeRoute())),
+                      context, MaterialPageRoute(builder: (_) => const HomeRoute())),
                   child: const Text('Login'))
             ]));
   }

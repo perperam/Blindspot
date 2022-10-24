@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'screen_imageview.dart';
 
 /*******************************************************************************
  * TAKE PHTO TAB
@@ -14,8 +15,7 @@ class TakePhotoTab extends StatelessWidget {
         children: <Widget>[
           Container(width: 200, height: 400, color: Colors.grey),
           const ElevatedButton(onPressed: null, child: Text('Take Photo'))
-        ]
-    );
+        ]);
   }
 }
 
@@ -32,13 +32,16 @@ class GalleryTab extends StatelessWidget {
     return ListView.builder(
         itemCount: 15,
         itemBuilder: (context, index) {
-          return const Card(child: ListTile(
-              title: Text('image'),
-              leading: Icon(Icons.movie),
-              subtitle: Text('subtitle')
-          ));
-        }
-    );
+          return Card(
+              child: ListTile(
+                  title: Text('image'),
+                  leading: Icon(Icons.movie),
+                  subtitle: Text('subtitle'),
+                  onTap: () => Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => const ImageView()))
+              )
+          );
+        });
   }
 }
 
@@ -54,12 +57,14 @@ class SettingsTab extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          Row(mainAxisAlignment: MainAxisAlignment.center,
+          Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: const <Widget>[
                 Text('Darkmode'),
                 Switch(value: false, onChanged: null)
               ]),
-          Row(mainAxisAlignment: MainAxisAlignment.center,
+          Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: const <Widget>[
                 Text('???'),
                 Switch(value: false, onChanged: null)
@@ -67,9 +72,7 @@ class SettingsTab extends StatelessWidget {
           const Text('AppVersion: 0.1'),
           ElevatedButton(
               child: const Text('Logout'),
-              onPressed: () => Navigator.pop(context)
-          )
-        ]
-    );
+              onPressed: () => Navigator.pop(context))
+        ]);
   }
 }
