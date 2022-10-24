@@ -1,21 +1,41 @@
-import 'package:flutter/Cupertino.dart';
-import'AddPhoto.dart';
-import'GalerieScreen.dart';
-import'HomeScreen.dart';
-import'LogScreen.dart';
-import'Settings.dart';
-
+import 'package:flutter/material.dart';
+// import'AddPhoto.dart';
+import 'HomeScreen.dart';
 
 class LogScreen extends StatelessWidget{
   @override
   Widget build(BuildContext context){
-    return CupertinoPageScaffold(
-        navigationBar: CupertinoNavigationBar(
-            middle: Text("Login")
+    return Scaffold(
+        appBar: AppBar(
+            title: Text("Login into Blindspot")
         ),
-        child: Center(child:(
-            //FlutterLogin(onLogin: ),
-            CupertinoButton(child: Text('Login'), color: CupertinoColors.activeBlue, onPressed: () => Navigator.push (context, CupertinoPageRoute(builder: (_) => HomeScreen() )))
-        )));
+        body: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+                Container(width: 150, height: 150, color: Colors.red),
+                TextFormField(
+                  decoration: const InputDecoration(
+                    border: UnderlineInputBorder(),
+                    labelText: 'Enter your username',
+                  ),
+                ),
+                TextFormField(
+                  decoration: const InputDecoration(
+                    border: UnderlineInputBorder(),
+                    labelText: 'Enter your password',
+                  ),
+                ),
+                ElevatedButton(onPressed: () => Navigator.push (context, MaterialPageRoute(builder: (_) => HomeRoute() )), child: Text('Login'))
+              ]
+        )
+    );
+
+
+        // Center(child:(
+        //     //FlutterLogin(onLogin: ),
+        //     ElevatedButton(child: Text('Login'), color: CupertinoColors.activeBlue, onPressed: () => Navigator.push (context, CupertinoPageRoute(builder: (_) => HomeScreen() )))
+        // )));
   }
 }
+
