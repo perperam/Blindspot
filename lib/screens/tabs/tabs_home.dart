@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'screen_imageview.dart';
 
 /*******************************************************************************
- * TAKE PHTO TAB
+ * TAKE PHOTO TAB
  *******************************************************************************/
 class TakePhotoTab extends StatelessWidget {
   const TakePhotoTab({super.key});
