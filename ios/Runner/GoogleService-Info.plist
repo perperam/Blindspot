@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>627549356878-v6gthdg1948qlderq5i6stgu9jjgvcba.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.627549356878-v6gthdg1948qlderq5i6stgu9jjgvcba</string>
+	<key>API_KEY</key>
+	<string>AIzaSyC3qXTqJPhRpItUkagIbVYfvap7U58UpU4</string>
+	<key>GCM_SENDER_ID</key>
+	<string>627549356878</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.blindspot.blindspot</string>
+	<key>PROJECT_ID</key>
+	<string>blindspot-18dd0</string>
+	<key>STORAGE_BUCKET</key>
+	<string>blindspot-18dd0.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:627549356878:ios:0da798b52effa18733541f</string>
+</dict>
+</plist>

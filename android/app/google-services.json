@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "627549356878",
+    "project_id": "blindspot-18dd0",
+    "storage_bucket": "blindspot-18dd0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:627549356878:android:cafc5aa32d32d78e33541f",
+        "android_client_info": {
+          "package_name": "com.blindspot.blindspot"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "627549356878-3qk6ikj5eij3aljnk741kg9nq4tvsj14.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqYP3XgWSVRFNoois9aUi96ADd-luv6Ls"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "627549356878-3qk6ikj5eij3aljnk741kg9nq4tvsj14.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "627549356878-v6gthdg1948qlderq5i6stgu9jjgvcba.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.blindspot.blindspot"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
