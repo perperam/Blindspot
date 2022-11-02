@@ -6,29 +6,30 @@ class HomeRoute extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 3,
-      child: Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: const Text('Blindspot'),
-          centerTitle: true,
-          bottom: const TabBar(
-            tabs: [
-              Tab(icon: Icon(Icons.camera_alt)),
-              Tab(icon: Icon(Icons.image)),
-              Tab(icon: Icon(Icons.settings)),
+    return const DefaultTabController(
+        length: 2,
+        child: Scaffold(
+          floatingActionButton: FloatingActionButton(
+              onPressed: null, child: Icon(Icons.camera_alt)),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
+          bottomNavigationBar: BottomAppBar(
+            color: Colors.orangeAccent,
+            shape: CircularNotchedRectangle(),
+            notchMargin: 5,
+            child: TabBar(
+              tabs: [
+                Tab(text: "Images", icon: Icon(Icons.image)),
+                Tab(text: "Settings", icon: Icon(Icons.settings)),
+              ],
+            ),
+          ),
+          body: TabBarView(
+            children: [
+              GalleryTab(),
+              SettingsTab(),
             ],
           ),
-        ),
-        body: const TabBarView(
-          children: [
-            TakePhotoTab(),
-            GalleryTab(),
-            SettingsTab(),
-          ],
-        ),
-      ),
-    );
+        ));
   }
 }
