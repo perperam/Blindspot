@@ -14,17 +14,33 @@ class PreviewPage extends StatefulWidget {
 }
 
 class _PreviewPageState extends State<PreviewPage> {
+  var apiUrlString = Uri.parse('http://dev.icatas.eu:5000/string');
+  var apiUrlPicture = Uri.parse('http://dev.icatas.eu:5000/picture');
+
   Future<String> fetchString() async {
-    final response = await http.get(Uri.parse('http://dev.icatas.eu:5000/string'));
+    final response = await http.get(apiUrlString);
     return response.body;
   }
 
+  // , body:widget.picture
+
+  Future<String> postPic() async {
+    var request = http.MultipartRequest('POST', apiUrlPicture);
+    request.files.add(await http.MultipartFile.fromPath('image', widget.picture.path)); // HERE IS THE ERROR
+
+    var streamedResponse = await request.send();
+    final responseString = await http.Response.fromStream(streamedResponse);
+    return responseString.body;
+  }
+
   late Future<String> futurehttp;
+  late Future<String> futureImg;
 
   @override
   void initState() {
     super.initState();
-    futurehttp = fetchString();
+    // futurehttp = fetchString();
+    futureImg = postPic();
   }
 
   @override
@@ -37,7 +53,7 @@ class _PreviewPageState extends State<PreviewPage> {
           const SizedBox(height: 24),
           Text(widget.picture.name),
           Container(child: FutureBuilder<String>(
-            future: futurehttp,
+            future: futureImg,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return Text(snapshot.data!);
