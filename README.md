@@ -35,8 +35,9 @@
 ## image_view screen 
 - a more detailed photo view with more metadata
 
-#TO-DO's
+# TO-DO's
 - ListView is overlapped by take Photo button
+- going back from preview freezes camera
 
 ## Sources
 - [Camera](https://medium.com/@fernnandoptr/how-to-use-camera-in-flutter-flutter-camera-package-44defe81d2da)

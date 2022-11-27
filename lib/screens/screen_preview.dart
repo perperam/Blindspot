@@ -2,6 +2,8 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'dart:io' as Io;
 
 
 class PreviewPage extends StatefulWidget {
@@ -22,25 +24,24 @@ class _PreviewPageState extends State<PreviewPage> {
     return response.body;
   }
 
-  // , body:widget.picture
-
-  Future<String> postPic() async {
+  Future<Map<String, dynamic>> postPic() async {
     var request = http.MultipartRequest('POST', apiUrlPicture);
     request.files.add(await http.MultipartFile.fromPath('image', widget.picture.path)); // HERE IS THE ERROR
 
     var streamedResponse = await request.send();
     final responseString = await http.Response.fromStream(streamedResponse);
-    return responseString.body;
+    final m = await json.decode(responseString.body);
+    return m;
   }
 
   late Future<String> futurehttp;
-  late Future<String> futureImg;
+  late Future<Map<String, dynamic>> futureMap;
 
   @override
   void initState() {
     super.initState();
     // futurehttp = fetchString();
-    futureImg = postPic();
+    futureMap = postPic();
   }
 
   @override
@@ -49,16 +50,28 @@ class _PreviewPageState extends State<PreviewPage> {
       appBar: AppBar(title: const Text('Preview Page')),
       body: Center(
         child: Column(mainAxisSize: MainAxisSize.min, children: [
-          Image.file(File(widget.picture.path), fit: BoxFit.cover, width: 250),
-          const SizedBox(height: 24),
-          Text(widget.picture.name),
-          Container(child: FutureBuilder<String>(
-            future: futureImg,
+          Container(child: FutureBuilder<Map<String, dynamic>>(
+            future: futureMap,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                return Text(snapshot.data!);
+                return Image.memory(base64Decode(snapshot.data!["image"]));
+              } else {
+                return const CircularProgressIndicator();
               }
-              return const CircularProgressIndicator();
+            }
+          )
+          ),
+          // Image.file(File(widget.picture.path), fit: BoxFit.cover, width: 250),
+          const SizedBox(height: 24),
+          Text(widget.picture.name),
+          Container(child: FutureBuilder<Map<String, dynamic>>(
+            future: futureMap,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return Text(snapshot.data!["metadata"]);
+              } else {
+                return const CircularProgressIndicator();
+              }
             }
           ))
         ]),
