@@ -43,3 +43,4 @@
 - [Camera](https://medium.com/@fernnandoptr/how-to-use-camera-in-flutter-flutter-camera-package-44defe81d2da)
 - [Button Navigation Bar](https://www.fluttercampus.com/guide/77/how-to-set-notched-floating-action-button-in-bottom-navigation-bar/)
 - [Fetch data with http](https://docs.flutter.dev/cookbook/networking/fetch-data)
+- [Base64 Images](https://www.bezkoder.com/dart-base64-image/)

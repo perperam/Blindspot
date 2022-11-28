@@ -1,9 +1,9 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'dart:io';
+// import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'dart:io' as Io;
+// import 'dart:io' as Io;
 
 
 class PreviewPage extends StatefulWidget {
@@ -16,13 +16,7 @@ class PreviewPage extends StatefulWidget {
 }
 
 class _PreviewPageState extends State<PreviewPage> {
-  var apiUrlString = Uri.parse('http://dev.icatas.eu:5000/string');
   var apiUrlPicture = Uri.parse('http://dev.icatas.eu:5000/picture');
-
-  Future<String> fetchString() async {
-    final response = await http.get(apiUrlString);
-    return response.body;
-  }
 
   Future<Map<String, dynamic>> postPic() async {
     var request = http.MultipartRequest('POST', apiUrlPicture);
@@ -34,13 +28,11 @@ class _PreviewPageState extends State<PreviewPage> {
     return m;
   }
 
-  late Future<String> futurehttp;
   late Future<Map<String, dynamic>> futureMap;
 
   @override
   void initState() {
     super.initState();
-    // futurehttp = fetchString();
     futureMap = postPic();
   }
 
@@ -49,8 +41,9 @@ class _PreviewPageState extends State<PreviewPage> {
     return Scaffold(
       appBar: AppBar(title: const Text('Preview Page')),
       body: Center(
-        child: Column(mainAxisSize: MainAxisSize.min, children: [
-          Container(child: FutureBuilder<Map<String, dynamic>>(
+        child: SingleChildScrollView(
+    child: Column(mainAxisSize: MainAxisSize.min, children: [
+          FutureBuilder<Map<String, dynamic>>(
             future: futureMap,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
@@ -59,12 +52,11 @@ class _PreviewPageState extends State<PreviewPage> {
                 return const CircularProgressIndicator();
               }
             }
-          )
           ),
           // Image.file(File(widget.picture.path), fit: BoxFit.cover, width: 250),
           const SizedBox(height: 24),
           Text(widget.picture.name),
-          Container(child: FutureBuilder<Map<String, dynamic>>(
+          FutureBuilder<Map<String, dynamic>>(
             future: futureMap,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
@@ -73,8 +65,9 @@ class _PreviewPageState extends State<PreviewPage> {
                 return const CircularProgressIndicator();
               }
             }
-          ))
-        ]),
+          )
+        ])
+        )
       ),
     );
   }
