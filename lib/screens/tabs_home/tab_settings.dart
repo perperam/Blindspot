@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import'package:blindspot/screens/Login/screen_login.dart';
 
 class SettingsTab extends StatelessWidget {
   const SettingsTab({super.key});
@@ -22,9 +24,14 @@ class SettingsTab extends StatelessWidget {
                 Switch(value: false, onChanged: null)
               ]),
           const Text('AppVersion: 0.1'),
-          ElevatedButton(
-              child: const Text('Logout'),
-              onPressed: () => Navigator.pop(context))
+          OutlinedButton(
+              child: Text(
+                'Sign out', style: TextStyle(color: Colors.red)),
+                onPressed: () {
+                FirebaseAuth.instance.signOut();
+                Navigator.push(context, MaterialPageRoute(builder: (context) => MyLogin()));
+                },
+          )
         ]);
   }
 }
