@@ -1,7 +1,7 @@
 import 'package:blindspot/screens/Login/screen_login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'reusable_widget.dart';
-import '../screen_home.dart';
+import 'package:blindspot/Settings/Colors.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -32,7 +32,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),),
       body: Container(
-          color: Colors.blueGrey,
+          color: CustomColors.Background,
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           child: SingleChildScrollView(
@@ -59,8 +59,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                       height: 20,
                     ),
                     firebaseUIButton(context, "Create Account", () {
-                      FirebaseAuth.instance
-                          .createUserWithEmailAndPassword(
+                      FirebaseAuth.instance.createUserWithEmailAndPassword(
                           email: _emailTextController.text,
                           password: _passwordTextController.text)
                           .then((value) {
@@ -68,6 +67,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) => MyLogin()));
                       }).onError((error, stackTrace) {
+                        ScaffoldMessenger.of(context).showSnackBar(Massage("Error ${error.toString()}"));
                         print("Error ${error.toString()}");
                     });
                   })

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 
 TextField reusableTextField(String text, IconData icon, bool isPasswordType,
@@ -55,12 +56,25 @@ Container firebaseUIButton(BuildContext context, String title, Function onTap) {
   );
 }
 
-SnackBar ErrorMassage (){
+SnackBar Massage (String Massage){
   return SnackBar(
-      content: Container(
-        //Icon(Icons.error, color: Colors.white70,);
-        child: Text("Can not Login, please try again"),
-      ),
-      behavior: SnackBarBehavior.floating,
-    );
+    content: Container(
+      //Icon(Icons.error, color: Colors.white70,);
+      child: Text(Massage),
+    ),
+    behavior: SnackBarBehavior.floating,
+  );
+}
+
+
+void reusableUserRequest (Function LoggedIn, Function Loggedout){
+  FirebaseAuth auth = FirebaseAuth.instance;
+
+  FirebaseAuth.instance.userChanges().listen((User? user){
+    if( user == null){
+      LoggedIn();
+    } else {
+      Loggedout();
+    }
+  });
 }
