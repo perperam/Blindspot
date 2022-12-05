@@ -1,6 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'screen_preview.dart';
+import 'package:blindspot/Settings/Colors.dart';
 
 //forked on https://medium.com/@fernnandoptr/how-to-use-camera-in-flutter-flutter-camera-package-44defe81d2da)
 
@@ -64,14 +65,14 @@ class _CameraPageState extends State<CameraPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: CustomColors.Background,
         body: SafeArea(
           child: Column(children: [
             Expanded(child:
               (_cameraController.value.isInitialized)
               ? CameraPreview(_cameraController)
               : Container(
-                color: Colors.black,
+                color: CustomColors.Background,
                 child: const Center(child: CircularProgressIndicator())
               )
             ),
@@ -79,7 +80,7 @@ class _CameraPageState extends State<CameraPage> {
               alignment: Alignment.bottomCenter,
               child: Container(
                 height: MediaQuery.of(context).size.height * 0.1,
-                decoration: BoxDecoration(color: Colors.grey.shade800),
+                decoration: BoxDecoration(color: Colors.grey.shade800), // Color Problem
                 child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -91,7 +92,7 @@ class _CameraPageState extends State<CameraPage> {
                             _isRearCameraSelected
                             ? Icons.switch_camera
                             : Icons.switch_camera,
-                            color: Colors.white),
+                            color: CustomColors.Text),
                           onPressed: () {
                             setState(
                               () => _isRearCameraSelected = !_isRearCameraSelected);
@@ -105,7 +106,7 @@ class _CameraPageState extends State<CameraPage> {
                           iconSize: 50,
                           padding: EdgeInsets.zero,
                           constraints: const BoxConstraints(),
-                          icon: const Icon(Icons.circle, color: Colors.white),
+                          icon: const Icon(Icons.circle, color: Colors.black87), // Color Problem
                         )
                       ),
                       const Spacer(),
