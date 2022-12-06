@@ -1,6 +1,23 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 
+
+class Waiting extends StatelessWidget {
+  const Waiting({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const <Widget>[
+              CircularProgressIndicator(),
+              Text("Loading the Image")
+    ]));
+  }
+}
+
+
 class View extends StatelessWidget {
   final Map<String, dynamic> imageData;
   const View(this.imageData, {super.key});
@@ -20,6 +37,7 @@ class View extends StatelessWidget {
   }
 }
 
+
 class ImageView extends StatelessWidget {
   final String b64image;
   const ImageView(this.b64image, {super.key});
@@ -29,6 +47,7 @@ class ImageView extends StatelessWidget {
     return Image.memory(base64Decode(b64image));
   }
 }
+
 
 class MetaView extends StatelessWidget {
   final Map<String, dynamic> metadata;

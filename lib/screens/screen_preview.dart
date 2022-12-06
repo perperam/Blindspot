@@ -1,12 +1,9 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-
-// import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-// import 'dart:io' as Io;
-
 import 'package:blindspot/image_view.dart' as iv;
+
 
 class PreviewPage extends StatefulWidget {
   const PreviewPage({Key? key, required this.picture}) : super(key: key);
@@ -16,6 +13,7 @@ class PreviewPage extends StatefulWidget {
   @override
   State<PreviewPage> createState() => _PreviewPageState();
 }
+
 
 class _PreviewPageState extends State<PreviewPage> {
   var apiUrlPicture = Uri.parse('http://dev.icatas.eu:5000/picture');
@@ -49,7 +47,7 @@ class _PreviewPageState extends State<PreviewPage> {
             if (snapshot.hasData) {
               return iv.View(snapshot.data!);
             } else {
-              return const CircularProgressIndicator();
+              return const iv.Waiting();
             }
           }
           )
