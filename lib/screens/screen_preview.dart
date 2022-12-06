@@ -46,29 +46,30 @@ class _PreviewPageState extends State<PreviewPage> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-          FutureBuilder<Map<String, dynamic>>(
-              future: futureMap,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return Image.memory(base64Decode(snapshot.data!["image"]));
-                } else {
-                  return const CircularProgressIndicator();
-                }
-              }),
-          // Image.file(File(widget.picture.path), fit: BoxFit.cover, width: 250),
-          const SizedBox(height: 24),
-          Text(widget.picture.name),
-          FutureBuilder<Map<String, dynamic>>(
-              future: futureMap,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return MetaView(snapshot.data!["metadata"]);
-                  // return Text(snapshot.data!["metadata"]);
-                } else {
-                  return const CircularProgressIndicator();
-                }
-              })
-        ])));
+              FutureBuilder<Map<String, dynamic>>(
+                  future: futureMap,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return Image.memory(
+                          base64Decode(snapshot.data!["image"]));
+                    } else {
+                      return const CircularProgressIndicator();
+                    }
+                  }),
+              // Image.file(File(widget.picture.path), fit: BoxFit.cover, width: 250),
+              const SizedBox(height: 24),
+              Text(widget.picture.name),
+              FutureBuilder<Map<String, dynamic>>(
+                  future: futureMap,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return MetaView(snapshot.data!["metadata"]);
+                      // return Text(snapshot.data!["metadata"]);
+                    } else {
+                      return const CircularProgressIndicator();
+                    }
+                  })
+            ])));
   }
 }
 
@@ -108,19 +109,19 @@ class MetaView extends StatelessWidget {
     List<Widget> textChildren = [];
     for (var d in data) {
       // print(d.runtimeType);
-      textChildren.add(Container(
-        color: Colors.orangeAccent,
-          child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text("name: ${d["name"].toString()}"),
-          Text("name: ${d["class"].toString()}"),
-          Text("confidence: ${d["confidence"].toString()}")
+      textChildren.add(Card(
+          child: ExpansionTile(
+        title: Text("Name: ${d["name"].toString()}"),
+        controlAffinity: ListTileControlAffinity.leading,
+        children: <Widget>[
+          ListTile(title: Text("Class ID: ${d["class"].toString()}")),
+          ListTile(title: Text("Confidence: ${d["confidence"].toString()}")),
+          ListTile(title: Text("x-min: ${d["xmin"].toString()}")),
+          ListTile(title: Text("y-min: ${d["ymin"].toString()}")),
+          ListTile(title: Text("x-max: ${d["xmax"].toString()}")),
+          ListTile(title: Text("y-max: ${d["ymax"].toString()}")),
         ],
       )));
-      // textChildren.add(
-      //     Container(color: Colors.orangeAccent, child: Text(d.toString())));
-      textChildren.add(Container(color: Colors.white, height: 20));
     }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -128,3 +129,13 @@ class MetaView extends StatelessWidget {
     );
   }
 }
+
+/*
+Column(
+crossAxisAlignment: CrossAxisAlignment.start,
+children: [
+Text("name: ${d["name"].toString()}"),
+Text("name: ${d["class"].toString()}"),
+Text("confidence: ${d["confidence"].toString()}")
+]
+ */
