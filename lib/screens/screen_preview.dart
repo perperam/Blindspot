@@ -39,18 +39,6 @@ class _PreviewPageState extends State<PreviewPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(title: const Text('Preview Page')),
-        body: FutureBuilder<Map<String, dynamic>>(
-          future: futureMap,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return iv.View(snapshot.data!);
-            } else {
-              return const iv.Waiting();
-            }
-          }
-          )
-    );
+    return iv.ImageBuilder(futureMap);
   }
 }
