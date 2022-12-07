@@ -3,6 +3,8 @@ import 'package:camera/camera.dart';
 import 'tabs_home/tab_gallery.dart';
 import 'tabs_home/tab_settings.dart';
 import 'screen_camera.dart';
+import 'package:hive/hive.dart';
+import 'package:blindspot/main.dart';
 
 class HomeRoute extends StatefulWidget {
   const HomeRoute({Key? key}) : super(key: key);
@@ -11,9 +13,11 @@ class HomeRoute extends StatefulWidget {
   State<HomeRoute> createState() => _HomeRoute();
 }
 
+
 class _HomeRoute extends State<HomeRoute> {
   @override
   Widget build(BuildContext context) {
+    var darkMode = Hive.box(themeBox).get('darkMode', defaultValue: false);
     return DefaultTabController(
         length: 2,
         child: Scaffold(
@@ -38,10 +42,12 @@ class _HomeRoute extends State<HomeRoute> {
               ],
             ),
           ),
-          body: const TabBarView(
+          body: TabBarView(
             children: [
               GalleryTab(),
-              SettingsTab(),
+              SettingsTab(
+                value: darkMode,
+              ),
             ],
           ),
         ));
