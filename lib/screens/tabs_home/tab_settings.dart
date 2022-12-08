@@ -36,7 +36,7 @@ class SettingsTab extends StatelessWidget {
                 'Sign out', style: TextStyle(color: Colors.red)),
                 onPressed: () {
                 FirebaseAuth.instance.signOut();
-                Navigator.push(context, MaterialPageRoute(builder: (context) => MyLogin(value: darkMode,)));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => MyLogin()));
                 },
           )
         ])

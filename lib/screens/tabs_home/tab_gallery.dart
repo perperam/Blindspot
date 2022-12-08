@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../screen_imageview.dart';
+import 'package:hive/hive.dart';
+import 'tab_settings.dart';
 
 class GalleryTab extends StatelessWidget {
   const GalleryTab({super.key});
@@ -8,6 +10,7 @@ class GalleryTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var darkMode = Hive.box(themeBox).get('darkMode', defaultValue: false);
     return ListView.builder(
         itemCount: 15,
         itemBuilder: (context, index) {

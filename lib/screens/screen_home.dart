@@ -13,7 +13,6 @@ class HomeRoute extends StatefulWidget {
   State<HomeRoute> createState() => _HomeRoute();
 }
 
-
 class _HomeRoute extends State<HomeRoute> {
   @override
   Widget build(BuildContext context) {
@@ -45,9 +44,7 @@ class _HomeRoute extends State<HomeRoute> {
           body: TabBarView(
             children: [
               GalleryTab(),
-              SettingsTab(
-                value: darkMode,
-              ),
+              SettingsTab(value: darkMode),
             ],
           ),
         ));
