@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
+import 'package:blindspot/fbuilder_else_widgets.dart';
+
 
 class ImageBuilder extends StatefulWidget  {
   Future<Map<String, dynamic>> futureImageData;
-  ImageBuilder(this.futureImageData, {super.key});
+  bool buttonMode;
+  ImageBuilder(this.futureImageData, this.buttonMode, {super.key});
 
   @override
   State<ImageBuilder> createState() => _ImageBuilder();
@@ -19,59 +22,29 @@ class _ImageBuilder extends State<ImageBuilder> {
             future: widget.futureImageData,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                return View(snapshot.data!);
+                return View(snapshot.data!, widget.buttonMode);
               } else if (snapshot.hasError) {
-                return const Error();
+                return ElseError(massage: "Could not load the Image!");
               } else {
-                return const Waiting();
+                return ElseWaiting(massage: "Loading the image...");
               }
             }));
   }
 }
 
 
-class Error extends StatelessWidget {
-  const Error({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const <Widget>[
-              Icon(
-                  Icons.error_outline,
-                  color: Colors.red,
-                  size: 60),
-              Text("Could not load the Image!")
-            ]));
-  }
-}
-
-
-class Waiting extends StatelessWidget {
-  const Waiting({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const <Widget>[
-          CircularProgressIndicator(),
-          Text("Loading the image...")
-        ]));
-  }
-}
 
 
 class View extends StatelessWidget {
   final Map<String, dynamic> imageData;
+  bool buttonMode;
 
-  const View(this.imageData, {super.key});
+  View(this.imageData, this.buttonMode, {super.key});
 
   @override
   Widget build(BuildContext context) {
+
     return SingleChildScrollView(
         child: Column(
             mainAxisSize: MainAxisSize.min,
