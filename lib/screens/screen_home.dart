@@ -4,7 +4,7 @@ import 'tabs_home/tab_gallery.dart';
 import 'tabs_home/tab_settings.dart';
 import 'screen_camera.dart';
 import 'package:hive/hive.dart';
-import 'package:blindspot/main.dart';
+
 
 class HomeRoute extends StatefulWidget {
   const HomeRoute({Key? key}) : super(key: key);
@@ -14,6 +14,15 @@ class HomeRoute extends StatefulWidget {
 }
 
 class _HomeRoute extends State<HomeRoute> {
+  @override
+  Widget build(BuildContext context) {
+    return HomeScreenTabController();
+  }
+}
+
+class HomeScreenTabController extends StatelessWidget {
+  const HomeScreenTabController({super.key});
+
   @override
   Widget build(BuildContext context) {
     var darkMode = Hive.box(themeBox).get('darkMode', defaultValue: false);
@@ -29,18 +38,8 @@ class _HomeRoute extends State<HomeRoute> {
               },
               child: const Icon(Icons.camera_alt)),
           floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerDocked,
-          bottomNavigationBar: const BottomAppBar(
-            color: Colors.orangeAccent,
-            shape: CircularNotchedRectangle(),
-            notchMargin: 5,
-            child: TabBar(
-              tabs: [
-                Tab(text: "Images", icon: Icon(Icons.image)),
-                Tab(text: "Settings", icon: Icon(Icons.settings)),
-              ],
-            ),
-          ),
+          FloatingActionButtonLocation.centerDocked,
+          bottomNavigationBar: const HomeScreenAppBar(),
           body: TabBarView(
             children: [
               GalleryTab(),
@@ -48,5 +47,25 @@ class _HomeRoute extends State<HomeRoute> {
             ],
           ),
         ));
+  }
+}
+
+
+class HomeScreenAppBar extends StatelessWidget {
+  const HomeScreenAppBar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const BottomAppBar(
+      color: Colors.orangeAccent,
+      shape: CircularNotchedRectangle(),
+      notchMargin: 5,
+      child: TabBar(
+        tabs: [
+          Tab(text: "Images", icon: Icon(Icons.image)),
+          Tab(text: "Settings", icon: Icon(Icons.settings)),
+        ],
+      ),
+    );
   }
 }

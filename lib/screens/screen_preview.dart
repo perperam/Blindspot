@@ -2,6 +2,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:path_provider/path_provider.dart';
 import 'package:blindspot/image_view.dart' as iv;
 
 
@@ -39,6 +40,6 @@ class _PreviewPageState extends State<PreviewPage> {
 
   @override
   Widget build(BuildContext context) {
-    return iv.ImageBuilder(futureMap);
+    return iv.ImageBuilder(futureMap, true);
   }
 }
