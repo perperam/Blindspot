@@ -4,7 +4,8 @@ import 'package:hive/hive.dart';
 import 'tab_settings.dart';
 
 class GalleryTab extends StatelessWidget {
-  const GalleryTab({super.key});
+  final Map<String, dynamic> listAllImageData;
+  const GalleryTab(this.listAllImageData, {super.key});
 
   // const List<String> _items = List<String>.generate(10000, (i) => 'Item $i');
 
@@ -16,9 +17,9 @@ class GalleryTab extends StatelessWidget {
         itemBuilder: (context, index) {
           return Card(
               child: ListTile(
-                  title: Text('image'),
-                  leading: Icon(Icons.movie),
-                  subtitle: Text('subtitle'),
+                  title: Text(listAllImageData["uuid1"]!['name']!),
+                  leading: const Icon(Icons.movie),
+                  subtitle: Text(listAllImageData["uuid1"]!['datetime']!),
                   onTap: () => Navigator.push(context,
                       MaterialPageRoute(builder: (_) => const ImageView()))));
         });

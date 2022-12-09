@@ -70,14 +70,11 @@ class ImageView extends StatelessWidget {
 
 
 class MetaView extends StatelessWidget {
-  final Map<String, dynamic> metadata;
-
-  const MetaView(this.metadata, {super.key});
+  final Map<String, dynamic> data;
+  const MetaView(this.data, {super.key});
 
   @override
   Widget build(BuildContext context) {
-    Map data = metadata;
-
     List<Widget> textChildren = [];
     textChildren.add(Card(
         child: ListTile(title: Text("Date: ${data["datetime"].toString()}"))));
