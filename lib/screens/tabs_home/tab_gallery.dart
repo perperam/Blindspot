@@ -4,22 +4,26 @@ import 'package:hive/hive.dart';
 import 'tab_settings.dart';
 
 class GalleryTab extends StatelessWidget {
-  final Map<String, dynamic> listAllImageData;
-  const GalleryTab(this.listAllImageData, {super.key});
+  final Map<String, dynamic> mapAllImageData;
+  GalleryTab(this.mapAllImageData, {super.key});
 
   // const List<String> _items = List<String>.generate(10000, (i) => 'Item $i');
 
   @override
   Widget build(BuildContext context) {
+    List<Map<String, String>> listAllImageData;
+
+    List<String> keys = mapAllImageData.keys.toList();
+
     var darkMode = Hive.box(themeBox).get('darkMode', defaultValue: false);
     return ListView.builder(
-        itemCount: 15,
+        itemCount: mapAllImageData.length,
         itemBuilder: (context, index) {
           return Card(
               child: ListTile(
-                  title: Text(listAllImageData["uuid1"]!['name']!),
+                  title: Text(mapAllImageData[keys[index]]!['name']!),
                   leading: const Icon(Icons.movie),
-                  subtitle: Text(listAllImageData["uuid1"]!['datetime']!),
+                  subtitle: Text(mapAllImageData[keys[index]]!['datetime']!),
                   onTap: () => Navigator.push(context,
                       MaterialPageRoute(builder: (_) => const ImageView()))));
         });
