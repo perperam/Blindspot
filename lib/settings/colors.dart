@@ -8,5 +8,6 @@ class CustomColors{
  static Color Background = Color(0xFF607D8B); //bluegray
  static Color Text = Color(0xB3FFFFFF); // white
  static Color Tabbar = Color(0xFFFF9800); // Orange
+ static Color test = Colors.orangeAccent;
 }
 

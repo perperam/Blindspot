@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:blindspot/Settings/Colors.dart';
+import 'package:blindspot/Settings/colors.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 
 TextField reusableTextField(String text, IconData icon, bool isPasswordType,

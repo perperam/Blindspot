@@ -1,7 +1,7 @@
 import 'package:blindspot/screens/screen_login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../reusable_widget.dart';
-import 'package:blindspot/Settings/Colors.dart';
+import 'package:blindspot/Settings/colors.dart';
 import 'package:flutter/material.dart';
 import 'tabs_home/tab_settings.dart';
 import 'package:hive/hive.dart';
