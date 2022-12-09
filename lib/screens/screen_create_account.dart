@@ -37,7 +37,6 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),),
       body: Container(
-          color: CustomColors.Background,
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           child: SingleChildScrollView(
@@ -70,7 +69,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                           .then((value) {
                         print("Created New Account");
                         Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => MyLogin(value: darkMode,)));
+                            MaterialPageRoute(builder: (context) => MyLogin()));
                       }).onError((error, stackTrace) {
                         ScaffoldMessenger.of(context).showSnackBar(Massage("Error ${error.toString()}"));
                         print("Error ${error.toString()}");

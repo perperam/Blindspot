@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'screens/screen_login.dart';
+import 'package:blindspot/reusable/funktions/user_request.dart';
 import 'screens/screen_home.dart';
 import 'screens/tabs_home/tab_settings.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -33,41 +34,9 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false, //switching between light and dark theme,
             themeMode: darkMode ? ThemeMode.dark : ThemeMode.light,
             darkTheme: ThemeData.dark(),
-            home: MyLogin(
-              value: darkMode,
-            ));
+            home: MyLogin(),
+            );
       },
     );
   }
 }
-
-
-
-
-
-/*
-void main() async {
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'Your App Name',
-        home: _getLandingPage()
-    );
-  }
-}
-
-  Widget _getLandingPage() {
-    return StreamBuilder<User>(
-      stream: FirebaseAuth.instance.onAuthStateChanged,
-      builder: (BuildContext context, snapshot) {
-        if (snapshot.hasData) {
-          return HomeRoute();
-        } else {
-          return MyLogin();
-        }
-      },
-    );
-  }
-}
-*/
