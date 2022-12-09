@@ -5,13 +5,13 @@ import 'tab_settings.dart';
 
 class GalleryTab extends StatelessWidget {
   final Map<String, dynamic> mapAllImageData;
-  GalleryTab(this.mapAllImageData, {super.key});
+  const GalleryTab(this.mapAllImageData, {super.key});
 
   // const List<String> _items = List<String>.generate(10000, (i) => 'Item $i');
 
   @override
   Widget build(BuildContext context) {
-    List<Map<String, String>> listAllImageData;
+    // List<Map<String, String>> listAllImageData;
 
     List<String> keys = mapAllImageData.keys.toList();
 

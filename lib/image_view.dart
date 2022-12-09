@@ -5,34 +5,43 @@ import 'package:blindspot/fbuilder_else_widgets.dart';
 
 class ImageBuilder extends StatefulWidget  {
   Future<Map<String, dynamic>> futureImageData;
-  bool buttonMode;
-  ImageBuilder(this.futureImageData, this.buttonMode, {super.key});
+  String mode;
+  ImageBuilder(this.futureImageData, this.mode, {super.key});
 
   @override
   State<ImageBuilder> createState() => _ImageBuilder();
 }
 
 class _ImageBuilder extends State<ImageBuilder> {
+  // changes which button is shown at which screen
+  Widget _getViewModeButton(String mode) {
+    if (mode == 'preview') {
+      return IconButton(
+          icon: const Icon(Icons.save),
+          onPressed: null // save_image()
+      );
+    } else if (mode == 'listview') {
+      return const IconButton(
+          icon: Icon(Icons.settings),
+          onPressed: null
+      );
+    } else {
+      return const Icon(Icons.circle);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: const Text('Preview Page'),
-          actions: [IconButton(
-              icon: Icon(Icons.camera),
-              onPressed: (){
-                // saveImage();
-                // doSync(); ??
-                // closeScreen()
-              }
-          )],
+          actions: [_getViewModeButton(widget.mode)],
         ),
         body: FutureBuilder<Map<String, dynamic>>(
             future: widget.futureImageData,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                return View(snapshot.data!, widget.buttonMode);
+                return View(snapshot.data!);
               } else if (snapshot.hasError) {
                 return ElseError(massage: "Could not load the Image!");
               } else {
@@ -48,9 +57,8 @@ class _ImageBuilder extends State<ImageBuilder> {
 
 class View extends StatelessWidget {
   final Map<String, dynamic> imageData;
-  bool buttonMode;
 
-  View(this.imageData, this.buttonMode, {super.key});
+  const View(this.imageData, {super.key});
 
   @override
   Widget build(BuildContext context) {

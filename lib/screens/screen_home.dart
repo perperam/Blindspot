@@ -18,16 +18,16 @@ class HomeRoute extends StatefulWidget {
 
 class _HomeRoute extends State<HomeRoute> {
   // get path to local storage
-  // Future<String> get _localPath async {
-  //   final directory = await getApplicationDocumentsDirectory();
-  //   return directory.path;
-  // }
+  Future<String> get _localPath async {
+    final directory = await getApplicationDocumentsDirectory();
+    return directory.path;
+  }
 
   // path to file in local storage
-  // Future<File> get _localFile async {
-  //   final path = await _localPath;
-  //   return File('$path/list_all_image_data.json');
-  // }
+  Future<File> get _localFile async {
+    final path = await _localPath;
+    return File('$path/list_all_image_data.json');
+  }
 
   Future<Map<String, dynamic>> loadDefaultAsset() async {
     String data = await DefaultAssetBundle.of(context).loadString("assets/list_all_image_data.json");
@@ -35,35 +35,38 @@ class _HomeRoute extends State<HomeRoute> {
   }
 
   // write json from assets if missing
-  // writeDefault() async {
-  //   Map<String, Map<String, String>> listAllImageData;
-  //
-  //   listAllImageData = await loadDefaultAsset();
-  //
-  //   final file = await _localFile;
-  //
-  //   // Write the file
-  //   file.writeAsString(jsonEncode(listAllImageData));
-  // }
+  writeDefault() async {
+    Map<String, dynamic> listAllImageData;
+
+    listAllImageData = await loadDefaultAsset();
+
+    final file = await _localFile;
+
+    // Write the file
+    file.writeAsString(jsonEncode(listAllImageData));
+  }
 
 
 
-  // Future<Map<String, dynamic>> readListAllImageData() async {
-  //     writeDefault();
-  //
-  //     final file = await _localFile;
-  //
-  //     // Read the file
-  //     final contents = await file.readAsString();
-  //
-  //     return json.decode(contents);
-  // }
+  Future<Map<String, dynamic>> readListAllImageData() async {
+      writeDefault();
+
+      final file = await _localFile;
+
+      // Read the file
+      final contents = await file.readAsString();
+
+      return json.decode(contents);
+  }
 
   @override
   Widget build(BuildContext context) {
+    // for debuging
+    // readListAllImageData().then((Map<String, dynamic> m) {print(m.toString());});
+
     return Scaffold(
         body: FutureBuilder<Map<String, dynamic>> (
-            future: loadDefaultAsset(),
+            future: readListAllImageData(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return HomeScreenTabController(snapshot.data!);

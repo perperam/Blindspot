@@ -27,6 +27,6 @@ class _ImageView extends State<ImageView> {
 
   @override
   Widget build(BuildContext context) {
-    return iv.ImageBuilder(futureMap, true);
+    return iv.ImageBuilder(futureMap, "listview");
   }
 }

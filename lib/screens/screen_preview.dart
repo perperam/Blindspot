@@ -25,21 +25,21 @@ class _PreviewPageState extends State<PreviewPage> {
 
     var streamedResponse = await request.send();
     final responseString = await http.Response.fromStream(streamedResponse);
-    final m = await json.decode(responseString.body);
-    return m;
-    //m = zurückgekomme json von API
+    // imageData = response from API
+    final imageData = await json.decode(responseString.body);
+    return imageData;
   }
 
-  late Future<Map<String, dynamic>> futureMap;
+  late Future<Map<String, dynamic>> futureImageData;
 
   @override
   void initState() {
     super.initState();
-    futureMap = postPic();
+    futureImageData = postPic();
   }
 
   @override
   Widget build(BuildContext context) {
-    return iv.ImageBuilder(futureMap, true);
+    return iv.ImageBuilder(futureImageData, "preview");
   }
 }
