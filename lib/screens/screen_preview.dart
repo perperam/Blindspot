@@ -27,6 +27,7 @@ class _PreviewPageState extends State<PreviewPage> {
     final responseString = await http.Response.fromStream(streamedResponse);
     final m = await json.decode(responseString.body);
     return m;
+    //m = zurückgekomme json von API
   }
 
   late Future<Map<String, dynamic>> futureMap;

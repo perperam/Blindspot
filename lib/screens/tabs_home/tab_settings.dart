@@ -6,7 +6,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 const themeBox = 'hiveThemeBox';
 
-
 class SettingsTab extends StatelessWidget {
   final bool value;
   const SettingsTab({Key? key, required this.value}) : super(key: key);
@@ -35,6 +34,7 @@ class SettingsTab extends StatelessWidget {
               child: Text(
                 'Sign out', style: TextStyle(color: Colors.red)),
                 onPressed: () {
+                // Message 
                 FirebaseAuth.instance.signOut();
                 Navigator.push(context, MaterialPageRoute(builder: (context) => MyLogin()));
                 },

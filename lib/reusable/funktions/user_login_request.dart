@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:blindspot/screens/screen_login.dart';
 
+//Rückgabe bool
+//userLoginRequest
 
 void user_login_request (Function user_is_logged_in, Function user_is_not_logged_in){
 
@@ -11,7 +13,7 @@ void user_login_request (Function user_is_logged_in, Function user_is_not_logged
       if (user == null) {
         user_is_not_logged_in();
       } else {
-        user_is_not_logged_in();
+        user_is_logged_in();
       }
     });
 }
