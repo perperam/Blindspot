@@ -17,7 +17,17 @@ class _ImageBuilder extends State<ImageBuilder> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text('Preview Page')),
+        appBar: AppBar(
+          title: const Text('Preview Page'),
+          actions: [IconButton(
+              icon: Icon(Icons.camera),
+              onPressed: (){
+                // saveImage();
+                // doSync(); ??
+                // closeScreen()
+              }
+          )],
+        ),
         body: FutureBuilder<Map<String, dynamic>>(
             future: widget.futureImageData,
             builder: (context, snapshot) {
