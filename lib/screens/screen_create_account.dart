@@ -12,8 +12,7 @@ import 'package:flutter_signin_button/flutter_signin_button.dart';
 
 
 class CreateAccountScreen extends StatefulWidget {
-  final bool value;
-  const CreateAccountScreen({Key? key, required this.value}) : super(key: key);
+  const CreateAccountScreen({Key? key}) : super(key: key);
 
   @override
   _CreateAccountScreenState createState() => _CreateAccountScreenState();
@@ -26,7 +25,6 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
   TextEditingController _userNameTextController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    var darkMode = Hive.box(themeBox).get('darkMode', defaultValue: false);
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(

@@ -16,11 +16,11 @@ void main() async {
   await Firebase.initializeApp();
   await Hive.initFlutter();
   await Hive.openBox(themeBox);
-  runApp(MaterialApp(title: 'Blindspot', home: MyApp()));
+  runApp(MaterialApp(title: 'Blindspot', home: Blindspot()));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class Blindspot extends StatelessWidget {
+  const Blindspot({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +30,20 @@ class MyApp extends StatelessWidget {
       builder: (context, box, widget) {//saving the value inside the hive box,
       var darkMode = Hive.box(themeBox).get('darkMode', defaultValue: false);
         return MaterialApp(
-            debugShowCheckedModeBanner: false, //switching between light and dark theme,
-            themeMode: darkMode ? ThemeMode.dark : ThemeMode.light,
-            darkTheme: ThemeData.dark(),
-            home: MyLogin(),
-            );
+          debugShowCheckedModeBanner: false, //switching between light and dark theme,
+          themeMode: darkMode ? ThemeMode.dark : ThemeMode.light,
+          darkTheme: ThemeData.dark(),
+          home: MyLogin(),
+          /*
+          initialRoute: '/',
+            routes: {
+            // Navigation with named routes
+            '/MyLogin': (context) => const MyLogin(),
+            '/HomeRoute': (context) => const HomeRoute(),
+            }
+           */
+
+        );
       },
     );
   }
