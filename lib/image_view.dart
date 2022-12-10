@@ -70,6 +70,22 @@ class _ImageBuilder extends State<ImageBuilder> {
             Map mapAllImageData = json.decode(contents);
             print(mapAllImageData.toString());
 
+            Map newImageListViewData = {
+              (await widget.futureImageData)['uuid'] : {
+                'name' : (await widget.futureImageData)['name'],
+                'datetime' : (await widget.futureImageData)['metadata']['datetime']
+              }
+            };
+            // print((await widget.futureImageData)['metadata'].toString());
+            print(newImageListViewData.toString());
+
+            // add to newImageData so that new Data is at beginning of the Map
+            newImageListViewData.addAll(mapAllImageData);
+            print(newImageListViewData.toString());
+
+            // override map_all_image_data.json with new one
+            pathMapAllImageData.writeAsString(jsonEncode(newImageListViewData));
+
 
           } //saveImage(widget.futureImageData)
           );

@@ -48,13 +48,12 @@ class _HomeRoute extends State<HomeRoute> {
   }
 
   Future<Map<String, dynamic>> readMapAllImageData() async {
-    writeDefault();
+    // writeDefault();
 
-    final file = await _localFile;
-
-    // Read the file
-    final contents = await file.readAsString();
-
+    final Directory appDocDir = await getApplicationDocumentsDirectory();
+    final File pathMapAllImageData = File('${appDocDir.path}/map_all_image_data.json');
+    final contents = await pathMapAllImageData.readAsString();
+    print("READ ALL IMAGE DATA");
     return json.decode(contents);
   }
 
