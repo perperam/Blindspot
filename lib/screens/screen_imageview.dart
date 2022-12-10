@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:blindspot/image_view.dart' as iv;
 
-class ImageView extends StatefulWidget  {
-  const ImageView({super.key});
+class ImageViewScreen extends StatefulWidget  {
+  const ImageViewScreen({super.key});
 
   @override
-  State<ImageView> createState() => _ImageView();
+  State<ImageViewScreen> createState() => _ImageViewScreen();
 }
 
 
-class _ImageView extends State<ImageView> {
+class _ImageViewScreen extends State<ImageViewScreen> {
 
   Future<Map<String, dynamic>> loadPic() async {
     String data = await DefaultAssetBundle.of(context).loadString("assets/test_image_data.json");

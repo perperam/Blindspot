@@ -25,7 +25,7 @@ class GalleryTab extends StatelessWidget {
                   leading: const Icon(Icons.movie),
                   subtitle: Text(mapAllImageData[keys[index]]!['datetime']!),
                   onTap: () => Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => const ImageView()))));
+                      MaterialPageRoute(builder: (_) => const ImageViewScreen()))));
         });
   }
 }
