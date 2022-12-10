@@ -20,7 +20,7 @@ class _GalleryTab extends State<GalleryTab> {
   Widget build(BuildContext context) {
     // List<Map<String, String>> listAllImageData;
 
-    List<String> keys = widget.mapAllImageData.keys.toList();
+    List<String> uuidKeys = widget.mapAllImageData.keys.toList();
 
 
     var darkMode = Hive.box(themeBox).get('darkMode', defaultValue: false);
@@ -29,11 +29,18 @@ class _GalleryTab extends State<GalleryTab> {
         itemBuilder: (context, index) {
           return Card(
               child: ListTile(
-                  title: Text(widget.mapAllImageData[keys[index]]!['name']!),
+                  title: Text(widget.mapAllImageData[uuidKeys[index]]!['name']!),
                   leading: const Icon(Icons.movie),
-                  subtitle: Text(widget.mapAllImageData[keys[index]]!['datetime']!),
+                  subtitle: Text(widget.mapAllImageData[uuidKeys[index]]!['datetime']!),
                   onTap: () => Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => const ImageViewScreen()))));
+                      MaterialPageRoute(
+                          builder: (_) => ImageViewScreen(
+                              // get the uuid from mapAllImageData at index
+                              uuidKeys[index]
+                          )
+                      )
+                  )
+              ));
         });
   }
 }

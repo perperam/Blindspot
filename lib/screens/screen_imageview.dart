@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
+import 'dart:io';
+import 'package:path_provider/path_provider.dart';
 import 'package:blindspot/image_view.dart' as iv;
 
 class ImageViewScreen extends StatefulWidget  {
-  const ImageViewScreen({super.key});
+  String imageDataUuid;
+  ImageViewScreen(this.imageDataUuid, {super.key});
 
   @override
   State<ImageViewScreen> createState() => _ImageViewScreen();
@@ -12,9 +15,15 @@ class ImageViewScreen extends StatefulWidget  {
 
 class _ImageViewScreen extends State<ImageViewScreen> {
 
-  Future<Map<String, dynamic>> loadPic() async {
-    String data = await DefaultAssetBundle.of(context).loadString("assets/test_image_data.json");
-    return jsonDecode(data);
+  // read the json file by uuid which is specified in the listViewBuilder
+  Future<Map<String, dynamic>> loadImageData() async {
+    print('THE UUID IS: ${widget.imageDataUuid}');
+    Directory appDocDir = await getApplicationDocumentsDirectory();
+    Directory appDocDirImageData = Directory('${appDocDir.path}/image_data');
+    File pathMapAllImageData = File('${appDocDirImageData.path}/${widget.imageDataUuid}.json');
+    print('THE PATH IS: ${pathMapAllImageData.toString()}');
+    final contents = await pathMapAllImageData.readAsString();
+    return jsonDecode(contents);
   }
 
   late Future<Map<String, dynamic>> futureMap;
@@ -22,7 +31,7 @@ class _ImageViewScreen extends State<ImageViewScreen> {
   @override
   void initState() {
     super.initState();
-    futureMap = loadPic();
+    futureMap = loadImageData();
   }
 
   @override

@@ -39,12 +39,14 @@ class _ImageBuilder extends State<ImageBuilder> {
             Directory appDocDirImageData = Directory('${appDocDir.path}/image_data');
 
             File pathImageData = File('${appDocDirImageData.path}/${(await widget.futureImageData)["uuid"]}.json');
-            pathImageData.writeAsString((await widget.futureImageData).toString());
+
+            String ImageData = jsonEncode(await widget.futureImageData);
+            // pathImageData.writeAsString(ImageData);
 
             File pathMapAllImageData = File('${appDocDir.path}/map_all_image_data.json');
             final contents = await pathMapAllImageData.readAsString();
             Map mapAllImageData = json.decode(contents);
-            print(mapAllImageData.toString());
+            // print(jsonEncode(mapAllImageData));
 
             Map newImageListViewData = {
               (await widget.futureImageData)['uuid'] : {
@@ -53,11 +55,11 @@ class _ImageBuilder extends State<ImageBuilder> {
               }
             };
             // print((await widget.futureImageData)['metadata'].toString());
-            print(newImageListViewData.toString());
+            // print(jsonEncode(newImageListViewData));
 
             // add to newImageData so that new Data is at beginning of the Map
             newImageListViewData.addAll(mapAllImageData);
-            print(newImageListViewData.toString());
+            // print(jsonEncode(newImageListViewData));
 
             // override map_all_image_data.json with new one
             pathMapAllImageData.writeAsString(jsonEncode(newImageListViewData));
@@ -89,8 +91,11 @@ class _ImageBuilder extends State<ImageBuilder> {
             future: widget.futureImageData,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
+                // String ImageData = (snapshot.data!).toString();
+                // print('IMAGEDATA (SNAPSHOT) from future: ${ImageData!}');
                 return View(snapshot.data!);
               } else if (snapshot.hasError) {
+                // print('THE ERROR IS: ${snapshot.error.toString()}');
                 return ElseError(massage: "Could not load the Image!");
               } else {
                 return ElseWaiting(massage: "Loading the image...");
