@@ -5,30 +5,6 @@ import 'package:blindspot/fbuilder_else_widgets.dart';
 import 'package:path_provider/path_provider.dart';
 
 
-saveImage(Future<Map<String, dynamic>> newFutureImageData) async {
-  final directory = await getApplicationDocumentsDirectory();
-  File jsonFile = File('${directory.path}/map_all_image_data.json');
-  final contents = await jsonFile.readAsString();
-  print("THE STRING$contents");
-  // Map<String, dynamic> mapAllImageData = json.decode(contents);
-  //
-  // Map<String, dynamic> newImageData = await newFutureImageData;
-  // print(newImageData.toString());
-
-  // // stores tha newImageData map in a form needed for map_all_image_data.json
-  // Map<String, dynamic> newImageListViewData = {
-  //   newImageData['uuid'] : {
-  //     'name' : newImageData['name'],
-  //     'datetime' : newImageData['metadata']['datatime']
-  //   }
-  // };
-  //
-  // // add to newImageData so that new Data is at beginning of the Map
-  // newImageListViewData.addAll(mapAllImageData);
-  //
-  // print(newImageListViewData.toString());
-}
-
 class ImageBuilder extends StatefulWidget {
   Future<Map<String, dynamic>> futureImageData;
   String mode;
@@ -105,7 +81,7 @@ class _ImageBuilder extends State<ImageBuilder> {
           leading: IconButton(
             icon: Icon(Icons.close),
             onPressed: () => Navigator.of(context).popUntil((route){
-              return route.settings.name == 'CameraScreen';
+              return route.settings.name == 'HomeScreen';
             })
           )
         ),

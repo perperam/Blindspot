@@ -17,57 +17,23 @@ class HomeRoute extends StatefulWidget {
 }
 
 class _HomeRoute extends State<HomeRoute> {
-  // get path to local storage
-  Future<String> get _localPath async {
-    final directory = await getApplicationDocumentsDirectory();
-    return directory.path;
-  }
 
-  // path to file in local storage
-  Future<File> get _localFile async {
-    final path = await _localPath;
-    return File('$path/map_all_image_data.json');
-  }
-
-  Future<Map<String, dynamic>> loadDefaultAsset() async {
-    String data = await DefaultAssetBundle.of(context)
-        .loadString("assets/map_all_image_data.json");
-    return jsonDecode(data);
-  }
-
-  // write json from assets if missing
-  writeDefault() async {
-    Map<String, dynamic> listAllImageData;
-
-    listAllImageData = await loadDefaultAsset();
-
-    final file = await _localFile;
-
-    // Write the file
-    file.writeAsString(jsonEncode(listAllImageData));
-  }
-
+  // assure that map_all_image_data.json file is present and return its content
   Future<Map<String, dynamic>> readMapAllImageData() async {
-    // writeDefault();
-
     final Directory appDocDir = await getApplicationDocumentsDirectory();
     final File pathMapAllImageData = File('${appDocDir.path}/map_all_image_data.json');
-    final contents = await pathMapAllImageData.readAsString();
-    print("READ ALL IMAGE DATA");
-    return json.decode(contents);
-  }
 
-  // _initFileMapAllImageData() async {
-  //   final Directory appDocDir = await getApplicationDocumentsDirectory();
-  //   File pathMapAllImageData = File('${appDocDir.path}/map_all_image_data.json');
-  //
-  //   if (await pathMapAllImageData.exists()) {
-  //     return pathMapAllImageData;
-  //   } else {
-  //     pathMapAllImageData = await pathMapAllImageData.create(recursive: true);
-  //     // return appDocDirImageData
-  //   }
-  // }
+    if (await pathMapAllImageData.exists()) {
+      // if available read from file and return its content as map
+      final contents = await pathMapAllImageData.readAsString();
+      return json.decode(contents);
+    } else {
+      // if not available create new empty at storage and return empty map
+      Map<String, dynamic> empty = {};
+      pathMapAllImageData.writeAsString(jsonEncode(empty));
+      return empty;
+    }
+  }
 
   // assure that directory for ImageDate.json files is present
   _initDirImageData () async {
