@@ -94,7 +94,7 @@ class _MyLogin extends State<MyLogin> {
                               builder: (_) {
                                 return HomeRoute();
                               },
-                              settings: RouteSettings(name: 'HomeRoute')));
+                              settings: RouteSettings(name: 'HomeScreen')));
                     }),
                     SignInButton(Buttons.Google, onPressed: () {
                       loginWithGoogle()
@@ -110,7 +110,7 @@ class _MyLogin extends State<MyLogin> {
                                   builder: (_) {
                                     return HomeRoute();
                                   },
-                                  settings: RouteSettings(name: 'HomeRoute')));
+                                  settings: RouteSettings(name: 'HomeScreen')));
                         }, () {});
                       });
                     }),
