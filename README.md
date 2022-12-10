@@ -42,6 +42,7 @@
 - ListView is overlapped by take Photo button
 - going back from preview freezes camera
 - Navigate with named routes
+- delete files when logout?
 
 ## Sources
 - [Camera](https://medium.com/@fernnandoptr/how-to-use-camera-in-flutter-flutter-camera-package-44defe81d2da)
