@@ -4,21 +4,18 @@ import 'dart:io';
 import 'package:blindspot/fbuilder_else_widgets.dart';
 import 'package:path_provider/path_provider.dart';
 
-testdo() {
-  print('hello, this is an test do');
-}
 
 saveImage(Future<Map<String, dynamic>> newFutureImageData) async {
   final directory = await getApplicationDocumentsDirectory();
-  File jsonFile = File('${directory.path}/list_all_image_data.json');
+  File jsonFile = File('${directory.path}/map_all_image_data.json');
   final contents = await jsonFile.readAsString();
-  print("THE STRING" + contents.toString());
+  print("THE STRING$contents");
   // Map<String, dynamic> mapAllImageData = json.decode(contents);
   //
   // Map<String, dynamic> newImageData = await newFutureImageData;
   // print(newImageData.toString());
 
-  // // stores tha newImageData map in a form needed for list_all_image_data.json
+  // // stores tha newImageData map in a form needed for map_all_image_data.json
   // Map<String, dynamic> newImageListViewData = {
   //   newImageData['uuid'] : {
   //     'name' : newImageData['name'],
@@ -50,16 +47,28 @@ class _ImageBuilder extends State<ImageBuilder> {
           icon: const Icon(Icons.save),
           onPressed: () async {
             // =========
-            String directory;
-            List files;
-
-            directory = (await getApplicationDocumentsDirectory()).path;
-            files = Directory(directory).listSync();
-
-            ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(files.toString())));
-            print(files.toString());
+            // String directory;
+            // List files;
+            //
+            // directory = (await getApplicationDocumentsDirectory()).path;
+            // files = Directory(directory).listSync();
+            //
+            // ScaffoldMessenger.of(context).showSnackBar(
+            //     SnackBar(content: Text(files.toString())));
+            // print(files.toString());
             // =========
+
+            // write api response to  local storage
+            final Directory appDocDir = await getApplicationDocumentsDirectory();
+            Directory appDocDirImageData = Directory('${appDocDir.path}/image_data');
+
+            File pathImageData = File('${appDocDirImageData.path}/${(await widget.futureImageData)["uuid"]}.json');
+            pathImageData.writeAsString((await widget.futureImageData).toString());
+
+            // File pathMapAllImageData = File('${appDocDir.path}/map_all_image_data.json');
+            // final contents = await jsonFile.readAsString();
+
+
           } //saveImage(widget.futureImageData)
           );
     } else if (mode == 'listview') {

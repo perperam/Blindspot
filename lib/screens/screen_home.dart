@@ -26,12 +26,12 @@ class _HomeRoute extends State<HomeRoute> {
   // path to file in local storage
   Future<File> get _localFile async {
     final path = await _localPath;
-    return File('$path/list_all_image_data.json');
+    return File('$path/map_all_image_data.json');
   }
 
   Future<Map<String, dynamic>> loadDefaultAsset() async {
     String data = await DefaultAssetBundle.of(context)
-        .loadString("assets/list_all_image_data.json");
+        .loadString("assets/map_all_image_data.json");
     return jsonDecode(data);
   }
 
@@ -47,7 +47,7 @@ class _HomeRoute extends State<HomeRoute> {
     file.writeAsString(jsonEncode(listAllImageData));
   }
 
-  Future<Map<String, dynamic>> readListAllImageData() async {
+  Future<Map<String, dynamic>> readMapAllImageData() async {
     writeDefault();
 
     final file = await _localFile;
@@ -58,9 +58,21 @@ class _HomeRoute extends State<HomeRoute> {
     return json.decode(contents);
   }
 
+  // _initFileMapAllImageData() async {
+  //   final Directory appDocDir = await getApplicationDocumentsDirectory();
+  //   File pathMapAllImageData = File('${appDocDir.path}/map_all_image_data.json');
+  //
+  //   if (await pathMapAllImageData.exists()) {
+  //     return pathMapAllImageData;
+  //   } else {
+  //     pathMapAllImageData = await pathMapAllImageData.create(recursive: true);
+  //     // return appDocDirImageData
+  //   }
+  // }
+
   // assure that directory for ImageDate.json files is present
-  _initPathImageData () async {
-    final Directory appDocDir = await getApplicationDocumentsDirectory();
+  _initDirImageData () async {
+    Directory appDocDir = await getApplicationDocumentsDirectory();
     Directory appDocDirImageData = Directory('${appDocDir.path}/image_data/');
 
     if (await appDocDirImageData.exists()) {
@@ -74,7 +86,7 @@ class _HomeRoute extends State<HomeRoute> {
   @override
   void initState() {
     // assure that directory for ImageDate.json files is present
-    _initPathImageData();
+    _initDirImageData();
     super.initState();
   }
 
@@ -85,7 +97,7 @@ class _HomeRoute extends State<HomeRoute> {
 
     return Scaffold(
         body: FutureBuilder<Map<String, dynamic>>(
-            future: readListAllImageData(),
+            future: readMapAllImageData(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return HomeScreenTabController(snapshot.data!);
