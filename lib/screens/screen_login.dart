@@ -42,8 +42,8 @@ class _MyLogin extends State<MyLogin> {
                   padding: EdgeInsets.fromLTRB(50, 20, 20, 0),
                   child: Column(children: <Widget>[
                     const SizedBox(height: 15),
-                    Text("Welcome to Blindspot! \nplease choose a Login-method",
-                        style: TextStyle(
+                    Text("Welcome to Blindspot!",
+                        style: const TextStyle(
                           fontSize: 28,
                         )),
                     const Image(
@@ -67,20 +67,34 @@ class _MyLogin extends State<MyLogin> {
                         print("Error ${error.toString()}");
                       });
                       user_login_request(() {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRoute()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) {
+                                  return const HomeRoute();
+                                },
+                                settings: RouteSettings(name: 'HomeRoute')));
                       }, () {});
                     }),
                     firebase_ui_button(context, 'Create Acount', () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                                  CreateAccountScreen(value: darkMode)));
+                              builder: (_) {
+                                return const CreateAccountScreen();
+                              },
+                              settings:
+                                  RouteSettings(name: 'CreateAccountScreen')));
                     }),
                     firebase_ui_button(context, "To Homescreen without Login",
                         () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => HomeRoute()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) {
+                                return HomeRoute();
+                              },
+                              settings: RouteSettings(name: 'HomeRoute')));
                     }),
                     SignInButton(Buttons.Google, onPressed: () {
                       loginWithGoogle()
@@ -93,7 +107,10 @@ class _MyLogin extends State<MyLogin> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => HomeRoute()));
+                                  builder: (_) {
+                                    return HomeRoute();
+                                  },
+                                  settings: RouteSettings(name: 'HomeRoute')));
                         }, () {});
                       });
                     }),
