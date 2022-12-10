@@ -1,11 +1,41 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
+import 'dart:io';
 import 'package:blindspot/fbuilder_else_widgets.dart';
+import 'package:path_provider/path_provider.dart';
 
+testdo() {
+  print('hello, this is an test do');
+}
 
-class ImageBuilder extends StatefulWidget  {
+saveImage(Future<Map<String, dynamic>> newFutureImageData) async {
+  final directory = await getApplicationDocumentsDirectory();
+  File jsonFile = File('${directory.path}/list_all_image_data.json');
+  final contents = await jsonFile.readAsString();
+  print("THE STRING" + contents.toString());
+  // Map<String, dynamic> mapAllImageData = json.decode(contents);
+  //
+  // Map<String, dynamic> newImageData = await newFutureImageData;
+  // print(newImageData.toString());
+
+  // // stores tha newImageData map in a form needed for list_all_image_data.json
+  // Map<String, dynamic> newImageListViewData = {
+  //   newImageData['uuid'] : {
+  //     'name' : newImageData['name'],
+  //     'datetime' : newImageData['metadata']['datatime']
+  //   }
+  // };
+  //
+  // // add to newImageData so that new Data is at beginning of the Map
+  // newImageListViewData.addAll(mapAllImageData);
+  //
+  // print(newImageListViewData.toString());
+}
+
+class ImageBuilder extends StatefulWidget {
   Future<Map<String, dynamic>> futureImageData;
   String mode;
+
   ImageBuilder(this.futureImageData, this.mode, {super.key});
 
   @override
@@ -18,13 +48,13 @@ class _ImageBuilder extends State<ImageBuilder> {
     if (mode == 'preview') {
       return IconButton(
           icon: const Icon(Icons.save),
-          onPressed: null // save_image()
-      );
+          onPressed: () {
+            ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Icon button is pressed')));
+          } //saveImage(widget.futureImageData)
+          );
     } else if (mode == 'listview') {
-      return const IconButton(
-          icon: Icon(Icons.settings),
-          onPressed: null
-      );
+      return const IconButton(icon: Icon(Icons.settings), onPressed: null);
     } else {
       return const Icon(Icons.circle);
     }
@@ -36,6 +66,12 @@ class _ImageBuilder extends State<ImageBuilder> {
         appBar: AppBar(
           title: const Text('Preview Page'),
           actions: [_getViewModeButton(widget.mode)],
+          leading: IconButton(
+            icon: Icon(Icons.close),
+            onPressed: () => Navigator.of(context).popUntil((route){
+              return route.settings.name == 'CameraScreen';
+            })
+          )
         ),
         body: FutureBuilder<Map<String, dynamic>>(
             future: widget.futureImageData,
@@ -51,10 +87,6 @@ class _ImageBuilder extends State<ImageBuilder> {
   }
 }
 
-
-
-
-
 class View extends StatelessWidget {
   final Map<String, dynamic> imageData;
 
@@ -62,7 +94,6 @@ class View extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return SingleChildScrollView(
         child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -73,7 +104,6 @@ class View extends StatelessWidget {
         ]));
   }
 }
-
 
 class ImageView extends StatelessWidget {
   final String b64image;
@@ -86,9 +116,9 @@ class ImageView extends StatelessWidget {
   }
 }
 
-
 class MetaView extends StatelessWidget {
   final Map<String, dynamic> data;
+
   const MetaView(this.data, {super.key});
 
   @override

@@ -5,16 +5,16 @@ import 'package:blindspot/Settings/colors.dart';
 
 //forked on https://medium.com/@fernnandoptr/how-to-use-camera-in-flutter-flutter-camera-package-44defe81d2da)
 
-class CameraPage extends StatefulWidget {
-  const CameraPage({Key? key, required this.cameras}) : super(key: key);
+class CameraScreen extends StatefulWidget {
+  const CameraScreen({Key? key, required this.cameras}) : super(key: key);
 
   final List<CameraDescription>? cameras;
 
   @override
-  State<CameraPage> createState() => _CameraPageState();
+  State<CameraScreen> createState() => _CameraScreenState();
 }
 
-class _CameraPageState extends State<CameraPage> {
+class _CameraScreenState extends State<CameraScreen> {
   late CameraController _cameraController;
   bool _isRearCameraSelected = true;
 

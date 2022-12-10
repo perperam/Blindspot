@@ -30,7 +30,8 @@ class _HomeRoute extends State<HomeRoute> {
   }
 
   Future<Map<String, dynamic>> loadDefaultAsset() async {
-    String data = await DefaultAssetBundle.of(context).loadString("assets/list_all_image_data.json");
+    String data = await DefaultAssetBundle.of(context)
+        .loadString("assets/list_all_image_data.json");
     return jsonDecode(data);
   }
 
@@ -46,26 +47,24 @@ class _HomeRoute extends State<HomeRoute> {
     file.writeAsString(jsonEncode(listAllImageData));
   }
 
-
-
   Future<Map<String, dynamic>> readListAllImageData() async {
-      writeDefault();
+    writeDefault();
 
-      final file = await _localFile;
+    final file = await _localFile;
 
-      // Read the file
-      final contents = await file.readAsString();
+    // Read the file
+    final contents = await file.readAsString();
 
-      return json.decode(contents);
+    return json.decode(contents);
   }
 
   @override
   Widget build(BuildContext context) {
-    // for debuging
+    // for debugging
     // readListAllImageData().then((Map<String, dynamic> m) {print(m.toString());});
 
     return Scaffold(
-        body: FutureBuilder<Map<String, dynamic>> (
+        body: FutureBuilder<Map<String, dynamic>>(
             future: readListAllImageData(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
@@ -82,8 +81,8 @@ class _HomeRoute extends State<HomeRoute> {
 
 class HomeScreenTabController extends StatelessWidget {
   Map<String, dynamic> mapAllImageData;
-  HomeScreenTabController(this.mapAllImageData, {super.key});
 
+  HomeScreenTabController(this.mapAllImageData, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +95,12 @@ class HomeScreenTabController extends StatelessWidget {
                 await availableCameras().then((value) => Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (_) => CameraPage(cameras: value))));
+                        builder: (_) {
+                          return CameraScreen(cameras: value);
+                        },
+                      settings: RouteSettings(name: 'CameraScreen')
+                    )
+                ));
               },
               child: const Icon(Icons.camera_alt)),
           floatingActionButtonLocation:

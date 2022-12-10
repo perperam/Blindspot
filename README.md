@@ -41,12 +41,16 @@
 - Safe/Delete butten bei Photopreview
 - ListView is overlapped by take Photo button
 - going back from preview freezes camera
+- Navigate with named routes
 
 ## Sources
 - [Camera](https://medium.com/@fernnandoptr/how-to-use-camera-in-flutter-flutter-camera-package-44defe81d2da)
 - [Button Navigation Bar](https://www.fluttercampus.com/guide/77/how-to-set-notched-floating-action-button-in-bottom-navigation-bar/)
 - [Fetch data with http](https://docs.flutter.dev/cookbook/networking/fetch-data)
 - [Base64 Images](https://www.bezkoder.com/dart-base64-image/)
+- [Navigaor](https://stackoverflow.com/questions/59212860/how-can-i-pop-to-specific-screen-in-flutter)
+- [AppBar Buttons](https://www.didierboelens.com/2018/04/hint-1-hide-back-arrow-and-use-close-button/)
+- [Navigate with named routes](https://docs.flutter.dev/cookbook/navigation/named-routes)
 
 ## Benennung
 Separation of concern
