@@ -58,6 +58,26 @@ class _HomeRoute extends State<HomeRoute> {
     return json.decode(contents);
   }
 
+  // assure that directory for ImageDate.json files is present
+  _initPathImageData () async {
+    final Directory appDocDir = await getApplicationDocumentsDirectory();
+    Directory appDocDirImageData = Directory('${appDocDir.path}/image_data/');
+
+    if (await appDocDirImageData.exists()) {
+      // return appDocDirImageData
+    } else {
+      appDocDirImageData = await appDocDirImageData.create(recursive: true);
+      // return appDocDirImageData
+    }
+  }
+
+  @override
+  void initState() {
+    // assure that directory for ImageDate.json files is present
+    _initPathImageData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     // for debugging

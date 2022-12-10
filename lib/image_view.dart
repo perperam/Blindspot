@@ -48,9 +48,18 @@ class _ImageBuilder extends State<ImageBuilder> {
     if (mode == 'preview') {
       return IconButton(
           icon: const Icon(Icons.save),
-          onPressed: () {
+          onPressed: () async {
+            // =========
+            String directory;
+            List files;
+
+            directory = (await getApplicationDocumentsDirectory()).path;
+            files = Directory(directory).listSync();
+
             ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Icon button is pressed')));
+                SnackBar(content: Text(files.toString())));
+            print(files.toString());
+            // =========
           } //saveImage(widget.futureImageData)
           );
     } else if (mode == 'listview') {
