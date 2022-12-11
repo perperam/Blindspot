@@ -10,6 +10,9 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'tabs_home/tab_settings.dart';
 import 'package:hive/hive.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+
 
 class MyLogin extends StatefulWidget {
   //final bool value;
@@ -60,7 +63,15 @@ class _MyLogin extends State<MyLogin> {
                       FirebaseAuth.instance
                           .signInWithEmailAndPassword(
                               email: emailInput.text, password: passInput.text)
-                          .then((value) {})
+                          .then((value) {
+                            FirebaseFirestore.instance.collection("user").doc(FirebaseAuth.instance.currentUser?.uid).get().then(
+                                    (DocumentSnapshot doc) {
+                                    final data = doc.data() as Map<String, dynamic>;
+                                    final cloudDarkMode = data["darkMode"];
+                                    Hive.box(themeBox).put('darkMode', cloudDarkMode);
+                                    print(cloudDarkMode);
+                                });
+                      })
                           .onError((error, stackTrace) {
                         ScaffoldMessenger.of(context)
                             .showSnackBar(massage("Error ${error.toString()}"));

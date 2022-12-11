@@ -8,6 +8,8 @@ import 'package:blindspot/fbuilder_else_widgets.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class HomeRoute extends StatefulWidget {
   const HomeRoute({Key? key}) : super(key: key);
@@ -83,6 +85,7 @@ class HomeScreenTabController extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //var cloudDarkMode = FirebaseFirestore.instance.collection("user").doc(FirebaseAuth.instance.currentUser?.uid).get();
     var darkMode = Hive.box(themeBox).get('darkMode', defaultValue: false);
     return DefaultTabController(
         length: 2,

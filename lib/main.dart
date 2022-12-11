@@ -16,6 +16,7 @@ void main() async {
   await Firebase.initializeApp();
   await Hive.initFlutter();
   await Hive.openBox(themeBox);
+  await Hive.box(themeBox).put('darkMode', false);
   runApp(MaterialApp(title: 'Blindspot', home: Blindspot()));
 }
 

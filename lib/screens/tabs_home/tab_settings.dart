@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:blindspot/screens/screen_login.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 const themeBox = 'hiveThemeBox';
 
@@ -26,6 +27,7 @@ class SettingsTab extends StatelessWidget {
                   value: value,
                   onChanged: (val) {
                     Hive.box(themeBox).put('darkMode', !value);
+                    FirebaseFirestore.instance.collection("user").doc(FirebaseAuth.instance.currentUser?.uid).set({"darkMode": !value});
                   },
                 )
               ]),
