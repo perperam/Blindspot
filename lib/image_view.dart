@@ -41,7 +41,7 @@ class _ImageBuilder extends State<ImageBuilder> {
             File pathImageData = File('${appDocDirImageData.path}/${(await widget.futureImageData)["uuid"]}.json');
 
             String ImageData = jsonEncode(await widget.futureImageData);
-            // pathImageData.writeAsString(ImageData);
+            pathImageData.writeAsString(ImageData);
 
             File pathMapAllImageData = File('${appDocDir.path}/map_all_image_data.json');
             final contents = await pathMapAllImageData.readAsString();
