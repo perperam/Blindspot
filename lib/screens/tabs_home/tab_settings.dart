@@ -1,9 +1,12 @@
+import 'dart:io';
+import 'package:blindspot/reusable/funktions/relaod_home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:blindspot/screens/screen_login.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:path_provider/path_provider.dart';
+
 
 const themeBox = 'hiveThemeBox';
 
@@ -33,12 +36,29 @@ class SettingsTab extends StatelessWidget {
               ]),
           const Text('AppVersion: 0.1'),
           OutlinedButton(
-              child: Text(
+            child: const Text(
+                'Delete all Data', style: TextStyle(color: Colors.red)),
+            onPressed: () async {
+              final Directory appDocDir = await getApplicationDocumentsDirectory();
+              Directory appDocDirImageData = Directory('${appDocDir.path}/image_data');
+              File pathMapAllImageData = File('${appDocDir.path}/map_all_image_data.json');
+
+              // delete all images
+              await appDocDirImageData.delete(recursive: true);
+              await pathMapAllImageData.delete(recursive: true);
+
+              // should be changed to something different ??
+              reloadHomeScreen(context);
+
+            },
+          ),
+          OutlinedButton(
+              child: const Text(
                 'Sign out', style: TextStyle(color: Colors.red)),
                 onPressed: () {
                 // Message 
                 FirebaseAuth.instance.signOut();
-                Navigator.push(context, MaterialPageRoute(builder: (context) => MyLogin()));
+                Navigator.pop(context);
                 },
           )
         ])
