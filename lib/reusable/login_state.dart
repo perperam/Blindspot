@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import '../screens/screen_home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class MyLogin extends StatefulWidget {
+class LoginState extends StatefulWidget {
   //final bool value;
   //const MyLogin({Key? key, required this.value}) : super(key: key);
-  const MyLogin({Key? key}) : super(key: key);
+  const LoginState({Key? key}) : super(key: key);
 
   @override
-  _MyLogin createState() => _MyLogin();
+  _LoginState createState() => _LoginState();
 }
 
-class _MyLogin extends State<MyLogin> {
+class _LoginState extends State<LoginState> {
   User? user; //track the authenticated user here
   final emailInput = TextEditingController(text: '');
   final passInput = TextEditingController(text: '');

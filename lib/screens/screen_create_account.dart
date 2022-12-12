@@ -1,9 +1,10 @@
 import 'package:blindspot/reusable/login_state.dart';
+import 'package:blindspot/screens/screen_home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../reusable/widgets/firebase_ui_button.dart';
-import '../reusable/widgets/massage.dart';
+import '../reusable/widgets/message.dart';
 import '../reusable/widgets/text_field.dart';
 
 
@@ -63,8 +64,9 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                           .then((value) {
                         print("Created New Account");
                         FirebaseFirestore.instance.collection("user").doc(value.user?.uid).set({"darkMode": false});
+                        // Ist man direkt eingeloggt?
                         Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => const MyLogin()));
+                            MaterialPageRoute(builder: (context) => const HomeRoute()));
                       }).onError((error, stackTrace) {
                         ScaffoldMessenger.of(context).showSnackBar(massage("Error ${error.toString()}"));
                         print("Error ${error.toString()}");

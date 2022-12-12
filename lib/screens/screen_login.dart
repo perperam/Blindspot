@@ -4,7 +4,7 @@ import 'package:blindspot/reusable/widgets/text_field.dart';
 import 'package:blindspot/reusable/functions/user_login_request.dart';
 import 'package:blindspot/screens/screen_create_account.dart';
 import 'package:blindspot/reusable/widgets/firebase_ui_button.dart';
-import 'package:blindspot/reusable/widgets/massage.dart';
+import 'package:blindspot/reusable/widgets/message.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
@@ -78,7 +78,7 @@ class LoginScreen extends StatelessWidget {
                                     const RouteSettings(name: 'HomeRoute')));
                       }, () {});
                     }),
-                    firebaseUiButton(context, 'Create Acount', () {
+                    firebaseUiButton(context, 'Create Account', () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -114,7 +114,7 @@ class LoginScreen extends StatelessWidget {
                                     return const HomeRoute();
                                   },
                                   settings:
-                                      const RouteSettings(name: 'HomeScreen')));
+                                  const RouteSettings(name: 'HomeRoute')));
                         }, () {});
                       });
                     }),

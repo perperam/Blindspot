@@ -10,7 +10,6 @@ void main() async {
   await Firebase.initializeApp();
   await Hive.initFlutter();
   await Hive.openBox(themeBox);
-  await Hive.box(themeBox).put('darkMode', false);
   runApp(const MaterialApp(title: 'Blindspot', home: Blindspot()));
 }
 
@@ -28,7 +27,7 @@ class Blindspot extends StatelessWidget {
           debugShowCheckedModeBanner: false, //switching between light and dark theme,
           themeMode: darkMode ? ThemeMode.dark : ThemeMode.light,
           darkTheme: ThemeData.dark(),
-          home: const MyLogin(),
+          home: const LoginState(),
         );
       },
     );
