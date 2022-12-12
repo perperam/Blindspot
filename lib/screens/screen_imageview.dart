@@ -17,11 +17,11 @@ class _ImageViewScreen extends State<ImageViewScreen> {
 
   // read the json file by uuid which is specified in the listViewBuilder
   Future<Map<String, dynamic>> loadImageData() async {
-    print('THE UUID IS: ${widget.imageDataUuid}');
+    // print('THE UUID IS: ${widget.imageDataUuid}');
     Directory appDocDir = await getApplicationDocumentsDirectory();
     Directory appDocDirImageData = Directory('${appDocDir.path}/image_data');
     File pathMapAllImageData = File('${appDocDirImageData.path}/${widget.imageDataUuid}.json');
-    print('THE PATH IS: ${pathMapAllImageData.toString()}');
+    // print('THE PATH IS: ${pathMapAllImageData.toString()}');
     final contents = await pathMapAllImageData.readAsString();
     return jsonDecode(contents);
   }

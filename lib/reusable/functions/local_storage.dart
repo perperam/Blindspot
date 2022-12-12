@@ -35,10 +35,6 @@ void writeMapAllImageData(Map<String, dynamic> mapAllImageData) async {
 }
 
 void addToMapAllImageData(Map<String, dynamic> newImageData) async {
-  // create path vars
-  final Directory appDocDir = await getApplicationDocumentsDirectory();
-  final File pathMapAllImageData = File('${appDocDir.path}/$_fileNameMapAllImageData');
-
   // get existing map
   final Map<String, dynamic> mapAllImageData = await readMapAllImageData();
 

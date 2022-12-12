@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:blindspot/reusable/functions/relaod_home_screen.dart';
 import 'package:blindspot/screens/screen_login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -6,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:path_provider/path_provider.dart';
+import '../../reusable/functions/local_storage.dart';
 
 import '../../reusable/functions/local_storage.dart';
 import '../../reusable/widgets/redTextButton.dart';

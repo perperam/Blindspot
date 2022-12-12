@@ -8,8 +8,6 @@ import 'package:blindspot/fbuilder_else_widgets.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'dart:convert';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class HomeRoute extends StatefulWidget {
   const HomeRoute({Key? key}) : super(key: key);
@@ -69,7 +67,7 @@ class _HomeRoute extends State<HomeRoute> {
               if (snapshot.hasData) {
                 return HomeScreenTabController(snapshot.data!);
               } else if (snapshot.hasError) {
-                print(snapshot.error);
+                // print(snapshot.error);
                 return ElseError(massage: "Could not load the App!");
               } else {
                 return ElseWaiting(massage: "Loading the App...");
@@ -98,7 +96,7 @@ class HomeScreenTabController extends StatelessWidget {
                         builder: (_) {
                           return CameraScreen(cameras: value);
                         },
-                      settings: RouteSettings(name: 'CameraScreen')
+                      settings: const RouteSettings(name: 'CameraScreen')
                     )
                 ));
               },

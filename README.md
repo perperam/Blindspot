@@ -36,13 +36,21 @@
 - a more detailed photo view with more metadata
 
 # TO-DO's
-- Kommentare
-- Benennung
-- Safe/Delete butten bei Photopreview
+- comments
+- naming of functions and classes
+- rename option for preview screen
 - ListView is overlapped by take Photo button
 - going back from preview freezes camera
 - Navigate with named routes
 - delete files when logout?
+- screen_imageview local storage abstraction not used
+- rework this readme
+- save data to cloud
+- working logout
+- rework camera screen layout (add close button, etc.)
+- rework initState when changing something in local storage
+- fix @immutable error in classes
+- rework file tree
 
 
 - Darkmode sync vom Schalter (refresh)
@@ -60,8 +68,8 @@
 
 Separation of concern
 
-- Funktion -> lowerCamelCase (englisches verb)
+- Function -> lowerCamelCase (english verb)
 - Class -> CamelCase
 - Screen -> ___Screen (bsp. HomeScreen)
-- Datein -> snake_case 
-- Variablen -> lowerCamelCase
+- Files -> snake_case 
+- Variables -> lowerCamelCase
