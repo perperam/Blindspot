@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:blindspot/fbuilder_else_widgets.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:blindspot/reusable/functions/local_storage.dart';
 
 
 class ImageBuilder extends StatefulWidget {
@@ -22,50 +23,12 @@ class _ImageBuilder extends State<ImageBuilder> {
       return IconButton(
           icon: const Icon(Icons.save),
           onPressed: () async {
-            // =========
-            // String directory;
-            // List files;
-            //
-            // directory = (await getApplicationDocumentsDirectory()).path;
-            // files = Directory(directory).listSync();
-            //
-            // ScaffoldMessenger.of(context).showSnackBar(
-            //     SnackBar(content: Text(files.toString())));
-            // print(files.toString());
-            // =========
-
-            // write api response to  local storage
-            final Directory appDocDir = await getApplicationDocumentsDirectory();
-            Directory appDocDirImageData = Directory('${appDocDir.path}/image_data');
-
-            File pathImageData = File('${appDocDirImageData.path}/${(await widget.futureImageData)["uuid"]}.json');
-
-            String ImageData = jsonEncode(await widget.futureImageData);
-            pathImageData.writeAsString(ImageData);
-
-            File pathMapAllImageData = File('${appDocDir.path}/map_all_image_data.json');
-            final contents = await pathMapAllImageData.readAsString();
-            Map mapAllImageData = json.decode(contents);
-            // print(jsonEncode(mapAllImageData));
-
-            Map newImageListViewData = {
-              (await widget.futureImageData)['uuid'] : {
-                'name' : (await widget.futureImageData)['name'],
-                'datetime' : (await widget.futureImageData)['metadata']['datetime']
-              }
-            };
-            // print((await widget.futureImageData)['metadata'].toString());
-            // print(jsonEncode(newImageListViewData));
-
-            // add to newImageData so that new Data is at beginning of the Map
-            newImageListViewData.addAll(mapAllImageData);
-            // print(jsonEncode(newImageListViewData));
-
-            // override map_all_image_data.json with new one
-            pathMapAllImageData.writeAsString(jsonEncode(newImageListViewData));
-
-
-          } //saveImage(widget.futureImageData)
+            saveImageData(await widget.futureImageData);
+            addToMapAllImageData(await widget.futureImageData);
+            Navigator.of(context).popUntil((route){
+              return route.settings.name == 'HomeScreen';
+            });
+          }
           );
     } else if (mode == 'listview') {
       return const IconButton(icon: Icon(Icons.settings), onPressed: null);

@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:blindspot/reusable/funktions/relaod_home_screen.dart';
+import 'package:blindspot/reusable/functions/relaod_home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
