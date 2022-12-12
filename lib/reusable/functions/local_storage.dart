@@ -91,11 +91,9 @@ void deleteAllImageData() async {
   // delete imageData
   final Directory appDocDir = await getApplicationDocumentsDirectory();
   final File pathMapAllImageData = File('${appDocDir.path}/$_fileNameMapAllImageData');
-
-
-  final Directory appDocDirImageData = await getAppDocDirImageData();
-  await appDocDirImageData.delete(recursive: true);
+  final Directory appDocDirImageData = Directory('${appDocDir.path}/$_directoryNameImageData');
 
   // delete mapAllImageData
-
+  await pathMapAllImageData.delete(recursive: true);
+  await appDocDirImageData.delete(recursive: true);
 }

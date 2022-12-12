@@ -1,14 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'screens/screen_login.dart';
-import 'package:blindspot/reusable/functions/user_login_request.dart';
-import 'screens/screen_home.dart';
+import 'reusable/login_state.dart';
 import 'screens/tabs_home/tab_settings.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:hive/hive.dart';
 
 
 void main() async {
@@ -17,7 +11,7 @@ void main() async {
   await Hive.initFlutter();
   await Hive.openBox(themeBox);
   await Hive.box(themeBox).put('darkMode', false);
-  runApp(MaterialApp(title: 'Blindspot', home: Blindspot()));
+  runApp(const MaterialApp(title: 'Blindspot', home: Blindspot()));
 }
 
 class Blindspot extends StatelessWidget {
@@ -34,16 +28,7 @@ class Blindspot extends StatelessWidget {
           debugShowCheckedModeBanner: false, //switching between light and dark theme,
           themeMode: darkMode ? ThemeMode.dark : ThemeMode.light,
           darkTheme: ThemeData.dark(),
-          home: MyLogin(),
-          /*
-          initialRoute: '/',
-            routes: {
-            // Navigation with named routes
-            '/MyLogin': (context) => const MyLogin(),
-            '/HomeRoute': (context) => const HomeRoute(),
-            }
-           */
-
+          home: const MyLogin(),
         );
       },
     );

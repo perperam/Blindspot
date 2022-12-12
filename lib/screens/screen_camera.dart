@@ -1,7 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'screen_preview.dart';
-import 'package:blindspot/Settings/colors.dart';
+import 'package:blindspot/Settings/settings_colors.dart';
 
 //forked on https://medium.com/@fernnandoptr/how-to-use-camera-in-flutter-flutter-camera-package-44defe81d2da)
 

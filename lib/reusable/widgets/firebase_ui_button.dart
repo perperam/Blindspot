@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Container firebase_ui_button(BuildContext context, String title, Function onTap) {
+Container firebaseUiButton(BuildContext context, String title, Function onTap) {
   return Container(
     width: MediaQuery.of(context).size.width,
     height: 50,

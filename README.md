@@ -44,6 +44,9 @@
 - Navigate with named routes
 - delete files when logout?
 
+
+- Darkmode sync vom Schalter (refresh)
+
 ## Sources
 - [Camera](https://medium.com/@fernnandoptr/how-to-use-camera-in-flutter-flutter-camera-package-44defe81d2da)
 - [Button Navigation Bar](https://www.fluttercampus.com/guide/77/how-to-set-notched-floating-action-button-in-bottom-navigation-bar/)
@@ -54,6 +57,7 @@
 - [Navigate with named routes](https://docs.flutter.dev/cookbook/navigation/named-routes)
 
 ## Benennung
+
 Separation of concern
 
 - Funktion -> lowerCamelCase (englisches verb)

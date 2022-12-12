@@ -1,15 +1,10 @@
-import 'package:blindspot/screens/screen_login.dart';
+import 'package:blindspot/reusable/login_state.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../reusable_widget.dart';
-import 'package:blindspot/Settings/colors.dart';
 import 'package:flutter/material.dart';
-import 'tabs_home/tab_settings.dart';
-import 'package:hive/hive.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../reusable/widgets/firebase_ui_button.dart';
+import '../reusable/widgets/massage.dart';
+import '../reusable/widgets/text_field.dart';
 
 
 class CreateAccountScreen extends StatefulWidget {
@@ -21,9 +16,9 @@ class CreateAccountScreen extends StatefulWidget {
 
 class _CreateAccountScreenState extends State<CreateAccountScreen> {
 
-  TextEditingController _passwordTextController = TextEditingController();
-  TextEditingController _emailTextController = TextEditingController();
-  TextEditingController _userNameTextController = TextEditingController();
+  final TextEditingController _passwordTextController = TextEditingController();
+  final TextEditingController _emailTextController = TextEditingController();
+  final TextEditingController _userNameTextController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,33 +30,33 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
           "Create Account",
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),),
-      body: Container(
+      body: SizedBox(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           child: SingleChildScrollView(
               child: Padding(
-                padding: EdgeInsets.fromLTRB(20, 120, 20, 0),
+                padding: const EdgeInsets.fromLTRB(20, 120, 20, 0),
                 child: Column(
                   children: <Widget>[
                     const SizedBox(
                       height: 15,
                     ),
-                    reusableTextField("Enter UserName", Icons.person_outline, false,
+                    textField("Enter UserName", Icons.person_outline, false,
                         _userNameTextController),
                     const SizedBox(
                       height: 15,
                     ),
-                    reusableTextField("Enter Email Adress", Icons.person_outline, false,
+                    textField("Enter Email Adress", Icons.person_outline, false,
                         _emailTextController),
                     const SizedBox(
                       height: 15,
                     ),
-                    reusableTextField("Enter Password", Icons.lock_outlined, true,
+                    textField("Enter Password", Icons.lock_outlined, true,
                         _passwordTextController),
                     const SizedBox(
                       height: 15,
                     ),
-                    firebaseUIButton(context, "Create Account", () {
+                    firebaseUiButton(context, "Create Account", () {
                       FirebaseAuth.instance.createUserWithEmailAndPassword(
                           email: _emailTextController.text,
                           password: _passwordTextController.text)
@@ -69,9 +64,9 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                         print("Created New Account");
                         FirebaseFirestore.instance.collection("user").doc(value.user?.uid).set({"darkMode": false});
                         Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => MyLogin()));
+                            MaterialPageRoute(builder: (context) => const MyLogin()));
                       }).onError((error, stackTrace) {
-                        ScaffoldMessenger.of(context).showSnackBar(Massage("Error ${error.toString()}"));
+                        ScaffoldMessenger.of(context).showSnackBar(massage("Error ${error.toString()}"));
                         print("Error ${error.toString()}");
                     });
                   })

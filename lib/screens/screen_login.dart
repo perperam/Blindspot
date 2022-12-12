@@ -12,100 +12,92 @@ import 'tabs_home/tab_settings.dart';
 import 'package:hive/hive.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-
-
-class MyLogin extends StatefulWidget {
-  //final bool value;
-  //const MyLogin({Key? key, required this.value}) : super(key: key);
-  const MyLogin({Key? key}) : super(key: key);
-
-  @override
-  _MyLogin createState() => _MyLogin();
-}
-
-class _MyLogin extends State<MyLogin> {
+class LoginScreen extends StatelessWidget {
   User? user; //track the authenticated user here
   final emailInput = TextEditingController(text: '');
   final passInput = TextEditingController(text: '');
   FirebaseAuth auth = FirebaseAuth.instance;
 
+
+  LoginScreen({super.key, this.user});
+
   @override
   Widget build(BuildContext context) {
-    var darkMode = Hive.box(themeBox).get('darkMode', defaultValue: false);
-    //if (user eingeloggt, dann){
-    //
-    //}
     return Scaffold(
-        body: Container(
+        body: SizedBox(
             //color: CustomColors.Background,
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             child: SingleChildScrollView(
               child: Padding(
-                  padding: EdgeInsets.fromLTRB(50, 20, 20, 0),
+                  padding: const EdgeInsets.fromLTRB(50, 20, 20, 0),
                   child: Column(children: <Widget>[
                     const SizedBox(height: 15),
-                    Text("Welcome to Blindspot!",
-                        style: const TextStyle(
+                    const Text("Welcome to Blindspot!",
+                        style: TextStyle(
                           fontSize: 28,
                         )),
                     const Image(
                         image: AssetImage('assets/logo.png'),
                         width: 200,
                         height: 200),
-                    text_field("Enter Email adress", Icons.person_outline,
-                        false, emailInput),
+                    textField("Enter Email adress", Icons.person_outline, false,
+                        emailInput),
                     const SizedBox(height: 15),
-                    text_field(
+                    textField(
                         "Enter password", Icons.lock_outline, true, passInput),
                     const SizedBox(height: 15),
-                    firebase_ui_button(context, "Login with Email", () {
+                    firebaseUiButton(context, "Login with Email", () {
                       FirebaseAuth.instance
                           .signInWithEmailAndPassword(
                               email: emailInput.text, password: passInput.text)
                           .then((value) {
-                            FirebaseFirestore.instance.collection("user").doc(FirebaseAuth.instance.currentUser?.uid).get().then(
-                                    (DocumentSnapshot doc) {
-                                    final data = doc.data() as Map<String, dynamic>;
-                                    final cloudDarkMode = data["darkMode"];
-                                    Hive.box(themeBox).put('darkMode', cloudDarkMode);
-                                    print(cloudDarkMode);
-                                });
-                      })
-                          .onError((error, stackTrace) {
+                        FirebaseFirestore.instance
+                            .collection("user")
+                            .doc(FirebaseAuth.instance.currentUser?.uid)
+                            .get()
+                            .then((DocumentSnapshot doc) {
+                          final data = doc.data() as Map<String, dynamic>;
+                          final cloudDarkMode = data["darkMode"];
+                          Hive.box(themeBox).put('darkMode', cloudDarkMode);
+                          print(cloudDarkMode);
+                        });
+                      }).onError((error, stackTrace) {
                         ScaffoldMessenger.of(context)
                             .showSnackBar(massage("Error ${error.toString()}"));
                         print("Error ${error.toString()}");
                       });
-                      user_login_request(() {
+                      userLoginRequest(() {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (_) {
                                   return const HomeRoute();
                                 },
-                                settings: RouteSettings(name: 'HomeRoute')));
+                                settings:
+                                    const RouteSettings(name: 'HomeRoute')));
                       }, () {});
                     }),
-                    firebase_ui_button(context, 'Create Acount', () {
+                    firebaseUiButton(context, 'Create Acount', () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (_) {
                                 return const CreateAccountScreen();
                               },
-                              settings:
-                                  RouteSettings(name: 'CreateAccountScreen')));
+                              settings: const RouteSettings(
+                                  name: 'CreateAccountScreen')));
                     }),
-                    firebase_ui_button(context, "To Homescreen without Login",
+                    firebaseUiButton(context, "To Homescreen without Login",
                         () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (_) {
-                                return HomeRoute();
+                                return const HomeRoute();
                               },
-                              settings: RouteSettings(name: 'HomeScreen')));
+                              settings:
+                                  const RouteSettings(name: 'HomeScreen')));
                     }),
                     SignInButton(Buttons.Google, onPressed: () {
                       loginWithGoogle()
@@ -114,14 +106,15 @@ class _MyLogin extends State<MyLogin> {
                         ScaffoldMessenger.of(context)
                             .showSnackBar(massage("Error ${error.toString()}"));
                         print("Error ${error.toString()}");
-                        user_login_request(() {
+                        userLoginRequest(() {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (_) {
-                                    return HomeRoute();
+                                    return const HomeRoute();
                                   },
-                                  settings: RouteSettings(name: 'HomeScreen')));
+                                  settings:
+                                      const RouteSettings(name: 'HomeScreen')));
                         }, () {});
                       });
                     }),
