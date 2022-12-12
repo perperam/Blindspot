@@ -7,6 +7,8 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:path_provider/path_provider.dart';
 
+import '../../reusable/functions/local_storage.dart';
+
 
 const themeBox = 'hiveThemeBox';
 
@@ -39,14 +41,7 @@ class SettingsTab extends StatelessWidget {
             child: const Text(
                 'Delete all Data', style: TextStyle(color: Colors.red)),
             onPressed: () async {
-              final Directory appDocDir = await getApplicationDocumentsDirectory();
-              Directory appDocDirImageData = Directory('${appDocDir.path}/image_data');
-              File pathMapAllImageData = File('${appDocDir.path}/map_all_image_data.json');
-
-              // delete all images
-              await appDocDirImageData.delete(recursive: true);
-              await pathMapAllImageData.delete(recursive: true);
-
+              deleteAllImageData();
               // should be changed to something different ??
               reloadHomeScreen(context);
 
