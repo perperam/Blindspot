@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
-import 'dart:io';
 import 'package:blindspot/fbuilder_else_widgets.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:blindspot/reusable/functions/local_storage.dart';
 
 
@@ -44,7 +42,7 @@ class _ImageBuilder extends State<ImageBuilder> {
           title: const Text('Preview Page'),
           actions: [_getViewModeButton(widget.mode)],
           leading: IconButton(
-            icon: Icon(Icons.close),
+            icon: const Icon(Icons.close),
             onPressed: () => Navigator.of(context).popUntil((route){
               return route.settings.name == 'HomeScreen';
             })
