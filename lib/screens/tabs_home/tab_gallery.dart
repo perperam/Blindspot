@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../screen_imageview.dart';
+import '../screen_image_viewer.dart';
 import 'package:hive/hive.dart';
 import 'tab_settings.dart';
 

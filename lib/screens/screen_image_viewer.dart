@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
-import 'package:blindspot/image_view.dart' as iv;
+import 'package:blindspot/reusable/widgets/image_view.dart' as iv;
 
 class ImageViewScreen extends StatefulWidget  {
   String imageDataUuid;

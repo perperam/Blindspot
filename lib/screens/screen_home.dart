@@ -4,7 +4,7 @@ import 'tabs_home/tab_gallery.dart';
 import 'tabs_home/tab_settings.dart';
 import 'screen_camera.dart';
 import 'package:hive/hive.dart';
-import 'package:blindspot/fbuilder_else_widgets.dart';
+import 'package:blindspot/reusable/widgets/fbuilder_else_widgets.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'dart:convert';

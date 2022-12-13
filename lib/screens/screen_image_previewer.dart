@@ -2,7 +2,8 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:blindspot/image_view.dart' as iv;
+import 'package:blindspot/reusable/widgets/image_view.dart' as iv;
+import 'package:blindspot/config/api_access.dart';
 
 
 class PreviewPage extends StatefulWidget {
@@ -16,8 +17,6 @@ class PreviewPage extends StatefulWidget {
 
 
 class _PreviewPageState extends State<PreviewPage> {
-  var apiUrlPicture = Uri.parse('http://dev.icatas.eu:5000/picture');
-
   Future<Map<String, dynamic>> postPic() async {
     var request = http.MultipartRequest('POST', apiUrlPicture);
     request.files.add(await http.MultipartFile.fromPath(

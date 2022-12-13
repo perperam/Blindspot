@@ -1,0 +1,1 @@
+final Uri apiUrlPicture = Uri.parse('http://dev.icatas.eu:5000/picture');

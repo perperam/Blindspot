@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
-import 'package:blindspot/fbuilder_else_widgets.dart';
+import 'package:blindspot/reusable/widgets/fbuilder_else_widgets.dart';
 import 'package:blindspot/reusable/functions/local_storage.dart';
 
 
