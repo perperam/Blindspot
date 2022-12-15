@@ -75,8 +75,7 @@ Future<Directory> getAppDocDirImageData() async {
 
 Future<bool> saveImageData(Map<String, dynamic> imageData) async {
   // create path vars
-  final Directory appDocDir = await getApplicationDocumentsDirectory();
-  final Directory appDocDirImageData = Directory('${appDocDir.path}/$_directoryNameImageData');
+  final Directory appDocDirImageData = await getAppDocDirImageData();
   final File pathImageData = File('${appDocDirImageData.path}/${imageData['uuid']}.json');
 
   // save json file
