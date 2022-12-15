@@ -47,14 +47,15 @@ class _HomeRoute extends State<HomeScreen> {
       // return appDocDirImageData
     }
   }
-/*
+
   @override
   void initState() {
     // assure that directory for ImageDate.json files is present
     _initDirImageData();
     super.initState();
   }
-*/
+
+
   @override
   Widget build(BuildContext context) {
     // for debugging
