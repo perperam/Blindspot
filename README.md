@@ -63,6 +63,7 @@
 - [Navigaor](https://stackoverflow.com/questions/59212860/how-can-i-pop-to-specific-screen-in-flutter)
 - [AppBar Buttons](https://www.didierboelens.com/2018/04/hint-1-hide-back-arrow-and-use-close-button/)
 - [Navigate with named routes](https://docs.flutter.dev/cookbook/navigation/named-routes)
+- [Navigator in async functions](https://stackoverflow.com/questions/69466478/waiting-asynchronously-for-navigator-push-linter-warning-appears-use-build)
 
 ## Benennung
 

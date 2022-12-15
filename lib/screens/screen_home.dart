@@ -76,10 +76,16 @@ class _HomeRoute extends State<HomeRoute> {
   }
 }
 
-class HomeScreenTabController extends StatelessWidget {
-  Map<String, dynamic> mapAllImageData;
+class HomeScreenTabController extends StatefulWidget {
+  const HomeScreenTabController(this.mapAllImageData, {super.key});
+  final Map<String, dynamic> mapAllImageData;
 
-  HomeScreenTabController(this.mapAllImageData, {super.key});
+  @override
+  State<HomeScreenTabController> createState() => _HomeScreenTabController();
+}
+
+
+class _HomeScreenTabController extends State<HomeScreenTabController> {
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +112,7 @@ class HomeScreenTabController extends StatelessWidget {
           bottomNavigationBar: const HomeScreenAppBar(),
           body: TabBarView(
             children: [
-              GalleryTab(mapAllImageData),
+              GalleryTab(widget.mapAllImageData),
               SettingsTab(value: darkMode),
             ],
           ),

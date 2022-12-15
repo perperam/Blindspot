@@ -26,15 +26,17 @@ Future<Map<String, dynamic>> readMapAllImageData() async {
   }
 }
 
-void writeMapAllImageData(Map<String, dynamic> mapAllImageData) async {
+Future<bool> writeMapAllImageData(Map<String, dynamic> mapAllImageData) async {
   // THIS FUNCTION WILL OVERWRITE EXISTING DATA!!
   final Directory appDocDir = await getApplicationDocumentsDirectory();
   final File pathMapAllImageData = File('${appDocDir.path}/$_fileNameMapAllImageData');
 
   pathMapAllImageData.writeAsString(jsonEncode(mapAllImageData));
+
+  return true;
 }
 
-void addToMapAllImageData(Map<String, dynamic> newImageData) async {
+Future<bool> addToMapAllImageData(Map<String, dynamic> newImageData) async {
   // get existing map
   final Map<String, dynamic> mapAllImageData = await readMapAllImageData();
 
@@ -52,6 +54,8 @@ void addToMapAllImageData(Map<String, dynamic> newImageData) async {
 
   // override file with new map
   writeMapAllImageData(newMap);
+
+  return true;
 }
 
 
@@ -69,7 +73,7 @@ Future<Directory> getAppDocDirImageData() async {
   return appDocDirImageData;
 }
 
-void saveImageData(Map<String, dynamic> imageData) async {
+Future<bool> saveImageData(Map<String, dynamic> imageData) async {
   // create path vars
   final Directory appDocDir = await getApplicationDocumentsDirectory();
   final Directory appDocDirImageData = Directory('${appDocDir.path}/$_directoryNameImageData');
@@ -77,6 +81,8 @@ void saveImageData(Map<String, dynamic> imageData) async {
 
   // save json file
   pathImageData.writeAsString(jsonEncode(imageData));
+
+  return true;
 }
 
 void deleteImageData(String imageUuid) {

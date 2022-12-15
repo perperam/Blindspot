@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:blindspot/reusable/widgets/fbuilder_else_widgets.dart';
 import 'package:blindspot/reusable/functions/local_storage.dart';
+import 'package:blindspot/screens/screen_home.dart';
 
 
 class ImageBuilder extends StatefulWidget {
-  Future<Map<String, dynamic>> futureImageData;
-  String mode;
-
-  ImageBuilder(this.futureImageData, this.mode, {super.key});
+  const ImageBuilder(this.futureImageData, this.mode, {super.key});
+  final Future<Map<String, dynamic>> futureImageData;
+  final String mode;
 
   @override
   State<ImageBuilder> createState() => _ImageBuilder();
@@ -21,11 +21,16 @@ class _ImageBuilder extends State<ImageBuilder> {
       return IconButton(
           icon: const Icon(Icons.save),
           onPressed: () async {
-            saveImageData(await widget.futureImageData);
-            addToMapAllImageData(await widget.futureImageData);
-            Navigator.of(context).popUntil((route){
-              return route.settings.name == 'HomeScreen';
-            });
+            print(Navigator);
+            final navigator = Navigator.of(context);
+
+            await saveImageData(await widget.futureImageData);
+            await addToMapAllImageData(await widget.futureImageData);
+
+            // await Future.delayed(const Duration(seconds: 4), (){});
+
+            navigator.pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                const HomeRoute()), (Route<dynamic> route) => false);
           }
           );
     } else if (mode == 'listview') {
