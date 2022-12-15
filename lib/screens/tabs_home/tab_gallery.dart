@@ -5,25 +5,23 @@ import 'tab_settings.dart';
 
 
 class GalleryTab extends StatefulWidget {
-  Map<String, dynamic> mapAllImageData;
-  GalleryTab(this.mapAllImageData, {super.key});
+  const GalleryTab(this.mapAllImageData, {super.key});
+  final Map<String, dynamic> mapAllImageData;
+
 
   @override
   State<GalleryTab> createState() => _GalleryTab();
 }
 
 class _GalleryTab extends State<GalleryTab> {
-
-  // const List<String> _items = List<String>.generate(10000, (i) => 'Item $i');
-
+  
   @override
   Widget build(BuildContext context) {
     // List<Map<String, String>> listAllImageData;
-
     List<String> uuidKeys = widget.mapAllImageData.keys.toList();
 
+    Hive.box(themeBox).get('darkMode', defaultValue: false);
 
-    var darkMode = Hive.box(themeBox).get('darkMode', defaultValue: false);
     return ListView.builder(
         itemCount: widget.mapAllImageData.length,
         itemBuilder: (context, index) {
