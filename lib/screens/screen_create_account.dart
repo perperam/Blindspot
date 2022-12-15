@@ -66,7 +66,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                         FirebaseFirestore.instance.collection("user").doc(value.user?.uid).set({"darkMode": false});
                         // Ist man direkt eingeloggt?
                         Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => const HomeRoute()));
+                            MaterialPageRoute(builder: (context) => const HomeScreen()));
                       }).onError((error, stackTrace) {
                         ScaffoldMessenger.of(context).showSnackBar(massage("Error ${error.toString()}"));
                         print("Error ${error.toString()}");

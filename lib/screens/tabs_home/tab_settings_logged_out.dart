@@ -12,8 +12,9 @@ import '../../reusable/widgets/settings_button_black.dart';
 import '../../reusable/widgets/settings_button_red.dart';
 
 class ScreenSettingsLoggedOut extends StatelessWidget {
+  const ScreenSettingsLoggedOut({Key? key, required this.value}) : super(key: key);
   final bool value;
-  ScreenSettingsLoggedOut({Key? key, required this.value}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +62,9 @@ class ScreenSettingsLoggedOut extends StatelessWidget {
           settingsButtonRed('Delete all Data', () {
             deleteAllImageData();
             // should be changed to something different ??
-            reloadHomeScreen(context);
+
+            final NavigatorState navigator = Navigator.of(context);
+            reloadToHomeScreen(navigator);
           }),
         ])));
   }

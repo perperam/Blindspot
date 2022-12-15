@@ -1,25 +1,27 @@
 import 'package:flutter/material.dart';
-import 'screen_home.dart';
-import 'package:blindspot/reusable/widgets/text_field.dart';
-import 'package:blindspot/reusable/functions/user_login_request.dart';
-import 'package:blindspot/screens/screen_create_account.dart';
-import 'package:blindspot/reusable/widgets/firebase_ui_button.dart';
-import 'package:blindspot/reusable/widgets/message.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
-import 'tabs_home/tab_settings.dart';
 import 'package:hive/hive.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+// import project functions and widgets
+import 'package:blindspot/screens/screen_create_account.dart';
+import 'package:blindspot/screens/screen_home.dart';
+import 'package:blindspot/screens/tabs_home/tab_settings.dart';
+import 'package:blindspot/reusable/widgets/text_field.dart';
+import 'package:blindspot/reusable/functions/user_login_request.dart';
+import 'package:blindspot/reusable/widgets/firebase_ui_button.dart';
+import 'package:blindspot/reusable/widgets/message.dart';
+
+
 class LoginScreen extends StatelessWidget {
-  User? user; //track the authenticated user here
+  LoginScreen({super.key, this.user});
+  final User? user; //track the authenticated user here
   final emailInput = TextEditingController(text: '');
   final passInput = TextEditingController(text: '');
-  FirebaseAuth auth = FirebaseAuth.instance;
+  final FirebaseAuth auth = FirebaseAuth.instance;
 
-
-  LoginScreen({super.key, this.user});
 
   @override
   Widget build(BuildContext context) {
@@ -72,10 +74,10 @@ class LoginScreen extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (_) {
-                                  return const HomeRoute();
+                                  return const HomeScreen();
                                 },
                                 settings:
-                                    const RouteSettings(name: 'HomeRoute')));
+                                    const RouteSettings(name: 'HomeScreen')));
                       }, () {});
                     }),
                     firebaseUiButton(context, 'Create Account', () {
@@ -94,7 +96,7 @@ class LoginScreen extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                               builder: (_) {
-                                return const HomeRoute();
+                                return const HomeScreen();
                               },
                               settings:
                                   const RouteSettings(name: 'HomeScreen')));
@@ -111,10 +113,10 @@ class LoginScreen extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                   builder: (_) {
-                                    return const HomeRoute();
+                                    return const HomeScreen();
                                   },
                                   settings:
-                                  const RouteSettings(name: 'HomeRoute')));
+                                  const RouteSettings(name: 'HomeScreen')));
                         }, () {});
                       });
                     }),

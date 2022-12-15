@@ -12,9 +12,9 @@ import '../../reusable/widgets/message.dart';
 import '../../reusable/widgets/settings_button_red.dart';
 
 class ScreenSettingsLoggedIn extends StatelessWidget {
+  ScreenSettingsLoggedIn({Key? key, required this.value}) : super(key: key);
   final String? currentUser = FirebaseAuth.instance.currentUser?.email;
   final bool value;
-  ScreenSettingsLoggedIn({Key? key, required this.value}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,9 @@ class ScreenSettingsLoggedIn extends StatelessWidget {
           settingsButtonRed('Delete all Data', () {
             deleteAllImageData();
             // should be changed to something different ??
-            reloadHomeScreen(context);
+
+            final NavigatorState navigator = Navigator.of(context);
+            reloadToHomeScreen(navigator);
           }),
           const SizedBox(height: 10),
           settingsButtonRed('Sign out', () {

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
+
+import 'package:blindspot/reusable/functions/relaod_home_screen.dart';
 import 'package:blindspot/reusable/widgets/fbuilder_else_widgets.dart';
 import 'package:blindspot/reusable/functions/local_storage.dart';
-import 'package:blindspot/screens/screen_home.dart';
 
 
 class ImageBuilder extends StatefulWidget {
@@ -21,16 +22,14 @@ class _ImageBuilder extends State<ImageBuilder> {
       return IconButton(
           icon: const Icon(Icons.save),
           onPressed: () async {
-            print(Navigator);
-            final navigator = Navigator.of(context);
+            // prevent navigator and async problem, look into readme link for more
+            // information
+            final NavigatorState navigator = Navigator.of(context);
 
             await saveImageData(await widget.futureImageData);
             await addToMapAllImageData(await widget.futureImageData);
 
-            // await Future.delayed(const Duration(seconds: 4), (){});
-
-            navigator.pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
-                const HomeRoute()), (Route<dynamic> route) => false);
+            reloadToHomeScreen(navigator);
           }
           );
     } else if (mode == 'listview') {
@@ -48,23 +47,21 @@ class _ImageBuilder extends State<ImageBuilder> {
           actions: [_getViewModeButton(widget.mode)],
           leading: IconButton(
             icon: const Icon(Icons.close),
-            onPressed: () => Navigator.of(context).popUntil((route){
-              return route.settings.name == 'HomeScreen';
-            })
+            onPressed: () {
+              final NavigatorState navigator = Navigator.of(context);
+              reloadToHomeScreen(navigator);
+            }
           )
         ),
         body: FutureBuilder<Map<String, dynamic>>(
             future: widget.futureImageData,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                // String ImageData = (snapshot.data!).toString();
-                // print('IMAGEDATA (SNAPSHOT) from future: ${ImageData!}');
                 return View(snapshot.data!);
               } else if (snapshot.hasError) {
-                // print('THE ERROR IS: ${snapshot.error.toString()}');
-                return ElseError(massage: "Could not load the Image!");
+                return const ElseError(massage: "Could not load the Image!");
               } else {
-                return ElseWaiting(massage: "Loading the image...");
+                return const ElseWaiting(massage: "Loading the image...");
               }
             }));
   }

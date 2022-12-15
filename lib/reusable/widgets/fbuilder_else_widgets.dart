@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ElseError extends StatelessWidget {
-  String massage;
-  ElseError({super.key, this.massage="Error!"});
+  const ElseError({super.key, this.massage="Error!"});
+  final String massage;
+
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +22,8 @@ class ElseError extends StatelessWidget {
 
 
 class ElseWaiting extends StatelessWidget {
-  String massage;
-  ElseWaiting({super.key, this.massage="loading..."});
+  const ElseWaiting({super.key, this.massage="loading..."});
+  final String massage;
 
   @override
   Widget build(BuildContext context) {

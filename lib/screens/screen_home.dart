@@ -9,14 +9,14 @@ import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'dart:convert';
 
-class HomeRoute extends StatefulWidget {
-  const HomeRoute({Key? key}) : super(key: key);
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<HomeRoute> createState() => _HomeRoute();
+  State<HomeScreen> createState() => _HomeRoute();
 }
 
-class _HomeRoute extends State<HomeRoute> {
+class _HomeRoute extends State<HomeScreen> {
 
   // assure that map_all_image_data.json file is present and return its content
   Future<Map<String, dynamic>> readMapAllImageData() async {
