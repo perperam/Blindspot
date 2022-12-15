@@ -4,6 +4,8 @@ import 'dart:convert';
 import 'package:blindspot/reusable/functions/relaod_home_screen.dart';
 import 'package:blindspot/reusable/widgets/fbuilder_else_widgets.dart';
 import 'package:blindspot/reusable/functions/local_storage.dart';
+import 'package:blindspot/reusable/widgets/dialog.dart';
+import 'package:blindspot/reusable/functions/image_data_manipulation.dart';
 
 
 class ImageBuilder extends StatefulWidget {
@@ -16,20 +18,71 @@ class ImageBuilder extends StatefulWidget {
 }
 
 class _ImageBuilder extends State<ImageBuilder> {
+  late TextEditingController controller;
+
+  @override void initState() {
+    super.initState();
+
+    controller = TextEditingController();
+  }
+
+  // String getController() {
+  //   if (controller.text.isNotEmpty) {
+  //     return controller.text;
+  //   } else {
+  //     return 'TEST NAME';
+  //   }
+  // }
+
+  Future _openDialog()  {
+    return showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('This is an title'),
+          content: TextField(
+            autofocus: true,
+            decoration: const InputDecoration(hintText: 'Name InputData'),
+            controller: controller,
+          ),
+          actions: [
+            TextButton(
+                onPressed: () async {
+                  // prevent navigator and async problem, look into readme link for more
+                  // information
+                  final NavigatorState navigator = Navigator.of(context);
+
+                  Map<String, dynamic> imageData =  renameImageData(await widget.futureImageData, controller.text);
+
+                  await saveImageData(imageData);
+                  await addToMapAllImageData(imageData);
+
+                  reloadToHomeScreen(navigator);
+                },
+                child: const Text('Submit')),
+            TextButton(
+                onPressed: () {Navigator.pop(context);},
+                child: const Text('Cancel'))
+          ],
+        )
+    );
+  }
+
+
   // changes which button is shown at which screen
   Widget _getViewModeButton(String mode) {
     if (mode == 'preview') {
       return IconButton(
           icon: const Icon(Icons.save),
           onPressed: () async {
+            _openDialog();
             // prevent navigator and async problem, look into readme link for more
             // information
-            final NavigatorState navigator = Navigator.of(context);
-
-            await saveImageData(await widget.futureImageData);
-            await addToMapAllImageData(await widget.futureImageData);
-
-            reloadToHomeScreen(navigator);
+            // final NavigatorState navigator = Navigator.of(context);
+            //
+            // await saveImageData(await widget.futureImageData);
+            // await addToMapAllImageData(await widget.futureImageData);
+            //
+            // reloadToHomeScreen(navigator);
           }
           );
     } else if (mode == 'listview') {

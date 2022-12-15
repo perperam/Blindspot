@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 TextField textField(String text, IconData icon, bool isPasswordType,
     TextEditingController controller) {
   return TextField(
