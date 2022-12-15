@@ -17,5 +17,6 @@ reloadToHomeScreen(NavigatorState navigator) {
           settings:
           const RouteSettings(name: 'HomeScreen')
       ),
-      (Route<dynamic> route) => false);
+      (Route<dynamic> route) => false
+  );
 }

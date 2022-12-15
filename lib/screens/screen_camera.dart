@@ -1,13 +1,13 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'screen_image_previewer.dart';
+
+import 'package:blindspot/screens/screen_image_previewer.dart';
 import 'package:blindspot/config/config_colors.dart';
 
 //forked on https://medium.com/@fernnandoptr/how-to-use-camera-in-flutter-flutter-camera-package-44defe81d2da)
 
 class CameraScreen extends StatefulWidget {
   const CameraScreen({Key? key, required this.cameras}) : super(key: key);
-
   final List<CameraDescription>? cameras;
 
   @override
@@ -31,6 +31,8 @@ class _CameraScreenState extends State<CameraScreen> {
   }
 
   Future takePicture() async {
+    final NavigatorState navigator = Navigator.of(context);
+
     if (!_cameraController.value.isInitialized) {
       return null;
     }
@@ -40,9 +42,15 @@ class _CameraScreenState extends State<CameraScreen> {
     try {
       await _cameraController.setFlashMode(FlashMode.off);
       XFile picture = await _cameraController.takePicture();
-      Navigator.push(context, MaterialPageRoute(
-              builder: (context) => PreviewPage(picture: picture,
-              )));
+
+      navigator.pushAndRemoveUntil(
+          MaterialPageRoute(
+              builder: (context) {return PreviewPage(picture: picture);},
+              settings:
+              const RouteSettings(name: 'CameraScreen')
+          ),
+          ModalRoute.withName('HomeScreen')
+      );
     } on CameraException catch (e) {
       debugPrint('Error occured while taking picture: $e');
       return null;
