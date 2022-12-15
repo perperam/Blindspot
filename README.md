@@ -52,8 +52,7 @@
 - fix @immutable error in classes
 - rework file tree
 
-
-- Darkmode sync vom Schalter (refresh)
+- Settings ImageViewer
 
 ## Sources
 - [Camera](https://medium.com/@fernnandoptr/how-to-use-camera-in-flutter-flutter-camera-package-44defe81d2da)
