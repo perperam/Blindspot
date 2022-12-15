@@ -32,7 +32,7 @@ class LoginScreen extends StatelessWidget {
             height: MediaQuery.of(context).size.height,
             child: SingleChildScrollView(
               child: Padding(
-                  padding: const EdgeInsets.fromLTRB(50, 20, 20, 0),
+                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
                   child: Column(children: <Widget>[
                     const SizedBox(height: 15),
                     const Text("Welcome to Blindspot!",
@@ -74,7 +74,7 @@ class LoginScreen extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (_) {
-                                  return const HomeScreen();
+                                  return HomeScreen();
                                 },
                                 settings:
                                     const RouteSettings(name: 'HomeScreen')));
@@ -85,7 +85,7 @@ class LoginScreen extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                               builder: (_) {
-                                return const CreateAccountScreen();
+                                return  CreateAccountScreen();
                               },
                               settings: const RouteSettings(
                                   name: 'CreateAccountScreen')));
@@ -96,7 +96,7 @@ class LoginScreen extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                               builder: (_) {
-                                return const HomeScreen();
+                                return  HomeScreen();
                               },
                               settings:
                                   const RouteSettings(name: 'HomeScreen')));
@@ -108,17 +108,17 @@ class LoginScreen extends StatelessWidget {
                         ScaffoldMessenger.of(context)
                             .showSnackBar(massage("Error ${error.toString()}"));
                         print("Error ${error.toString()}");
-                        userLoginRequest(() {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) {
-                                    return const HomeScreen();
-                                  },
-                                  settings:
-                                  const RouteSettings(name: 'HomeScreen')));
-                        }, () {});
                       });
+                      userLoginRequest(() {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) {
+                                  return  HomeScreen();
+                                },
+                                settings:
+                                const RouteSettings(name: 'HomeScreen')));
+                      }, () {});
                     }),
                   ])),
             )));
