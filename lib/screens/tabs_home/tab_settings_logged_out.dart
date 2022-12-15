@@ -29,10 +29,6 @@ class ScreenSettingsLoggedOut extends StatelessWidget {
               value: value,
               onChanged: (val) {
                 Hive.box(themeBox).put('darkMode', !value);
-                FirebaseFirestore.instance
-                    .collection("user")
-                    .doc(FirebaseAuth.instance.currentUser?.uid)
-                    .set({"darkMode": !value});
               },
             )
           ]),
