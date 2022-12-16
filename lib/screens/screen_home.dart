@@ -7,6 +7,7 @@ import 'tabs_home/tab_settings.dart';
 import 'screen_camera.dart';
 import 'package:blindspot/reusable/widgets/fbuilder_else_widgets.dart';
 import 'package:blindspot/reusable/functions/local_storage.dart';
+import 'package:blindspot/config/config.dart';
 
 
 class HomeScreen extends StatefulWidget {

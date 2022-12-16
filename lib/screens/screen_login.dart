@@ -6,6 +6,7 @@ import 'package:hive/hive.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 // import project functions and widgets
+import 'package:blindspot/config/config.dart';
 import 'package:blindspot/screens/screen_create_account.dart';
 import 'package:blindspot/screens/screen_home.dart';
 import 'package:blindspot/screens/tabs_home/tab_settings.dart';

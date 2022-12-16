@@ -10,6 +10,7 @@ import '../../reusable/functions/local_storage.dart';
 import '../../reusable/functions/relaod_home_screen.dart';
 import '../../reusable/widgets/settings_button_black.dart';
 import '../../reusable/widgets/settings_button_red.dart';
+import 'package:blindspot/config/config.dart';
 
 class ScreenSettingsLoggedOut extends StatelessWidget {
   const ScreenSettingsLoggedOut({Key? key, required this.value}) : super(key: key);

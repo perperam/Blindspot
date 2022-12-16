@@ -3,6 +3,8 @@ import '../screen_image_viewer.dart';
 import 'package:hive/hive.dart';
 import 'tab_settings.dart';
 
+import 'package:blindspot/config/config.dart';
+
 
 class GalleryTab extends StatefulWidget {
   const GalleryTab(this.mapAllImageData, {super.key});

@@ -1,7 +1,6 @@
-
+import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -11,15 +10,20 @@ import '../../reusable/functions/user_login_request.dart';
 import '../../reusable/widgets/message.dart';
 import '../../reusable/widgets/settings_button_red.dart';
 import '../screen_login.dart';
+import 'package:blindspot/config/config.dart';
 
+// import settings widgets
+import '../../reusable/widgets/settings_active_user.dart';
+import '../../reusable/widgets/settings_dark_mode.dart';
+import '../../reusable/widgets/settings_delete_all_data.dart';
+import '../../reusable/widgets/settings_log_out_in.dart';
+import '../../reusable/widgets/settings_app_version.dart';
 
-const themeBox = 'hiveThemeBox';
 
 class SettingsTab extends StatefulWidget {
-  SettingsTab({Key? key, required this.callback, required this.darkMode})
+  const SettingsTab({Key? key, required this.callback, required this.darkMode})
       : super(key: key);
   final bool darkMode;
-  final String? currentUser = FirebaseAuth.instance.currentUser?.email;
   final Function callback;
 
   @override
@@ -27,116 +31,25 @@ class SettingsTab extends StatefulWidget {
 }
 
 class _SettingsTab extends State<SettingsTab> {
-  bool testValue = true;
 
   @override
   Widget build(BuildContext context) {
-    var darkMode = Hive.box(themeBox).get('darkMode', defaultValue: false);
+    Hive.box(themeBox).get('darkMode', defaultValue: false);
     return Scaffold( body: (
         Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              ActiveUserSetting(currentUser: widget.currentUser),
+              ActiveUserSetting(),
               DarkModeSetting(darkMode: widget.darkMode),
-              DeleteAllDataSetting(callback: () {} ), // widget.callback),
+              DeleteAllDataSetting(callback: widget.callback),
               const SizedBox(height: 10),
               RedSettingsButton(text: 'DO CALLBACK', onPressed: widget.callback),
               const SizedBox(height: 10),
-              settingsButtonRed('Sign out', () {
-                userLoginRequest(() {
-                  massage('Logged Out successful');
-                }, () {
-                  massage('Error with logout');
-                });
-                FirebaseAuth.instance.signOut();
-                //Navigator.pop(context);
-                Navigator.push(context, MaterialPageRoute(builder: (_) {
-                  return LoginScreen();
-                }));
-              }),
-
+              LogOutInSetting(),
               const SizedBox(height: 10),
-              const Text('AppVersion: 0.1'),
-              OutlinedButton(
-                child: Text(
-                    'Sign out', style: TextStyle(color: Colors.red)),
-                onPressed: () {
-                  FirebaseAuth.instance.signOut();
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
-                },
-              )
+              const AppVersionSetting(),
             ])
     ));
-  }
-}
-
-class ActiveUserSetting extends StatelessWidget {
-  const ActiveUserSetting({super.key, required this.currentUser});
-  final String? currentUser;
-
-  @override
-  Widget build(BuildContext context) {
-    return Text("Hello, you are logged in as:\n$currentUser\n");
-  }
-}
-
-class DarkModeSetting extends StatelessWidget {
-  const DarkModeSetting({super.key, required this.darkMode});
-  final bool darkMode;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-      Text(darkMode ? 'Dark Mode' : 'Light Mode'),
-      Switch(
-        value: darkMode,
-        onChanged: (val) {
-          print('THE VALUE: $val');
-          Hive.box(themeBox).put('darkMode', !darkMode);
-          //reloadToHomeScreen(Navigator.of(context));
-          FirebaseFirestore.instance
-              .collection("user")
-              .doc(FirebaseAuth.instance.currentUser?.uid)
-              .set({"darkMode": !darkMode});
-        },
-      ),
-    ]);
-  }
-}
-
-class DeleteAllDataSetting extends StatelessWidget {
-  const DeleteAllDataSetting({super.key, required this.callback});
-  final Function callback;
-
-  @override
-  Widget build(BuildContext context) {
-    return RedSettingsButton(
-        text: 'Delete all Data',
-        onPressed: () {
-          deleteAllImageData();
-          callback();
-        });
-  }
-}
-
-class LogOutSetting extends StatelessWidget {
-  const LogOutSetting({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return RedSettingsButton(
-        text: 'Sign out',
-        onPressed: () {
-          userLoginRequest(() {
-            massage('Logged Out successful');
-          }, () {
-            massage('Error with logout');
-          });
-
-          FirebaseAuth.instance.signOut();
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => LoginScreen()));
-        });
   }
 }
