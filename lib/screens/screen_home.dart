@@ -48,6 +48,20 @@ class HomeScreenTabController extends StatefulWidget {
 
 
 class _HomeScreenTabController extends State<HomeScreenTabController> {
+  late Future<Map<String, dynamic>> _mapAllImageDataFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _mapAllImageDataFuture = readMapAllImageData();
+  }
+
+  void callback() {
+    setState(() {
+      _mapAllImageDataFuture = readMapAllImageData();
+      print("SET STATE");
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +89,7 @@ class _HomeScreenTabController extends State<HomeScreenTabController> {
           body: TabBarView(
             children: [
               GalleryTab(widget.mapAllImageData),
-              SettingsTab(callback: () {}, darkMode: darkMode),
+              SettingsTab(callback: callback, darkMode: darkMode),
             ],
           ),
         ));

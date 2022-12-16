@@ -55,13 +55,7 @@ class _SettingsTab extends State<SettingsTab> {
                     ),
                     const SizedBox(height: 10),
                   ]),
-              settingsButtonRed('Delete all Data', () {
-                deleteAllImageData();
-                // should be changed to something different ??
-
-                final NavigatorState navigator = Navigator.of(context);
-                reloadToHomeScreen(navigator);
-              }),
+              DeleteAllDataSetting(callback: widget.callback),
               const SizedBox(height: 10),
               settingsButtonRed('Sign out', () {
                 userLoginRequest(() {
@@ -88,5 +82,21 @@ class _SettingsTab extends State<SettingsTab> {
               )
             ])
     ));
+  }
+}
+
+class DeleteAllDataSetting extends StatelessWidget {
+  const DeleteAllDataSetting({super.key, required this.callback});
+
+  final Function callback;
+
+  @override
+  Widget build(BuildContext context) {
+    return RedSettingsButton(
+        text: 'Delete all Data',
+        onPressed: () {
+          deleteAllImageData();
+          callback();
+        });
   }
 }
