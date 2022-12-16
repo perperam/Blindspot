@@ -17,37 +17,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreen extends State<HomeScreen> {
-  @override
-  Widget build(BuildContext context) {
-    // for debugging
-    // readListAllImageData().then((Map<String, dynamic> m) {print(m.toString());});
-
-    return Scaffold(
-        body: FutureBuilder<Map<String, dynamic>>(
-            future: readMapAllImageData(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return HomeScreenTabController(snapshot.data!);
-              } else if (snapshot.hasError) {
-                // print(snapshot.error);
-                return ElseError(massage: "Could not load the App!");
-              } else {
-                return ElseWaiting(massage: "Loading the App...");
-              }
-            }));
-  }
-}
-
-class HomeScreenTabController extends StatefulWidget {
-  const HomeScreenTabController(this.mapAllImageData, {super.key});
-  final Map<String, dynamic> mapAllImageData;
-
-  @override
-  State<HomeScreenTabController> createState() => _HomeScreenTabController();
-}
-
-
-class _HomeScreenTabController extends State<HomeScreenTabController> {
   late Future<Map<String, dynamic>> _mapAllImageDataFuture;
 
   @override
@@ -62,6 +31,43 @@ class _HomeScreenTabController extends State<HomeScreenTabController> {
       print("SET STATE");
     });
   }
+
+  @override
+  Widget build(BuildContext context) {
+    // for debugging
+    // readListAllImageData().then((Map<String, dynamic> m) {print(m.toString());});
+
+    return Scaffold(
+        body: FutureBuilder<Map<String, dynamic>>(
+            future: _mapAllImageDataFuture,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return HomeScreenTabController(
+                    snapshot.data!,
+                    callback: callback
+                );
+              } else if (snapshot.hasError) {
+                // print(snapshot.error);
+                return ElseError(massage: "Could not load the App!");
+              } else {
+                return ElseWaiting(massage: "Loading the App...");
+              }
+            }));
+  }
+}
+
+class HomeScreenTabController extends StatefulWidget {
+  const HomeScreenTabController(this.mapAllImageData, {super.key, required this.callback,});
+  final Map<String, dynamic> mapAllImageData;
+  final Function callback;
+
+  @override
+  State<HomeScreenTabController> createState() => _HomeScreenTabController();
+}
+
+
+class _HomeScreenTabController extends State<HomeScreenTabController> {
+
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +95,7 @@ class _HomeScreenTabController extends State<HomeScreenTabController> {
           body: TabBarView(
             children: [
               GalleryTab(widget.mapAllImageData),
-              SettingsTab(callback: callback, darkMode: darkMode),
+              SettingsTab(callback: widget.callback, darkMode: darkMode),
             ],
           ),
         ));
