@@ -1,15 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import '../../reusable/functions/local_storage.dart';
-import '../../reusable/functions/relaod_home_screen.dart';
-import '../../reusable/functions/user_login_request.dart';
-import '../../reusable/widgets/message.dart';
 import '../../reusable/widgets/settings_button_red.dart';
-import '../screen_login.dart';
 import 'package:blindspot/config/config.dart';
 
 // import settings widgets
