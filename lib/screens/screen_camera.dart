@@ -47,7 +47,10 @@ class _CameraScreenState extends State<CameraScreen> {
       navigator.push(
           MaterialPageRoute(
               builder: (_) {
-                return PreviewPage(picture: picture);
+                return PreviewPage(
+                  picture: picture,
+                  callback: widget.callback,
+                );
               },
               settings:
               const RouteSettings(name: 'CameraScreen')));

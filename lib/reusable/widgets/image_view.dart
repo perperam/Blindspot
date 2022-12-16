@@ -9,9 +9,10 @@ import 'package:blindspot/reusable/functions/image_data_manipulation.dart';
 
 
 class ImageBuilder extends StatefulWidget {
-  const ImageBuilder(this.futureImageData, this.mode, {super.key});
+  const ImageBuilder(this.futureImageData, this.mode, {super.key, required this.callback});
   final Future<Map<String, dynamic>> futureImageData;
   final String mode;
+  final Function callback;
 
   @override
   State<ImageBuilder> createState() => _ImageBuilder();
@@ -24,14 +25,6 @@ class _ImageBuilder extends State<ImageBuilder> {
     super.initState();
     controller = TextEditingController();
   }
-
-  // String getController() {
-  //   if (controller.text.isNotEmpty) {
-  //     return controller.text;
-  //   } else {
-  //     return 'TEST NAME';
-  //   }
-  // }
 
   Future _openDialog()  {
     return showDialog(
@@ -55,10 +48,8 @@ class _ImageBuilder extends State<ImageBuilder> {
                   await saveImageData(imageData);
                   await addToMapAllImageData(imageData);
 
-                  // navigator.popUntil(ModalRoute.withName('HomeScreen'));
-
+                  // close AlertDialog
                   navigator.pop();
-                  // reloadToHomeScreen(navigator);
                 },
                 child: const Text('Submit')),
             TextButton(
@@ -78,6 +69,7 @@ class _ImageBuilder extends State<ImageBuilder> {
           onPressed: () async {
             final NavigatorState navigator = Navigator.of(context);
             await _openDialog();
+            widget.callback();
             reloadToHomeScreen(navigator);
           }
           );
