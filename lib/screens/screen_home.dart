@@ -57,7 +57,7 @@ class _HomeScreen extends State<HomeScreen> {
 }
 
 class HomeScreenTabController extends StatefulWidget {
-  const HomeScreenTabController(this.mapAllImageData, {super.key, required this.callback,});
+  const HomeScreenTabController(this.mapAllImageData, {super.key, required this.callback});
   final Map<String, dynamic> mapAllImageData;
   final Function callback;
 
@@ -82,7 +82,7 @@ class _HomeScreenTabController extends State<HomeScreenTabController> {
                     context,
                     MaterialPageRoute(
                         builder: (_) {
-                          return CameraScreen(cameras: value);
+                          return CameraScreen(cameras: value, callback: widget.callback);
                         },
                       settings: const RouteSettings(name: 'CameraScreen')
                     )

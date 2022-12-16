@@ -11,12 +11,14 @@ final NavigatorState navigator = Navigator.of(context);
  */
 
 reloadToHomeScreen(NavigatorState navigator) {
-  navigator.pushAndRemoveUntil(
-      MaterialPageRoute(
-        builder: (context) {return const HomeScreen();},
-          settings:
-          const RouteSettings(name: 'HomeScreen')
-      ),
-      (Route<dynamic> route) => false
-  );
+  navigator.popUntil(ModalRoute.withName('HomeScreen'));
+  // navigator.pushAndRemoveUntil(
+  //     MaterialPageRoute(
+  //       builder: (context) {return const HomeScreen();},
+  //         settings:
+  //         const RouteSettings(name: 'HomeScreen')
+  //     ),
+  //     // (Route<dynamic> route) => false
+  //     ModalRoute.withName('HomeScreen')
+  // );
 }

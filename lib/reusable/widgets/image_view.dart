@@ -22,7 +22,6 @@ class _ImageBuilder extends State<ImageBuilder> {
 
   @override void initState() {
     super.initState();
-
     controller = TextEditingController();
   }
 
@@ -56,7 +55,10 @@ class _ImageBuilder extends State<ImageBuilder> {
                   await saveImageData(imageData);
                   await addToMapAllImageData(imageData);
 
-                  reloadToHomeScreen(navigator);
+                  // navigator.popUntil(ModalRoute.withName('HomeScreen'));
+
+                  navigator.pop();
+                  // reloadToHomeScreen(navigator);
                 },
                 child: const Text('Submit')),
             TextButton(
@@ -74,15 +76,9 @@ class _ImageBuilder extends State<ImageBuilder> {
       return IconButton(
           icon: const Icon(Icons.save),
           onPressed: () async {
-            _openDialog();
-            // prevent navigator and async problem, look into readme link for more
-            // information
-            // final NavigatorState navigator = Navigator.of(context);
-            //
-            // await saveImageData(await widget.futureImageData);
-            // await addToMapAllImageData(await widget.futureImageData);
-            //
-            // reloadToHomeScreen(navigator);
+            final NavigatorState navigator = Navigator.of(context);
+            await _openDialog();
+            reloadToHomeScreen(navigator);
           }
           );
     } else if (mode == 'listview') {

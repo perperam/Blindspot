@@ -55,7 +55,8 @@ class _SettingsTab extends State<SettingsTab> {
                     ),
                     const SizedBox(height: 10),
                   ]),
-              DeleteAllDataSetting(callback: widget.callback),
+              DeleteAllDataSetting(callback: () {} ), // widget.callback),
+              RedSettingsButton(text: 'DO CALLBACK', onPressed: widget.callback),
               const SizedBox(height: 10),
               settingsButtonRed('Sign out', () {
                 userLoginRequest(() {
