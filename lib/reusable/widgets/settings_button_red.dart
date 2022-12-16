@@ -33,16 +33,7 @@ settingsButtonRed(String name, Function() onTap) {
 }
 
 /*
-class ActiveUserSetting extends StatelessWidget {
-  const ActiveUserSetting({super.key, required this.currentUser});
 
-  final String? currentUser;
-
-  @override
-  Widget build(BuildContext context) {
-    return Text("Hello, you are logged in as:\n$currentUser\n");
-  }
-}
 
 class LogOutSetting extends StatelessWidget {
   const LogOutSetting({super.key});
@@ -65,44 +56,5 @@ class LogOutSetting extends StatelessWidget {
   }
 }
 
-class DeleteAllDataSetting extends StatelessWidget {
-  const DeleteAllDataSetting({super.key, required this.callback});
 
-  final Function callback;
-
-  @override
-  Widget build(BuildContext context) {
-    return RedSettingsButton(
-        text: 'Delete all Data',
-        onPressed: () {
-          deleteAllImageData();
-          callback();
-        });
-  }
-}
-
-class DarkModeSetting extends StatelessWidget {
-  const DarkModeSetting({super.key, required this.darkMode});
-
-  final bool darkMode;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-      Text(darkMode ? 'Dark Mode' : 'Light Mode'),
-      Switch(
-        value: darkMode,
-        onChanged: (val) {
-          print('THE VALUE: $val');
-          Hive.box(themeBox).put('darkMode', !darkMode);
-          //reloadToHomeScreen(Navigator.of(context));
-          FirebaseFirestore.instance
-              .collection("user")
-              .doc(FirebaseAuth.instance.currentUser?.uid)
-              .set({"darkMode": !darkMode});
-        },
-      ),
-    ]);
-  }
-}
 */
