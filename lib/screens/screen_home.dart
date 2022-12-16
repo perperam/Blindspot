@@ -1,61 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:camera/camera.dart';
+
 import 'tabs_home/tab_gallery.dart';
 import 'tabs_home/tab_settings.dart';
 import 'screen_camera.dart';
-import 'package:hive/hive.dart';
 import 'package:blindspot/reusable/widgets/fbuilder_else_widgets.dart';
-import 'package:path_provider/path_provider.dart';
-import 'dart:io';
-import 'dart:convert';
+import 'package:blindspot/reusable/functions/local_storage.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => _HomeRoute();
+  State<HomeScreen> createState() => _HomeScreen();
 }
 
-class _HomeRoute extends State<HomeScreen> {
-
-  // assure that map_all_image_data.json file is present and return its content
-  Future<Map<String, dynamic>> readMapAllImageData() async {
-    final Directory appDocDir = await getApplicationDocumentsDirectory();
-    final File pathMapAllImageData = File('${appDocDir.path}/map_all_image_data.json');
-
-    if (await pathMapAllImageData.exists()) {
-      // if available read from file and return its content as map
-      final contents = await pathMapAllImageData.readAsString();
-      return json.decode(contents);
-    } else {
-      // if not available create new empty at storage and return empty map
-      Map<String, dynamic> empty = {};
-      pathMapAllImageData.writeAsString(jsonEncode(empty));
-      return empty;
-    }
-  }
-
-  // assure that directory for ImageDate.json files is present
-  _initDirImageData () async {
-    Directory appDocDir = await getApplicationDocumentsDirectory();
-    Directory appDocDirImageData = Directory('${appDocDir.path}/image_data/');
-
-    if (await appDocDirImageData.exists()) {
-      // return appDocDirImageData
-    } else {
-      appDocDirImageData = await appDocDirImageData.create(recursive: true);
-      // return appDocDirImageData
-    }
-  }
-
-  @override
-  void initState() {
-    // assure that directory for ImageDate.json files is present
-    _initDirImageData();
-    super.initState();
-  }
-
-
+class _HomeScreen extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     // for debugging
