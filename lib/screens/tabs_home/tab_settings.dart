@@ -15,10 +15,19 @@ import '../screen_login.dart';
 
 const themeBox = 'hiveThemeBox';
 
-class SettingsTab extends StatelessWidget {
-  final bool value;
+class SettingsTab extends StatefulWidget {
+  SettingsTab({Key? key, required this.callback, required this.darkMode})
+      : super(key: key);
+  final bool darkMode;
   final String? currentUser = FirebaseAuth.instance.currentUser?.email;
-  SettingsTab({Key? key, required this.value}) : super(key: key);
+  final Function callback;
+
+  @override
+  State<SettingsTab> createState() => _SettingsTab();
+}
+
+class _SettingsTab extends State<SettingsTab> {
+  bool testValue = true;
 
   @override
   Widget build(BuildContext context) {
@@ -28,20 +37,20 @@ class SettingsTab extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Text("Hello, you are logged in as:\n$currentUser\n"),
+              Text("Hello, you are logged in as:\n${widget.currentUser}\n"),
               Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text(value ? 'Dark Mode' : 'Light Mode'),
+                    Text(widget.darkMode ? 'Dark Mode' : 'Light Mode'),
                     Switch(
-                      value: value,
+                      value: widget.darkMode,
                       onChanged: (val) {
-                        Hive.box(themeBox).put('darkMode', !value);
+                        Hive.box(themeBox).put('darkMode', !widget.darkMode);
                         //reloadToHomeScreen(Navigator.of(context));
                         FirebaseFirestore.instance
                             .collection("user")
                             .doc(FirebaseAuth.instance.currentUser?.uid)
-                            .set({"darkMode": !value});
+                            .set({"darkMode": !widget.darkMode});
                       },
                     ),
                     const SizedBox(height: 10),
@@ -81,73 +90,3 @@ class SettingsTab extends StatelessWidget {
     ));
   }
 }
-
-/*
-class SettingsTab extends StatefulWidget{
-  var darkmode;
-  SettingsTab({Key? key, required this.darkmode}) : super(key: key);
-
-  @override
-  State<SettingsTab> createState() => _SettingsTab(value: darkmode);
-
-}
-
-class _SettingsTab extends State<SettingsTab>{
-  bool value;
-  bool valueUser = false;
-  final String? currentUser = FirebaseAuth.instance.currentUser?.email;
-
-  _SettingsTab({Key? key, required this.value});
-  FirebaseAuth auth = FirebaseAuth.instance;
-
-
-  @override
-  Widget build(BuildContext context) {
-    var darkMode = Hive.box(themeBox).get('darkMode', defaultValue: false);
-    return Scaffold(
-        body: (Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Text("Hello, you are logged in as:\n$currentUser\n"),
-              Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-                Text(value ? 'Dark Mode' : 'Light Mode'),
-                Switch(
-                  value: value,
-                  onChanged: (val) {
-                    Hive.box(themeBox).put('darkMode', !value);
-                    FirebaseFirestore.instance
-                        .collection("user")
-                        .doc(FirebaseAuth.instance.currentUser?.uid)
-                        .set({"darkMode": !value});
-
-                  },
-                )
-              ]),
-              const Text('AppVersion: 0.1'),
-              const SizedBox(height: 10),
-              settingsButtonRed('Delete all Data', () {
-                deleteAllImageData();
-                // should be changed to something different ??
-
-                final NavigatorState navigator = Navigator.of(context);
-                reloadToHomeScreen(navigator);
-              }),
-              const SizedBox(height: 10),
-              settingsButtonRed('Sign out', () {
-                userLoginRequest(() {
-                  massage('Logged Out successful');
-                }, () {
-                  massage('Error with logout');
-                });
-                FirebaseAuth.instance.signOut();
-                //Navigator.pop(context);
-                Navigator.push(context, MaterialPageRoute(builder: (_) {
-                  return LoginScreen();
-                }));
-              }),
-            ])));
-  }
-}
-*/
-// PUSH / POP issue first "if" for ever

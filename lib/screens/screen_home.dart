@@ -75,7 +75,7 @@ class _HomeScreenTabController extends State<HomeScreenTabController> {
           body: TabBarView(
             children: [
               GalleryTab(widget.mapAllImageData),
-              SettingsTab(value: darkMode),
+              SettingsTab(callback: () {}, darkMode: darkMode),
             ],
           ),
         ));
