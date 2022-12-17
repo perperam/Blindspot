@@ -23,6 +23,10 @@ class LoginScreen extends StatelessWidget {
   final passInput = TextEditingController(text: '');
   final FirebaseAuth auth = FirebaseAuth.instance;
 
+  _pushHomeScreen() {
+
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +75,7 @@ class LoginScreen extends StatelessWidget {
                         print("Error ${error.toString()}");
                       });
                       userLoginRequest(() {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
                                 builder: (_) {
@@ -93,7 +97,7 @@ class LoginScreen extends StatelessWidget {
                     }),
                     firebaseUiButton(context, "To Homescreen without Login",
                         () {
-                      Navigator.push(
+                      Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
                               builder: (_) {

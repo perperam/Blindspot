@@ -11,7 +11,8 @@ final NavigatorState navigator = Navigator.of(context);
  */
 
 reloadToHomeScreen(NavigatorState navigator) {
-  navigator.popUntil(ModalRoute.withName('HomeScreen'));
+  navigator.popUntil((route) => route.isFirst);
+  // navigator.popUntil(ModalRoute.withName('HomeScreen'));
   // navigator.pushAndRemoveUntil(
   //     MaterialPageRoute(
   //       builder: (context) {return const HomeScreen();},

@@ -9,6 +9,7 @@ class ActiveUserSetting extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('THE ACTIVER USER WIDGET WAS CALLED');
     return checkForLogin(
         hasUser: Text("Hello, you are logged in as:\n$_currentUser\n"),
         noUser: const Text('Hello, you are not logged in')

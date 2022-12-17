@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../reusable/widgets/settings_button_red.dart';
 import 'package:blindspot/config/config.dart';
@@ -42,6 +43,13 @@ class _SettingsTab extends State<SettingsTab> {
               LogOutInSetting(),
               const SizedBox(height: 10),
               const AppVersionSetting(),
+              RedSettingsButton(
+                  text: 'testUser',
+                  onPressed: () {
+                    final String? currentUser = FirebaseAuth.instance.currentUser?.email;
+                    print(currentUser);
+                  }
+              )
             ])
     ));
   }
