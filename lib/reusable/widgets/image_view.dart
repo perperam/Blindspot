@@ -4,8 +4,8 @@ import 'dart:convert';
 import 'package:blindspot/reusable/functions/relaod_home_screen.dart';
 import 'package:blindspot/reusable/widgets/fbuilder_else_widgets.dart';
 import 'package:blindspot/reusable/functions/local_storage.dart';
-import 'package:blindspot/reusable/widgets/dialog.dart';
 import 'package:blindspot/reusable/functions/image_data_manipulation.dart';
+import 'package:blindspot/config/config_colors.dart';
 
 
 class ImageBuilder extends StatefulWidget {
@@ -84,6 +84,7 @@ class _ImageBuilder extends State<ImageBuilder> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: CustomColors.bars,
           title: const Text('Preview Page'),
           actions: [_getViewModeButton(widget.mode)],
           leading: IconButton(

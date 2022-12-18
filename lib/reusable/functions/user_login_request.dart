@@ -5,8 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 void userLoginRequest (Function userIsLoggedIn, Function userIsNotLoggedIn){
 
-  FirebaseAuth auth = FirebaseAuth.instance;
-
   FirebaseAuth.instance.userChanges().listen((User? user) {
     if (user != null) {
       userIsLoggedIn();

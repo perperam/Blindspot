@@ -23,10 +23,6 @@ class LoginScreen extends StatelessWidget {
   final passInput = TextEditingController(text: '');
   final FirebaseAuth auth = FirebaseAuth.instance;
 
-  _pushHomeScreen() {
-
-  }
-
 
   @override
   Widget build(BuildContext context) {
@@ -75,12 +71,10 @@ class LoginScreen extends StatelessWidget {
                           final data = doc.data() as Map<String, dynamic>;
                           final cloudDarkMode = data["darkMode"];
                           Hive.box(themeBox).put('darkMode', cloudDarkMode);
-                          print(cloudDarkMode);
                         });
                       }).onError((error, stackTrace) {
                         ScaffoldMessenger.of(context)
                             .showSnackBar(massage("Error ${error.toString()}"));
-                        print("Error ${error.toString()}");
                       });
                       userLoginRequest(() {
                         Navigator.pushReplacement(
@@ -126,7 +120,6 @@ class LoginScreen extends StatelessWidget {
                           .onError((error, stackTrace) {
                         ScaffoldMessenger.of(context)
                             .showSnackBar(massage("Error ${error.toString()}"));
-                        print("Error ${error.toString()}");
                       });
                       userLoginRequest(() {
                         Navigator.push(
@@ -150,9 +143,7 @@ class LoginScreen extends StatelessWidget {
           .signInWithEmailAndPassword(email: email, password: pass);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        print('No user found for that email.');
       } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
       }
       return Future.value(null);
     }

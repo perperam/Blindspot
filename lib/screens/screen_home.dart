@@ -8,6 +8,7 @@ import 'screen_camera.dart';
 import 'package:blindspot/reusable/widgets/fbuilder_else_widgets.dart';
 import 'package:blindspot/reusable/functions/local_storage.dart';
 import 'package:blindspot/config/config.dart';
+import 'package:blindspot/config/config_colors.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -29,14 +30,11 @@ class _HomeScreen extends State<HomeScreen> {
   void callback() {
     setState(() {
       _mapAllImageDataFuture = readMapAllImageData();
-      print("SET STATE");
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    // for debugging
-    // readListAllImageData().then((Map<String, dynamic> m) {print(m.toString());});
 
     return Scaffold(
         body: FutureBuilder<Map<String, dynamic>>(
@@ -49,9 +47,9 @@ class _HomeScreen extends State<HomeScreen> {
                 );
               } else if (snapshot.hasError) {
                 // print(snapshot.error);
-                return ElseError(massage: "Could not load the App!");
+                return const ElseError(massage: "Could not load the App!");
               } else {
-                return ElseWaiting(massage: "Loading the App...");
+                return const ElseWaiting(massage: "Loading the App...");
               }
             }));
   }
@@ -109,7 +107,7 @@ class HomeScreenAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const BottomAppBar(
-      color: Colors.orangeAccent,
+      color: CustomColors.bars,
       shape: CircularNotchedRectangle(),
       notchMargin: 5,
       child: TabBar(

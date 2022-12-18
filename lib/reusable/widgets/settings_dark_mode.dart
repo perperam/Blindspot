@@ -16,7 +16,6 @@ class DarkModeSetting extends StatelessWidget {
       Switch(
         value: darkMode,
         onChanged: (val) {
-          print('THE VALUE: $val');
           Hive.box(themeBox).put('darkMode', !darkMode);
           //reloadToHomeScreen(Navigator.of(context));
           FirebaseFirestore.instance

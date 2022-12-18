@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 
-SnackBar massage (String Massage){
+SnackBar massage (String massage){
   return SnackBar(
-    content: Container(
-      //Icon(Icons.error, color: CustomColors.Text,);
-      child: Text(Massage),
-    ),
+    content: Text(massage),
     behavior: SnackBarBehavior.floating,
   );
 }
