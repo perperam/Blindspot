@@ -31,7 +31,7 @@ On the left you can discard the picture and return to the home screen.
 ## Image display
 Here you can take a closer look at your saved image. By swiping downwards you can see the exact data for the picture.
 
-## Developer documentation
+# Developer documentation
 ## Building the app
 ### Requirements
 [Install Android Studio](https://docs.flutter.dev/development/tools/android-studio) or another IDE of your choice. Then clone this repository and open it.
