@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'reusable/login_state.dart';
-import 'screens/tabs_home/tab_settings.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:blindspot/config/config.dart';
 

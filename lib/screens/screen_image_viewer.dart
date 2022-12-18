@@ -5,8 +5,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:blindspot/reusable/widgets/image_view.dart' as iv;
 
 class ImageViewScreen extends StatefulWidget  {
-  String imageDataUuid;
-  ImageViewScreen(this.imageDataUuid, {super.key});
+  const ImageViewScreen(this.imageDataUuid, {super.key});
+  final String imageDataUuid;
 
   @override
   State<ImageViewScreen> createState() => _ImageViewScreen();

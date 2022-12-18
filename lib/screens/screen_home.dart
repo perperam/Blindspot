@@ -29,14 +29,11 @@ class _HomeScreen extends State<HomeScreen> {
   void callback() {
     setState(() {
       _mapAllImageDataFuture = readMapAllImageData();
-      print("SET STATE");
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    // for debugging
-    // readListAllImageData().then((Map<String, dynamic> m) {print(m.toString());});
 
     return Scaffold(
         body: FutureBuilder<Map<String, dynamic>>(
@@ -49,9 +46,9 @@ class _HomeScreen extends State<HomeScreen> {
                 );
               } else if (snapshot.hasError) {
                 // print(snapshot.error);
-                return ElseError(massage: "Could not load the App!");
+                return const ElseError(massage: "Could not load the App!");
               } else {
-                return ElseWaiting(massage: "Loading the App...");
+                return const ElseWaiting(massage: "Loading the App...");
               }
             }));
   }

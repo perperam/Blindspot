@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'package:blindspot/reusable/functions/relaod_home_screen.dart';
 import 'package:blindspot/reusable/widgets/fbuilder_else_widgets.dart';
 import 'package:blindspot/reusable/functions/local_storage.dart';
-import 'package:blindspot/reusable/widgets/dialog.dart';
 import 'package:blindspot/reusable/functions/image_data_manipulation.dart';
 
 

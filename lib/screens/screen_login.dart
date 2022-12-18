@@ -9,7 +9,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:blindspot/config/config.dart';
 import 'package:blindspot/screens/screen_create_account.dart';
 import 'package:blindspot/screens/screen_home.dart';
-import 'package:blindspot/screens/tabs_home/tab_settings.dart';
 import 'package:blindspot/reusable/widgets/text_field.dart';
 import 'package:blindspot/reusable/functions/user_login_request.dart';
 import 'package:blindspot/reusable/widgets/firebase_ui_button.dart';
@@ -22,10 +21,6 @@ class LoginScreen extends StatelessWidget {
   final emailInput = TextEditingController(text: '');
   final passInput = TextEditingController(text: '');
   final FirebaseAuth auth = FirebaseAuth.instance;
-
-  _pushHomeScreen() {
-
-  }
 
 
   @override
@@ -67,12 +62,10 @@ class LoginScreen extends StatelessWidget {
                           final data = doc.data() as Map<String, dynamic>;
                           final cloudDarkMode = data["darkMode"];
                           Hive.box(themeBox).put('darkMode', cloudDarkMode);
-                          print(cloudDarkMode);
                         });
                       }).onError((error, stackTrace) {
                         ScaffoldMessenger.of(context)
                             .showSnackBar(massage("Error ${error.toString()}"));
-                        print("Error ${error.toString()}");
                       });
                       userLoginRequest(() {
                         Navigator.pushReplacement(
@@ -112,7 +105,6 @@ class LoginScreen extends StatelessWidget {
                           .onError((error, stackTrace) {
                         ScaffoldMessenger.of(context)
                             .showSnackBar(massage("Error ${error.toString()}"));
-                        print("Error ${error.toString()}");
                       });
                       userLoginRequest(() {
                         Navigator.push(
@@ -135,9 +127,7 @@ class LoginScreen extends StatelessWidget {
           .signInWithEmailAndPassword(email: email, password: pass);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        print('No user found for that email.');
       } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
       }
       return Future.value(null);
     }

@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:blindspot/reusable/functions/local_storage.dart';
-import 'package:blindspot/reusable/functions/relaod_home_screen.dart';
-
 class SaveAlertDialog extends StatelessWidget {
   const SaveAlertDialog({super.key, required this.onSave});
   final Function onSave;
