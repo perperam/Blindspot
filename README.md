@@ -34,7 +34,55 @@ Here you can take a closer look at your saved image. By swiping downwards you ca
 # Developer documentation
 ## 
 
-
+# MOB Dokumentaion
+## Functional Requirements
+<table border="1" cellpadding="1" cellspacing="1" style="width:500px;">
+	<thead>
+		<tr>
+			<th scope="col"><p>Task</p>
+			</th>
+			<th scope="col">In our App</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>AF1<br />
+			Routes and Tabs</td>
+			<td>- Login Screen<br />
+			- Create Account Screen<br />
+			- Home Screen<br />
+			- Gallery Tab<br />
+			- Settings Tab<br />
+			- Camera Screen<br />
+			- Image preview Screen<br />
+			- Image view Screen</td>
+		</tr>
+		<tr>
+			<td>AF2<br />
+			ListView or GridView</td>
+			<td>- Gallery View<br />
+			- Object and metadata View</td>
+		</tr>
+		<tr>
+			<td>AF3<br />
+			Sensor or API</td>
+			<td>- Camera sensor to take pictures<br />
+			- API that evaluates the pictures</td>
+		</tr>
+		<tr>
+			<td>AF4<br />
+			Authentication</td>
+			<td>- No login option<br />
+			- Email login option<br />
+			- google login option</td>
+		</tr>
+        <tr>
+			<td>AF4<br />
+			Cloud Sync</td>
+			<td>NONE?</td>
+		</tr>
+	</tbody>
+</table> 
 
 
 # App GUI structure (screens)
@@ -102,6 +150,7 @@ Here you can take a closer look at your saved image. By swiping downwards you ca
 - [AppBar Buttons](https://www.didierboelens.com/2018/04/hint-1-hide-back-arrow-and-use-close-button/)
 - [Navigate with named routes](https://docs.flutter.dev/cookbook/navigation/named-routes)
 - [Navigator in async functions](https://stackoverflow.com/questions/69466478/waiting-asynchronously-for-navigator-push-linter-warning-appears-use-build)
+- [Change App Name](https://www.flutterbeads.com/change-app-name-in-flutter/)
 
 ## Benennung
 
