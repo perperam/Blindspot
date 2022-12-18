@@ -10,7 +10,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:blindspot/config/config.dart';
 import 'package:blindspot/screens/screen_create_account.dart';
 import 'package:blindspot/screens/screen_home.dart';
-import 'package:blindspot/screens/tabs_home/tab_settings.dart';
 import 'package:blindspot/reusable/widgets/text_field.dart';
 import 'package:blindspot/reusable/functions/user_login_request.dart';
 import 'package:blindspot/reusable/widgets/firebase_ui_button.dart';
@@ -45,16 +44,24 @@ class LoginScreen extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 28,
                         )),
+
+                    //Logo
                     const Image(
                         image: AssetImage('assets/logo.png'),
                         width: 200,
                         height: 200),
-                    textField("Enter Email adress", Icons.person_outline, false,
+
+                    //Textfield Email Address
+                    textField("Enter Email address", Icons.person_outline, false,
                         emailInput),
                     const SizedBox(height: 15),
+
+                    //Textfield Password
                     textField(
                         "Enter password", Icons.lock_outline, true, passInput),
                     const SizedBox(height: 15),
+
+                    //Button "Login with Mail"
                     firebaseUiButton(context, "Login with Email", () {
                       FirebaseAuth.instance
                           .signInWithEmailAndPassword(
@@ -86,6 +93,8 @@ class LoginScreen extends StatelessWidget {
                                     const RouteSettings(name: 'HomeScreen')));
                       }, () {});
                     }),
+
+                    //Button Create Account
                     firebaseUiButton(context, 'Create Account', () {
                       Navigator.push(
                           context,
@@ -96,6 +105,8 @@ class LoginScreen extends StatelessWidget {
                               settings: const RouteSettings(
                                   name: 'CreateAccountScreen')));
                     }),
+
+                    //Button To Homescreen without Login
                     firebaseUiButton(context, "To Homescreen without Login",
                         () {
                       Navigator.pushReplacement(
@@ -107,6 +118,8 @@ class LoginScreen extends StatelessWidget {
                               settings:
                                   const RouteSettings(name: 'HomeScreen')));
                     }),
+
+                    //Google sign in Button
                     SignInButton(Buttons.Google, onPressed: () {
                       loginWithGoogle()
                           .then((value) {})
@@ -116,8 +129,6 @@ class LoginScreen extends StatelessWidget {
                         print("Error ${error.toString()}");
                       });
                       userLoginRequest(() {
-                        //reloadToHomeScreen(Navigator.of(context));
-
                         Navigator.push(
                             context,
                             MaterialPageRoute(
