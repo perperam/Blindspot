@@ -1,4 +1,3 @@
-import 'package:blindspot/reusable/functions/relaod_home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -90,7 +89,7 @@ class LoginScreen extends StatelessWidget {
 
                     //Button Create Account
                     firebaseUiButton(context, 'Create Account', () {
-                      Navigator.push(
+                      Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
                               builder: (_) {

@@ -76,14 +76,14 @@ class _CameraScreenState extends State<CameraScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: CustomColors.Background,
+      backgroundColor: CustomColors.backGround,
         body: SafeArea(
           child: Column(children: [
             Expanded(child:
               (_cameraController.value.isInitialized)
               ? CameraPreview(_cameraController)
               : Container(
-                color: CustomColors.Background,
+                color: CustomColors.backGround,
                 child: const Center(child: CircularProgressIndicator())
               )
             ),
@@ -103,7 +103,7 @@ class _CameraScreenState extends State<CameraScreen> {
                             _isRearCameraSelected
                             ? Icons.switch_camera
                             : Icons.switch_camera,
-                            color: CustomColors.Text),
+                            color: CustomColors.text),
                           onPressed: () {
                             setState(
                               () => _isRearCameraSelected = !_isRearCameraSelected);
