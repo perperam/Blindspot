@@ -1,3 +1,4 @@
+import 'package:blindspot/reusable/functions/relaod_home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -107,6 +108,8 @@ class LoginScreen extends StatelessWidget {
                             .showSnackBar(massage("Error ${error.toString()}"));
                       });
                       userLoginRequest(() {
+                        //reloadToHomeScreen(Navigator.of(context));
+
                         Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -115,6 +118,7 @@ class LoginScreen extends StatelessWidget {
                                 },
                                 settings:
                                 const RouteSettings(name: 'HomeScreen')));
+
                       }, () {});
                     }),
                   ])),
