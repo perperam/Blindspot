@@ -1,3 +1,4 @@
+import 'package:blindspot/main.dart';
 import 'package:flutter/material.dart';
 import 'package:blindspot/screens/screen_home.dart';
 
@@ -13,10 +14,10 @@ final NavigatorState navigator = Navigator.of(context);
 reloadToHomeScreen(NavigatorState navigator) {
   navigator.pushAndRemoveUntil(
       MaterialPageRoute(
-        builder: (context) {return const HomeScreen();},
+        builder: (context) {return HomeScreen();},
           settings:
           const RouteSettings(name: 'HomeScreen')
       ),
-      (Route<dynamic> route) => false
+      ModalRoute.withName('Blindspot')
   );
 }
