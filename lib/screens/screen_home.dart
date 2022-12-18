@@ -8,6 +8,7 @@ import 'screen_camera.dart';
 import 'package:blindspot/reusable/widgets/fbuilder_else_widgets.dart';
 import 'package:blindspot/reusable/functions/local_storage.dart';
 import 'package:blindspot/config/config.dart';
+import 'package:blindspot/config/config_colors.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -106,7 +107,7 @@ class HomeScreenAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const BottomAppBar(
-      color: Colors.orangeAccent,
+      color: CustomColors.bars,
       shape: CircularNotchedRectangle(),
       notchMargin: 5,
       child: TabBar(
