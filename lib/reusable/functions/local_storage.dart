@@ -3,15 +3,15 @@ import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 
 // const names in local storage
-const String _fileNameMapAllImageData =  'map_all_image_data.json';
-const String _directoryNameImageData = 'image_data';
+const String fileNameMapAllImageData =  'map_all_image_data.json';
+const String directoryNameImageData = 'image_data';
 
 // The mapAllImageData functions could be enhanced by abstract them into a class
 
 Future<Map<String, dynamic>> readMapAllImageData() async {
   // create path vars
   final Directory appDocDir = await getApplicationDocumentsDirectory();
-  final File pathMapAllImageData = File('${appDocDir.path}/$_fileNameMapAllImageData');
+  final File pathMapAllImageData = File('${appDocDir.path}/$fileNameMapAllImageData');
 
   // read json file
   if (await pathMapAllImageData.exists()) {
@@ -29,7 +29,7 @@ Future<Map<String, dynamic>> readMapAllImageData() async {
 Future<bool> writeMapAllImageData(Map<String, dynamic> mapAllImageData) async {
   // THIS FUNCTION WILL OVERWRITE EXISTING DATA!!
   final Directory appDocDir = await getApplicationDocumentsDirectory();
-  final File pathMapAllImageData = File('${appDocDir.path}/$_fileNameMapAllImageData');
+  final File pathMapAllImageData = File('${appDocDir.path}/$fileNameMapAllImageData');
 
   pathMapAllImageData.writeAsString(jsonEncode(mapAllImageData));
 
@@ -63,7 +63,7 @@ Future<bool> addToMapAllImageData(Map<String, dynamic> newImageData) async {
 Future<Directory> getAppDocDirImageData() async {
   // create path vars
   final Directory appDocDir = await getApplicationDocumentsDirectory();
-  final Directory appDocDirImageData = Directory('${appDocDir.path}/$_directoryNameImageData');
+  final Directory appDocDirImageData = Directory('${appDocDir.path}/$directoryNameImageData');
 
   // when directory is missing create it
   if ( !(await appDocDirImageData.exists()) ) {
@@ -91,8 +91,8 @@ void deleteImageData(String imageUuid) {
 void deleteAllImageData() async {
   // delete imageData
   final Directory appDocDir = await getApplicationDocumentsDirectory();
-  final File pathMapAllImageData = File('${appDocDir.path}/$_fileNameMapAllImageData');
-  final Directory appDocDirImageData = Directory('${appDocDir.path}/$_directoryNameImageData');
+  final File pathMapAllImageData = File('${appDocDir.path}/$fileNameMapAllImageData');
+  final Directory appDocDirImageData = Directory('${appDocDir.path}/$directoryNameImageData');
 
   // delete mapAllImageData
   await pathMapAllImageData.delete(recursive: true);
