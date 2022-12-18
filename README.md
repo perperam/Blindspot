@@ -31,8 +31,53 @@ On the left you can discard the picture and return to the home screen.
 ## Image display
 Here you can take a closer look at your saved image. By swiping downwards you can see the exact data for the picture.
 
-# Developer documentation
-## 
+## Developer documentation
+## Building the app
+### Requirements
+[Install Android Studio](https://docs.flutter.dev/development/tools/android-studio) or another IDE of your choice. Then clone this repository and open it.
+```
+git clone https://github.com/perperam/Blindspot.git
+```
+### Build the App
+Install the necessary dart and flutter packages. More information about the packages used and the versions can be found in the `pubspec.yaml` file.
+
+```
+flutter pub get
+flutter pub upgrade
+```
+
+To Build the App to an APK use this command:
+
+```
+flutter build apk --release --split-per-abi
+``` 
+
+### Installation
+Move your APK to your Android device and install it with the necessary permissions:
+
+- The app Requires access to the camera
+- The app needs access to the microphone.
+
+### Troubleshooting
+If the app icons do not work properly, reload them.
+```
+flutter pub get
+flutter pub run flutter_launcher_icons
+```
+
+
+## Directory structure
+The directory is structured as follows. The basic directory contains `main.dart`, which is used to run the app. The 'pubspack.yaml' contains information about the libraries used. The functionality of the app is divided into the directories `assets`, `config`, `screens` and `reusable` .
+
+| directory | function |
+| - | - |
+| `assets` | Here all constant files are stored |
+| `config` | Configuration like colours or URIs are stored here. |
+| `screens` | Gives the "physical" structure of the app. Here you will find the various pages that can be called up and in the `_tab` directories the tabs are sorted according to their screens. |
+| `reusable/widgets` | This is where the widgets are stored that are accessed from different places or screens. |
+| `reusable/functions` | This is where functions are stored that are used repeatedly in various places in the app. | 
+
+The rest of the directory follows the familiar Flutter and Android Studio structure. See [Flutter documentation](https://docs.flutter.dev/) for more information.
 
 # MOB Dokumentaion
 ## Functional Requirements
