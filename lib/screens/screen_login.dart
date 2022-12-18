@@ -7,6 +7,7 @@ import 'package:hive/hive.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 // import project functions and widgets
+import 'package:blindspot/config/config.dart';
 import 'package:blindspot/screens/screen_create_account.dart';
 import 'package:blindspot/screens/screen_home.dart';
 import 'package:blindspot/screens/tabs_home/tab_settings.dart';
@@ -22,6 +23,10 @@ class LoginScreen extends StatelessWidget {
   final emailInput = TextEditingController(text: '');
   final passInput = TextEditingController(text: '');
   final FirebaseAuth auth = FirebaseAuth.instance;
+
+  _pushHomeScreen() {
+
+  }
 
 
   @override
@@ -71,7 +76,7 @@ class LoginScreen extends StatelessWidget {
                         print("Error ${error.toString()}");
                       });
                       userLoginRequest(() {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
                                 builder: (_) {
@@ -93,7 +98,7 @@ class LoginScreen extends StatelessWidget {
                     }),
                     firebaseUiButton(context, "To Homescreen without Login",
                         () {
-                      Navigator.push(
+                      Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
                               builder: (_) {

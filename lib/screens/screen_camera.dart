@@ -7,8 +7,9 @@ import 'package:blindspot/config/config_colors.dart';
 //forked on https://medium.com/@fernnandoptr/how-to-use-camera-in-flutter-flutter-camera-package-44defe81d2da)
 
 class CameraScreen extends StatefulWidget {
-  const CameraScreen({Key? key, required this.cameras}) : super(key: key);
+  const CameraScreen({Key? key, required this.cameras, required this.callback}) : super(key: key);
   final List<CameraDescription>? cameras;
+  final Function callback;
 
   @override
   State<CameraScreen> createState() => _CameraScreenState();
@@ -43,14 +44,16 @@ class _CameraScreenState extends State<CameraScreen> {
       await _cameraController.setFlashMode(FlashMode.off);
       XFile picture = await _cameraController.takePicture();
 
-      navigator.pushAndRemoveUntil(
+      navigator.push(
           MaterialPageRoute(
-              builder: (context) {return PreviewPage(picture: picture);},
+              builder: (_) {
+                return PreviewPage(
+                  picture: picture,
+                  callback: widget.callback,
+                );
+              },
               settings:
-              const RouteSettings(name: 'CameraScreen')
-          ),
-          ModalRoute.withName('HomeScreen')
-      );
+              const RouteSettings(name: 'CameraScreen')));
     } on CameraException catch (e) {
       debugPrint('Error occured while taking picture: $e');
       return null;

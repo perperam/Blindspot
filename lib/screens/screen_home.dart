@@ -1,60 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:camera/camera.dart';
+
 import 'tabs_home/tab_gallery.dart';
 import 'tabs_home/tab_settings.dart';
 import 'screen_camera.dart';
-import 'package:hive/hive.dart';
 import 'package:blindspot/reusable/widgets/fbuilder_else_widgets.dart';
-import 'package:path_provider/path_provider.dart';
-import 'dart:io';
-import 'dart:convert';
+import 'package:blindspot/reusable/functions/local_storage.dart';
+import 'package:blindspot/config/config.dart';
+
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  HomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => _HomeRoute();
+  State<HomeScreen> createState() => _HomeScreen();
 }
 
-class _HomeRoute extends State<HomeScreen> {
-
-  // assure that map_all_image_data.json file is present and return its content
-  Future<Map<String, dynamic>> readMapAllImageData() async {
-    final Directory appDocDir = await getApplicationDocumentsDirectory();
-    final File pathMapAllImageData = File('${appDocDir.path}/map_all_image_data.json');
-
-    if (await pathMapAllImageData.exists()) {
-      // if available read from file and return its content as map
-      final contents = await pathMapAllImageData.readAsString();
-      return json.decode(contents);
-    } else {
-      // if not available create new empty at storage and return empty map
-      Map<String, dynamic> empty = {};
-      pathMapAllImageData.writeAsString(jsonEncode(empty));
-      return empty;
-    }
-  }
-
-  // assure that directory for ImageDate.json files is present
-  _initDirImageData () async {
-    Directory appDocDir = await getApplicationDocumentsDirectory();
-    Directory appDocDirImageData = Directory('${appDocDir.path}/image_data/');
-
-    if (await appDocDirImageData.exists()) {
-      // return appDocDirImageData
-    } else {
-      appDocDirImageData = await appDocDirImageData.create(recursive: true);
-      // return appDocDirImageData
-    }
-  }
+class _HomeScreen extends State<HomeScreen> {
+  late Future<Map<String, dynamic>> _mapAllImageDataFuture;
 
   @override
   void initState() {
-    // assure that directory for ImageDate.json files is present
-    _initDirImageData();
     super.initState();
+    _mapAllImageDataFuture = readMapAllImageData();
   }
 
+  void callback() {
+    setState(() {
+      _mapAllImageDataFuture = readMapAllImageData();
+      print("SET STATE");
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,10 +40,13 @@ class _HomeRoute extends State<HomeScreen> {
 
     return Scaffold(
         body: FutureBuilder<Map<String, dynamic>>(
-            future: readMapAllImageData(),
+            future: _mapAllImageDataFuture,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                return HomeScreenTabController(snapshot.data!);
+                return HomeScreenTabController(
+                    snapshot.data!,
+                    callback: callback
+                );
               } else if (snapshot.hasError) {
                 // print(snapshot.error);
                 return ElseError(massage: "Could not load the App!");
@@ -78,8 +58,9 @@ class _HomeRoute extends State<HomeScreen> {
 }
 
 class HomeScreenTabController extends StatefulWidget {
-  const HomeScreenTabController(this.mapAllImageData, {super.key});
+  const HomeScreenTabController(this.mapAllImageData, {super.key, required this.callback});
   final Map<String, dynamic> mapAllImageData;
+  final Function callback;
 
   @override
   State<HomeScreenTabController> createState() => _HomeScreenTabController();
@@ -87,6 +68,7 @@ class HomeScreenTabController extends StatefulWidget {
 
 
 class _HomeScreenTabController extends State<HomeScreenTabController> {
+
 
   @override
   Widget build(BuildContext context) {
@@ -101,7 +83,7 @@ class _HomeScreenTabController extends State<HomeScreenTabController> {
                     context,
                     MaterialPageRoute(
                         builder: (_) {
-                          return CameraScreen(cameras: value);
+                          return CameraScreen(cameras: value, callback: widget.callback);
                         },
                       settings: const RouteSettings(name: 'CameraScreen')
                     )
@@ -114,7 +96,7 @@ class _HomeScreenTabController extends State<HomeScreenTabController> {
           body: TabBarView(
             children: [
               GalleryTab(widget.mapAllImageData),
-              SettingsTab(value: darkMode),
+              SettingsTab(callback: widget.callback, darkMode: darkMode),
             ],
           ),
         ));

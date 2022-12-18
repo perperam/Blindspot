@@ -7,9 +7,9 @@ import 'package:blindspot/config/api_access.dart';
 
 
 class PreviewPage extends StatefulWidget {
-  const PreviewPage({Key? key, required this.picture}) : super(key: key);
-
+  const PreviewPage({Key? key, required this.picture, required this.callback}) : super(key: key);
   final XFile picture;
+  final Function callback;
 
   @override
   State<PreviewPage> createState() => _PreviewPageState();
@@ -39,6 +39,6 @@ class _PreviewPageState extends State<PreviewPage> {
 
   @override
   Widget build(BuildContext context) {
-    return iv.ImageBuilder(futureImageData, "preview");
+    return iv.ImageBuilder(futureImageData, "preview", callback: widget.callback,);
   }
 }

@@ -36,6 +36,7 @@ class _ImageViewScreen extends State<ImageViewScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return iv.ImageBuilder(futureMap, "listview");
+    // DO USE REAL CALL BACK HERE
+    return iv.ImageBuilder(futureMap, "listview", callback: () {});
   }
 }

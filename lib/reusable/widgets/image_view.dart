@@ -9,9 +9,10 @@ import 'package:blindspot/reusable/functions/image_data_manipulation.dart';
 
 
 class ImageBuilder extends StatefulWidget {
-  const ImageBuilder(this.futureImageData, this.mode, {super.key});
+  const ImageBuilder(this.futureImageData, this.mode, {super.key, required this.callback});
   final Future<Map<String, dynamic>> futureImageData;
   final String mode;
+  final Function callback;
 
   @override
   State<ImageBuilder> createState() => _ImageBuilder();
@@ -22,17 +23,8 @@ class _ImageBuilder extends State<ImageBuilder> {
 
   @override void initState() {
     super.initState();
-
     controller = TextEditingController();
   }
-
-  // String getController() {
-  //   if (controller.text.isNotEmpty) {
-  //     return controller.text;
-  //   } else {
-  //     return 'TEST NAME';
-  //   }
-  // }
 
   Future _openDialog()  {
     return showDialog(
@@ -56,7 +48,8 @@ class _ImageBuilder extends State<ImageBuilder> {
                   await saveImageData(imageData);
                   await addToMapAllImageData(imageData);
 
-                  reloadToHomeScreen(navigator);
+                  // close AlertDialog
+                  navigator.pop();
                 },
                 child: const Text('Submit')),
             TextButton(
@@ -74,15 +67,10 @@ class _ImageBuilder extends State<ImageBuilder> {
       return IconButton(
           icon: const Icon(Icons.save),
           onPressed: () async {
-            _openDialog();
-            // prevent navigator and async problem, look into readme link for more
-            // information
-            // final NavigatorState navigator = Navigator.of(context);
-            //
-            // await saveImageData(await widget.futureImageData);
-            // await addToMapAllImageData(await widget.futureImageData);
-            //
-            // reloadToHomeScreen(navigator);
+            final NavigatorState navigator = Navigator.of(context);
+            await _openDialog();
+            widget.callback();
+            reloadToHomeScreen(navigator);
           }
           );
     } else if (mode == 'listview') {
