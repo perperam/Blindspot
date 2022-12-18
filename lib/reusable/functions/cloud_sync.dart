@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
+import 'package:blindspot/reusable/functions/local_storage.dart';
 
 Future cloudListData () async{
   var user = FirebaseAuth.instance.currentUser?.uid;
@@ -22,10 +23,11 @@ Future<dynamic> syncData() async{
   print(listResult);
 
   for (var item in listResult.items){
+    print("item:$item");
     final imageRef = storageRef.child("$item");
-    final File file = File('${appDocDir.path}/$item');
+    final File file = File('${appDocDir.path}/user_data/test_image_data.json');
 
-    final downloadTask = imageRef.writeToFile(file);
+    final downloadTask = item.writeToFile(file);
     downloadTask.snapshotEvents.listen((taskSnapshot) {
       switch (taskSnapshot.state) {
         case TaskState.running:
@@ -73,9 +75,7 @@ void deleteUserCloudData() async{
 
   for (var item in listResult.items){
     print(item);
-    await storageRef
-          .child("$item")
-          .delete();
+    await item.delete();
   }
   print("everything deleted");
 
