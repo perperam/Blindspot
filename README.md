@@ -150,6 +150,7 @@ Here you can take a closer look at your saved image. By swiping downwards you ca
 - [AppBar Buttons](https://www.didierboelens.com/2018/04/hint-1-hide-back-arrow-and-use-close-button/)
 - [Navigate with named routes](https://docs.flutter.dev/cookbook/navigation/named-routes)
 - [Navigator in async functions](https://stackoverflow.com/questions/69466478/waiting-asynchronously-for-navigator-push-linter-warning-appears-use-build)
+- [Change App Name](https://www.flutterbeads.com/change-app-name-in-flutter/)
 
 ## Benennung
 
