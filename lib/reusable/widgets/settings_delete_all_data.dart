@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../reusable/functions/local_storage.dart';
 import '../../reusable/widgets/settings_button_red.dart';
+import '../../reusable/functions/cloud_sync.dart';
 
 class DeleteAllDataSetting extends StatelessWidget {
   const DeleteAllDataSetting({super.key, required this.callback});
@@ -12,6 +13,7 @@ class DeleteAllDataSetting extends StatelessWidget {
     return RedSettingsButton(
         text: 'Delete all Data',
         onPressed: () {
+          deleteUserCloudData();
           deleteAllImageData();
           callback();
         });

@@ -11,41 +11,44 @@ Future cloudListData () async{
   return listResult;
 }
 
-void syncData(listElements) async{
+Future<dynamic> syncData() async{
   var user = FirebaseAuth.instance.currentUser?.uid;
   final storageRef = FirebaseStorage.instance.ref();
+  final storageRefRef = FirebaseStorage.instance.ref().child("$user");
+  final listResult = await storageRefRef.listAll();
   final Directory appDocDir = await getApplicationDocumentsDirectory();
 
+  print(storageRefRef);
+  print(listResult);
 
-  for (var item in listElements.items){
-    final imageRef = storageRef.child("$user/$item");
+  for (var item in listResult.items){
+    final imageRef = storageRef.child("$item");
     final File file = File('${appDocDir.path}/$item');
 
     final downloadTask = imageRef.writeToFile(file);
     downloadTask.snapshotEvents.listen((taskSnapshot) {
       switch (taskSnapshot.state) {
         case TaskState.running:
-        // TODO: Handle this case.
+          print("running");
           break;
         case TaskState.paused:
-        // TODO: Handle this case.
+          print("paused");
           break;
         case TaskState.success:
           print("success");
           break;
         case TaskState.canceled:
-        // TODO: Handle this case.
+          print("canceled");
           break;
         case TaskState.error:
           print("error");
           break;
       }
     });
-
   }
 }
 
-void uploadData(imageData) async{
+Future<bool> uploadData(Map<String, dynamic> imageData) async{
   var user = FirebaseAuth.instance.currentUser?.uid;
   final storageRef = FirebaseStorage.instance.ref();
 
@@ -55,17 +58,25 @@ void uploadData(imageData) async{
   await storageRef
         .child('$user/${imageData['uuid']}.json')
         .putFile(file);
+
+  return true;
 }
 
-void deleteUserCloudData(listElements) async{
+void deleteUserCloudData() async{
   var user = FirebaseAuth.instance.currentUser?.uid;
   final storageRef = FirebaseStorage.instance.ref();
+  final storageRefRef = FirebaseStorage.instance.ref().child("$user");
+  final listResult = await storageRefRef.listAll();
+
+  print(storageRefRef);
 
 
-  for (var item in listElements.items){
+  for (var item in listResult.items){
+    print(item);
     await storageRef
-          .child("$user/$item")
+          .child("$item")
           .delete();
   }
+  print("everything deleted");
 
 }

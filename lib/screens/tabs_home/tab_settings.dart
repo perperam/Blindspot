@@ -14,6 +14,7 @@ import '../../reusable/widgets/settings_log_out_in.dart';
 import '../../reusable/widgets/settings_app_version.dart';
 
 
+
 class SettingsTab extends StatefulWidget {
   const SettingsTab({Key? key, required this.callback, required this.darkMode})
       : super(key: key);

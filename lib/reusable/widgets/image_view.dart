@@ -6,6 +6,7 @@ import 'package:blindspot/reusable/widgets/fbuilder_else_widgets.dart';
 import 'package:blindspot/reusable/functions/local_storage.dart';
 import 'package:blindspot/reusable/widgets/dialog.dart';
 import 'package:blindspot/reusable/functions/image_data_manipulation.dart';
+import 'package:blindspot/reusable/functions/cloud_sync.dart';
 
 
 class ImageBuilder extends StatefulWidget {
@@ -47,6 +48,7 @@ class _ImageBuilder extends State<ImageBuilder> {
 
                   await saveImageData(imageData);
                   await addToMapAllImageData(imageData);
+                  await uploadData(imageData);
 
                   // close AlertDialog
                   navigator.pop();

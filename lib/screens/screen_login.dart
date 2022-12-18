@@ -14,6 +14,7 @@ import 'package:blindspot/reusable/widgets/text_field.dart';
 import 'package:blindspot/reusable/functions/user_login_request.dart';
 import 'package:blindspot/reusable/widgets/firebase_ui_button.dart';
 import 'package:blindspot/reusable/widgets/message.dart';
+import 'package:blindspot/reusable/functions/cloud_sync.dart';
 
 
 class LoginScreen extends StatelessWidget {
@@ -68,6 +69,8 @@ class LoginScreen extends StatelessWidget {
                           final cloudDarkMode = data["darkMode"];
                           Hive.box(themeBox).put('darkMode', cloudDarkMode);
                           print(cloudDarkMode);
+                          syncData();
+
                         });
                       }).onError((error, stackTrace) {
                         ScaffoldMessenger.of(context)
