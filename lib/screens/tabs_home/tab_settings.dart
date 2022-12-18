@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import '../../reusable/widgets/settings_button_red.dart';
 import 'package:blindspot/config/config.dart';
 
 // import settings widgets
@@ -34,13 +33,13 @@ class _SettingsTab extends State<SettingsTab> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               ActiveUserSetting(),
+              const SizedBox(height: 20),
               DarkModeSetting(darkMode: widget.darkMode),
+              const SizedBox(height: 10),
               DeleteAllDataSetting(callback: widget.callback),
               const SizedBox(height: 10),
-              RedSettingsButton(text: 'DO CALLBACK', onPressed: widget.callback),
-              const SizedBox(height: 10),
               LogOutInSetting(),
-              const SizedBox(height: 10),
+              const SizedBox(height: 20),
               const AppVersionSetting(),
             ])
     ));
