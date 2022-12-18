@@ -12,7 +12,6 @@ class LoginState extends StatefulWidget {
 }
 
 class _LoginState extends State<LoginState> {
-  bool valueUser = false;
 
   @override
   Widget build(BuildContext context) {

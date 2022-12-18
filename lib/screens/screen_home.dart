@@ -67,7 +67,6 @@ class HomeScreenTabController extends StatefulWidget {
 
 class _HomeScreenTabController extends State<HomeScreenTabController> {
 
-
   @override
   Widget build(BuildContext context) {
     //var cloudDarkMode = FirebaseFirestore.instance.collection("user").doc(FirebaseAuth.instance.currentUser?.uid).get();
