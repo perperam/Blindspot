@@ -79,6 +79,13 @@ The directory is structured as follows. The basic directory contains `main.dart`
 
 The rest of the directory follows the familiar Flutter and Android Studio structure. See [Flutter documentation](https://docs.flutter.dev/) for more information.
 
+## External functions
+### API
+A YOLOv5 classifier is integrated as a REST API. This can be configured via the `api_access.dart'.
+
+### Cloud and login
+The cloud and login is realised via Firebase and Firestore from Google. More information about this can be found in the 'firebase_options.dart' file.
+
 # MOB Dokumentaion
 ## Functional Requirements
 <table border="1" cellpadding="1" cellspacing="1" style="width:500px;">
