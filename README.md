@@ -130,60 +130,20 @@ The rest of the directory follows the familiar Flutter and Android Studio struct
 </table> 
 
 
-# App GUI structure (screens)
-- login
-- home
-- image_view
-
-## login
-- appbar
-- logo
-- app title
-- user input
-- password input
-- enter/login button
-- on login to home screen 
-
-## home
-- swipe between tabs
-- take photo tab
-- gallery (list view) of photos tab
-- settings tab
-
-### TakePhotoTab
-- live camera
-- take photo button
-- 
-### GalleryTab
-- taken photos in a list view
-- short photo info
-- on click to image_screen view
-
-### SettingsTab
-- darkmode
-- api settings
-- logout
-
-## image_view screen 
-- a more detailed photo view with more metadata
-
 # TO-DO's
-- comments
+- more comments
 - naming of functions and classes
 - rename option for preview screen
 - ListView is overlapped by take Photo button
-- going back from preview freezes camera
+- going back from preview sometimes freezes camera
 - Navigate with named routes
 - delete files when logout?
 - screen_imageview local storage abstraction not used
 - rework this readme
-- save data to cloud
 - working logout
 - rework camera screen layout (add close button, etc.)
-- rework initState when changing something in local storage
 - fix @immutable error in classes
 - rework file tree
-
 - Settings ImageViewer
 
 ## Sources
