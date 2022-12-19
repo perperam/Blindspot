@@ -124,7 +124,7 @@ The rest of the directory follows the familiar Flutter and Android Studio struct
         <tr>
 			<td>AF4<br />
 			Cloud Sync</td>
-			<td>NONE?</td>
+			<td>Dark Mode in Firestore</td>
 		</tr>
 	</tbody>
 </table> 
