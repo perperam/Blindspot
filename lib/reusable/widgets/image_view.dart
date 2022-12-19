@@ -74,7 +74,7 @@ class _ImageBuilder extends State<ImageBuilder> {
           }
           );
     } else if (mode == 'listview') {
-      return const IconButton(icon: Icon(Icons.settings), onPressed: null);
+      return const SizedBox.shrink();
     } else {
       return const Icon(Icons.circle);
     }

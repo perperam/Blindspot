@@ -32,7 +32,52 @@ On the left you can discard the picture and return to the home screen.
 Here you can take a closer look at your saved image. By swiping downwards you can see the exact data for the picture.
 
 # Developer documentation
-## 
+## Building the app
+### Requirements
+[Install Android Studio](https://docs.flutter.dev/development/tools/android-studio) or another IDE of your choice. Then clone this repository and open it.
+```
+git clone https://github.com/perperam/Blindspot.git
+```
+### Build the App
+Install the necessary dart and flutter packages. More information about the packages used and the versions can be found in the `pubspec.yaml` file.
+
+```
+flutter pub get
+flutter pub upgrade
+```
+
+To Build the App to an APK use this command:
+
+```
+flutter build apk --release --split-per-abi
+``` 
+
+### Installation
+Move your APK to your Android device and install it with the necessary permissions:
+
+- The app Requires access to the camera
+- The app needs access to the microphone.
+
+### Troubleshooting
+If the app icons do not work properly, reload them.
+```
+flutter pub get
+flutter pub run flutter_launcher_icons
+```
+
+
+## Directory structure
+The directory is structured as follows. The basic directory contains `main.dart`, which is used to run the app. The 'pubspack.yaml' contains information about the libraries used. The functionality of the app is divided into the directories `assets`, `config`, `screens` and `reusable` .
+
+| directory | function |
+| - | - |
+| `assets` | Here all constant files are stored |
+| `config` | Configuration like colours or URIs are stored here. |
+| `screens` | Gives the "physical" structure of the app. Here you will find the various pages that can be called up and in the `_tab` directories the tabs are sorted according to their screens. |
+| `reusable/widgets` | This is where the widgets are stored that are accessed from different places or screens. |
+| `reusable/functions` | This is where functions are stored that are used repeatedly in various places in the app. | 
+
+The rest of the directory follows the familiar Flutter and Android Studio structure. See [Flutter documentation](https://docs.flutter.dev/) for more information.
 
 # MOB Dokumentaion
 ## Functional Requirements
@@ -79,66 +124,26 @@ Here you can take a closer look at your saved image. By swiping downwards you ca
         <tr>
 			<td>AF4<br />
 			Cloud Sync</td>
-			<td>NONE?</td>
+			<td>Dark Mode in Firestore</td>
 		</tr>
 	</tbody>
 </table> 
 
 
-# App GUI structure (screens)
-- login
-- home
-- image_view
-
-## login
-- appbar
-- logo
-- app title
-- user input
-- password input
-- enter/login button
-- on login to home screen 
-
-## home
-- swipe between tabs
-- take photo tab
-- gallery (list view) of photos tab
-- settings tab
-
-### TakePhotoTab
-- live camera
-- take photo button
-- 
-### GalleryTab
-- taken photos in a list view
-- short photo info
-- on click to image_screen view
-
-### SettingsTab
-- darkmode
-- api settings
-- logout
-
-## image_view screen 
-- a more detailed photo view with more metadata
-
 # TO-DO's
-- comments
+- more comments
 - naming of functions and classes
 - rename option for preview screen
 - ListView is overlapped by take Photo button
-- going back from preview freezes camera
+- going back from preview sometimes freezes camera
 - Navigate with named routes
 - delete files when logout?
 - screen_imageview local storage abstraction not used
 - rework this readme
-- save data to cloud
 - working logout
 - rework camera screen layout (add close button, etc.)
-- rework initState when changing something in local storage
 - fix @immutable error in classes
 - rework file tree
-
 - Settings ImageViewer
 
 ## Sources
