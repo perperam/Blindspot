@@ -81,10 +81,10 @@ The rest of the directory follows the familiar Flutter and Android Studio struct
 
 ## External functions
 ### API
-A YOLOv5 classifier is integrated as a REST API. This can be configured via the `api_access.dart'.
+A YOLOv5 classifier is integrated as a REST API. This can be configured via the `api_access.dart` file in the config directory.
 
 ### Cloud and login
-The cloud and login is realised via Firebase and Firestore from Google. More information about this can be found in the 'firebase_options.dart' file.
+The cloud and login is realised via Firebase and Firestore from Google. More information about this can be found in the `firebase_options.dart` file.
 
 # MOB Dokumentaion
 ## Functional Requirements
