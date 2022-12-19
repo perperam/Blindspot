@@ -126,7 +126,8 @@ The cloud and login is realised via Firebase and Firestore from Google. More inf
 			Authentication</td>
 			<td>- No login option<br />
 			- Email login option<br />
-			- google login option</td>
+			- Google login option<br />
+			- Create Account</td>
 		</tr>
         <tr>
 			<td>AF4<br />
